@@ -10,6 +10,8 @@ public class FollowCam : MonoBehaviour
     void Start()
     {
         int def;
+        int abc;
+        
     }
 
     // Update is called once per frame
