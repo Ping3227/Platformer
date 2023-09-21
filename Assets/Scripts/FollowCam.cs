@@ -9,7 +9,7 @@ public class FollowCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        int def;
     }
 
     // Update is called once per frame
