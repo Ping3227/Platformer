@@ -10248,8 +10248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7fd8e224eed8042a46edf004b0a80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUDCanvas: {fileID: 0}
-  PauseCanvas: {fileID: 0}
+  HUDCanvas: {fileID: 1548102080}
+  PauseCanvas: {fileID: 454995862}
 --- !u!114 &1321016220
 MonoBehaviour:
   m_ObjectHideFlags: 0
