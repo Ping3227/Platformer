@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -34,6 +30,7 @@ namespace Platformer.UI {
                 IsPause = !IsPause;
                 if (IsPause)
                 {
+                    Time.timeScale = 0;
                     //to do, Menu Mode: sent event to pause the game
                     if (PauseCanvas)
                     {
@@ -41,6 +38,7 @@ namespace Platformer.UI {
                     }
                 }
                 else {
+                    Time.timeScale = 1;
                     //to do, Game Mode: sent event to resume the game
                     if (PauseCanvas)
                     {
