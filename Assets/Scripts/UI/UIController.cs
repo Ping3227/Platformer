@@ -12,11 +12,13 @@ namespace Platformer.UI {
         /// The HUD canvas.
         /// must at least contain Health,Stamina 
         /// </summary>
-        public Canvas HUDCanvas;
+        [SerializeField]
+        Canvas HUDCanvas;
         /// <summary>
         /// The Pause canvas.
         /// must at least contain Resume,Quit
         /// </summary>
+        [SerializeField]
         public Canvas PauseCanvas;
         /// <summary>
         /// boolean to check if the game is paused
