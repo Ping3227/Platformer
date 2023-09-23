@@ -1,32 +1,43 @@
 using UnityEngine;
-/// <summary>
-/// Manager player Stamina related attributes
-/// </summary>
-public class Stamina : MonoBehaviour
+namespace Platformer.Mechanics
 {
-    private int CurrentStamina;
-
-    [SerializeField]
-    int MaxStamina;
-
-    [SerializeField]
-    int RechargingRate;
-    bool IsEmpty => CurrentStamina == 0;
-    bool IsCharging;
-    void Update()
+    /// <summary>
+    /// Manager player Stamina related attributes
+    /// </summary>
+    public class Stamina : MonoBehaviour
     {
-        if (IsCharging) { 
-            CurrentStamina += RechargingRate;
-            if (CurrentStamina > MaxStamina)
+        private int CurrentStamina;
+
+        [SerializeField]
+        int MaxStamina;
+
+        [SerializeField]
+        int RechargingRate;
+        bool IsEmpty => CurrentStamina == 0;
+        /// <summary>
+        /// can only be charging while player is not doing speical actions
+        /// </summary>
+        bool IsCharging;
+        /// <summary>
+        /// charge stamina while player is not doing speical actions
+        /// </summary>
+        void Update()
+        {
+            if (IsCharging)
             {
-                CurrentStamina = MaxStamina;
-                IsCharging = false;
+                CurrentStamina += RechargingRate;
+                if (CurrentStamina > MaxStamina)
+                {
+                    CurrentStamina = MaxStamina;
+                    IsCharging = false;
+                }
             }
         }
-    }
-    void OnEnable()
-    {
-        CurrentStamina = MaxStamina;
+        void OnEnable()
+        {
+            CurrentStamina = MaxStamina;
+        }
+
     }
 
 }
