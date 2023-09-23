@@ -8,11 +8,9 @@ namespace Platformer.Mechanics
     {
         private int CurrentStamina;
 
-        [SerializeField]
-        int MaxStamina;
+        [SerializeField] int MaxStamina;
 
-        [SerializeField]
-        int RechargingRate;
+        [SerializeField] int RechargingRate;
         bool IsEmpty => CurrentStamina == 0;
         /// <summary>
         /// can only be charging while player is not doing speical actions

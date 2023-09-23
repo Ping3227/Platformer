@@ -9,17 +9,13 @@ namespace Platformer.UI {
     public class UIController : MonoBehaviour
     {
         /// <summary>
-        /// The HUD canvas.
         /// must at least contain Health,Stamina 
         /// </summary>
-        [SerializeField]
-        Canvas HUDCanvas;
+        [SerializeField]Canvas HUDCanvas;
         /// <summary>
-        /// The Pause canvas.
         /// must at least contain Resume,Quit
         /// </summary>
-        [SerializeField]
-        public Canvas PauseCanvas;
+        [SerializeField] Canvas PauseCanvas;
         /// <summary>
         /// boolean to check if the game is paused
         /// </summary>
