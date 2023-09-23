@@ -9,5 +9,24 @@ public class Stamina : MonoBehaviour
     [SerializeField]
     int MaxStamina;
 
-    
+    [SerializeField]
+    int RechargingRate;
+    bool IsEmpty => CurrentStamina == 0;
+    bool IsCharging;
+    void Update()
+    {
+        if (IsCharging) { 
+            CurrentStamina += RechargingRate;
+            if (CurrentStamina > MaxStamina)
+            {
+                CurrentStamina = MaxStamina;
+                IsCharging = false;
+            }
+        }
+    }
+    void OnEnable()
+    {
+        CurrentStamina = MaxStamina;
+    }
+
 }

@@ -24,5 +24,9 @@ public class Health : MonoBehaviour
             currentHP = 0;
         }
     }
+    void OnEnable()
+    {
+        currentHP = MaxHP;
+    }
 
 }
