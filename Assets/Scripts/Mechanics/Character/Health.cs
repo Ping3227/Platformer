@@ -8,8 +8,7 @@ namespace Platformer.Mechanics {
         private int currentHP;
 
         [SerializeField] int MaxHP;
-
-        bool IsAlive => currentHP > 0;
+        public bool IsAlive => currentHP > 0;
         public void Heal(int value)
         {
             currentHP += value;
