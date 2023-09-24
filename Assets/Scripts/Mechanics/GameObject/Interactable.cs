@@ -1,4 +1,6 @@
+﻿using System;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace Platformer.Mechanics
@@ -7,15 +9,17 @@ namespace Platformer.Mechanics
     public class Interactable : MonoBehaviour
     {
         [SerializeField] GameObject InteractionHint;
+        [SerializeField] Vector3 Offset;
         private GameObject TheHint;
         [SerializeField] KeyCode InteractionKey;
-        [SerializeField] IAction[] InteractionObject; // need interface here 
-
+        [SerializeField] InteractActor[] InteractionObjects; // need interface here 
+        private bool IsInteractable;
         private void Awake()
         {
-            TheHint = Instantiate(InteractionHint, transform.position, Quaternion.identity);
-            TheHint.SetActive(false);
+            TheHint = Instantiate(InteractionHint, transform.position+Offset, Quaternion.identity);
             TheHint.GetComponentInChildren<TMP_Text>().text = InteractionKey.ToString();
+            TheHint.SetActive(false);
+            
         }
         /// <summary>
         /// Create visual hint for player to interact with object
@@ -23,7 +27,11 @@ namespace Platformer.Mechanics
         /// <param name="collision"></param>
         void OnTriggerEnter2D(Collider2D collider)
         {
-            TheHint.SetActive(true);
+            if (collider.tag == "Player")
+            {
+                TheHint.SetActive(true);
+                IsInteractable = true;
+            }
         }
         /// <summary>
         /// Destroy visual hint for player to interact with object
@@ -31,20 +39,27 @@ namespace Platformer.Mechanics
         /// <param name="collider"></param>
         void OnTriggerExit2D(Collider2D collider)
         {
-            TheHint.SetActive(false);
+            if (collider.tag == "Player") {
+                TheHint.SetActive(false);
+                IsInteractable = false;
+            }
+                
         }
-        void OnTriggerStay2D(Collider2D collider)
+        void Update()
         {
-            if (collider.tag == "Player")
+            if (IsInteractable &&Input.GetKeyDown(InteractionKey))
             {
-                if (Input.GetKeyDown(InteractionKey))
-                {
-                    foreach (IAction actioner in InteractionObject)
-                    {
-                        actioner.Action();
-                    }
+                Debug.Log("Interact");
+                foreach (InteractActor actioner in InteractionObjects)
+                {    
+                    actioner.Action();
+                        
                 }
             }
+            
         }
     }
+
+
+    
 }

@@ -29,6 +29,6 @@ public class InventoryManager : MonoBehaviour
     }
     public void NextItem()
     {
-        items.
+        
     }
 }
