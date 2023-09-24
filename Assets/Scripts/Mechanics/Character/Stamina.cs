@@ -24,12 +24,22 @@ namespace Platformer.Mechanics
             if (IsCharging)
             {
                 CurrentStamina += RechargingRate;
+                // Schedule<UpdateStamina>
                 if (CurrentStamina > MaxStamina)
                 {
                     CurrentStamina = MaxStamina;
                     IsCharging = false;
                 }
             }
+        }
+        public bool ConsumeStamina(int Value) { 
+            if (CurrentStamina >= Value)
+            {
+                CurrentStamina -= Value;
+                // Scedule<UpdateStamina>
+                return true;
+            }
+            return false;
         }
         void OnEnable()
         {
