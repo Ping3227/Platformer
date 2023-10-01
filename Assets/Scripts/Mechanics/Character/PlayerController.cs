@@ -27,20 +27,36 @@ namespace Platformer.Mechanics
         
         void Update()
         {
-            
+            var Input = new InputCollection{
+                JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
+                JumpUp = UnityEngine.Input.GetButtonUp("Jump"),
+                X = UnityEngine.Input.GetAxisRaw("Horizontal")
+            };
+            if (Input.JumpDown)
+            {
+               _TimePressedJump = Time.time;
+            }
             
         }
-        
-        
+        #region Input
+        public struct InputCollection
+        {
+            public float X;
+            public bool JumpDown;
+            public bool JumpUp;
+        }
+        #endregion
         void FixedUpdate()
         {
             //collision 
             //status update 
-            //jump,
-            //move 
+            //move
+            //gravity
+            //jump
+            //actually move 
             //animation 
         }
-        
+
         #region Collision
 
         [Header("Collision")]
@@ -86,14 +102,50 @@ namespace Platformer.Mechanics
 
         #region jump
 
-        [Header("Jump")] [SerializeField] float JumpAllowTime;
+        [Header("Jump")] 
+        [SerializeField] float JumpAllowTime;
         private float _TimePressedJump;
         private bool _JumpBuffer;
         [SerializeField] float CoyoteAllowTime;
+        
         private bool _CoyoteUsable;
+        private bool CanUseCoyote => _CoyoteUsable && ! _CollisionDown&& Time.time - _TimeLeftGround < CoyoteAllowTime;
         private float _TimeLeftGround;
-        void CalculateJump() { 
+        bool EndJumpEarly;
+        [SerializeField] float JumpHeight;
+        [SerializeField] float JumpSpeed;
+        [SerializeField] float MaxFallSpeed;
 
+        void CalculateJump() {
+            if (_CollisionDown)
+            {
+                // Move out of the ground
+                
+            }
+            /*if (CanUseCoyote || _JumpBuffer)
+            {
+                _currentVerticalSpeed = _jumpHeight;
+                _endedJumpEarly = false;
+                _coyoteUsable = false;
+                _timeLeftGrounded = float.MinValue;
+                JumpingThisFrame = true;
+            }
+            else
+            {
+                JumpingThisFrame = false;
+            }
+
+            // End the jump early if button released
+            if (!_colDown && Input.JumpUp && !_endedJumpEarly && Velocity.y > 0)
+            {
+                // _currentVerticalSpeed = 0;
+                _endedJumpEarly = true;
+            }
+
+            if (_colUp)
+            {
+                if (_currentVerticalSpeed > 0) _currentVerticalSpeed = 0;
+            }*/
         }
         #endregion
     }
