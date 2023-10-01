@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using System.Linq;
 namespace Platformer.Mechanics
 {
     /// <summary>
@@ -19,13 +22,80 @@ namespace Platformer.Mechanics
             animator =GetComponent<Animator>();
         }
         /// <summary>
-        /// Receive input and calculate all physics and control animation 
+        /// Receive input 
         /// </summary>
+        
         void Update()
         {
+            
+            
+        }
+        
+        
+        void FixedUpdate()
+        {
+            //collision 
+            //status update 
+            //jump,
+            //move 
+            //animation 
+        }
+        
+        #region Collision
 
+        [Header("Collision")]
+        private bool _CollisionUP, _CollisionRight, _CollisionDown, _CollisionLeft;
+        [SerializeField] private Bounds _CharacterBounds;
+        [SerializeField] private LayerMask _GroundLayer;
+        [SerializeField] private float _DetectionRayLength = 0.1f;
+        [SerializeField] private int _DetectorCount = 3;
+        [SerializeField][Range(0.1f, 0.3f)] private float _RayBuffer = 0.1f;
+        void CalculateCollision() {
+
+            var b = new Bounds(transform.position + _CharacterBounds.center, _CharacterBounds.size);
+
+            var NewCollisionDown = RunDetection(new Vector2(b.min.x + _RayBuffer, b.min.y), new Vector2(b.max.x - _RayBuffer, b.min.y), Vector2.down);
+
+            if (_CollisionDown && !NewCollisionDown) _TimeLeftGround = Time.time; // Only trigger when first leaving
+            else if (!_CollisionDown && NewCollisionDown)
+            {
+                _CoyoteUsable = true; 
+            }
+
+            _CollisionDown = NewCollisionDown;
+            _CollisionUP = RunDetection(new Vector2(b.min.x + _RayBuffer, b.max.y), new Vector2(b.max.x - _RayBuffer, b.max.y), Vector2.up);
+            _CollisionLeft = RunDetection(new Vector2(b.min.x, b.min.y + _RayBuffer), new Vector2(b.min.x, b.max.y - _RayBuffer), Vector2.left);
+            _CollisionRight = RunDetection(new Vector2(b.max.x, b.min.y + _RayBuffer), new Vector2(b.max.x, b.max.y - _RayBuffer), Vector2.right);
+            
+
+            
+            bool RunDetection(Vector2 start,Vector2 end,Vector2 Direction)
+            {
+                return EvaluateRayPositions(start,end).Any(point => Physics2D.Raycast(point, Direction, _DetectionRayLength, _GroundLayer));
+            }
+        }
+        private IEnumerable<Vector2> EvaluateRayPositions(Vector2 start,Vector2 end)
+        {
+            for (var i = 0; i < _DetectorCount; i++)
+            {
+                var t = (float)i / (_DetectorCount - 1);
+                yield return Vector2.Lerp(start, end, t);
+            }
+        }
+        #endregion
+
+        #region jump
+
+        [Header("Jump")] [SerializeField] float JumpAllowTime;
+        private float _TimePressedJump;
+        private bool _JumpBuffer;
+        [SerializeField] float CoyoteAllowTime;
+        private bool _CoyoteUsable;
+        private float _TimeLeftGround;
+        void CalculateJump() { 
 
         }
+        #endregion
     }
 
 }
