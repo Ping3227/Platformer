@@ -11,7 +11,7 @@ namespace Platformer.Mechanics
     [RequireComponent(typeof(Stamina), typeof(Health), typeof(Animator))]
     public class PlayerController : MonoBehaviour
     {
-     
+
         private Stamina stamina;
         private Health health;
         private Animator animator;
@@ -19,25 +19,26 @@ namespace Platformer.Mechanics
         {
             stamina = GetComponent<Stamina>();
             health = GetComponent<Health>();
-            animator =GetComponent<Animator>();
+            animator = GetComponent<Animator>();
         }
         /// <summary>
         /// Receive input 
         /// </summary>
-        
+
         void Update()
         {
-            var Input = new InputCollection{
+            Input = new InputCollection {
                 JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
                 JumpUp = UnityEngine.Input.GetButtonUp("Jump"),
                 X = UnityEngine.Input.GetAxisRaw("Horizontal")
             };
             if (Input.JumpDown)
             {
-               _TimePressedJump = Time.time;
+                _TimePressedJump = Time.time;
             }
-            
+
         }
+        private InputCollection Input;
         #region Input
         public struct InputCollection
         {
@@ -48,15 +49,14 @@ namespace Platformer.Mechanics
         #endregion
         void FixedUpdate()
         {
-            //collision 
-            //status update 
-            //move
-            //gravity
-            //jump
-            //actually move 
-            //animation 
+            CalculateCollision();
+            CalculateMove();
+            CalculateJump();
+            Move();
+            // UpdateAnimation(); 
         }
-
+        private float _CurrentVerticalSpeed;
+        private float _CurrentHorizontalSpeed;
         #region Collision
 
         [Header("Collision")]
@@ -75,22 +75,22 @@ namespace Platformer.Mechanics
             if (_CollisionDown && !NewCollisionDown) _TimeLeftGround = Time.time; // Only trigger when first leaving
             else if (!_CollisionDown && NewCollisionDown)
             {
-                _CoyoteUsable = true; 
+                _CoyoteUsable = true;
             }
 
             _CollisionDown = NewCollisionDown;
             _CollisionUP = RunDetection(new Vector2(b.min.x + _RayBuffer, b.max.y), new Vector2(b.max.x - _RayBuffer, b.max.y), Vector2.up);
             _CollisionLeft = RunDetection(new Vector2(b.min.x, b.min.y + _RayBuffer), new Vector2(b.min.x, b.max.y - _RayBuffer), Vector2.left);
             _CollisionRight = RunDetection(new Vector2(b.max.x, b.min.y + _RayBuffer), new Vector2(b.max.x, b.max.y - _RayBuffer), Vector2.right);
-            
 
-            
-            bool RunDetection(Vector2 start,Vector2 end,Vector2 Direction)
+
+
+            bool RunDetection(Vector2 start, Vector2 end, Vector2 Direction)
             {
-                return EvaluateRayPositions(start,end).Any(point => Physics2D.Raycast(point, Direction, _DetectionRayLength, _GroundLayer));
+                return EvaluateRayPositions(start, end).Any(point => Physics2D.Raycast(point, Direction, _DetectionRayLength, _GroundLayer));
             }
         }
-        private IEnumerable<Vector2> EvaluateRayPositions(Vector2 start,Vector2 end)
+        private IEnumerable<Vector2> EvaluateRayPositions(Vector2 start, Vector2 end)
         {
             for (var i = 0; i < _DetectorCount; i++)
             {
@@ -102,52 +102,141 @@ namespace Platformer.Mechanics
 
         #region jump
 
-        [Header("Jump")] 
+        [Header("Jump")]
         [SerializeField] float JumpAllowTime;
         private float _TimePressedJump;
         private bool _JumpBuffer;
         [SerializeField] float CoyoteAllowTime;
-        
+
         private bool _CoyoteUsable;
-        private bool CanUseCoyote => _CoyoteUsable && ! _CollisionDown&& Time.time - _TimeLeftGround < CoyoteAllowTime;
+        private bool CanUseCoyote => _CoyoteUsable && !_CollisionDown && Time.time - _TimeLeftGround < CoyoteAllowTime;
         private float _TimeLeftGround;
         bool EndJumpEarly;
-        [SerializeField] float JumpHeight;
+        [SerializeField] float JumpDecrease;
         [SerializeField] float JumpSpeed;
+        [SerializeField] float FallSpeed;
+        [SerializeField] float FallDecrease;
         [SerializeField] float MaxFallSpeed;
-
+        private bool _EndJumpEarly;
         void CalculateJump() {
-            if (_CollisionDown)
+            if (_CollisionDown) // ON GROUND
             {
-                // Move out of the ground
-                
+                if (_JumpBuffer && !_CollisionUP) { //Jump
+                    _CurrentVerticalSpeed = JumpSpeed;
+                    _EndJumpEarly = false;
+                    _CoyoteUsable = false;
+                    _JumpBuffer = false;
+                }
+                else { //Not Jump
+                    _CurrentVerticalSpeed = 0;
+                    _CoyoteUsable = true;
+                }
             }
-            /*if (CanUseCoyote || _JumpBuffer)
-            {
-                _currentVerticalSpeed = _jumpHeight;
-                _endedJumpEarly = false;
-                _coyoteUsable = false;
-                _timeLeftGrounded = float.MinValue;
-                JumpingThisFrame = true;
+            else { // IN AIR
+                if (_CurrentVerticalSpeed > 0) // Already Jumping 
+                {
+                    if (Input.JumpUp && !_EndJumpEarly)
+                    {
+                        _EndJumpEarly = true;
+                    }
+                    if (_EndJumpEarly) _CurrentVerticalSpeed = FallSpeed;
+                    else _CurrentVerticalSpeed -= JumpDecrease;
+
+                    if (_CollisionUP) _CurrentVerticalSpeed = 0;
+                }
+                else { //Falling 
+                    if (CanUseCoyote && (Input.JumpDown || _JumpBuffer)) //Jump
+                    {
+                        _CurrentVerticalSpeed = JumpSpeed;
+                        _EndJumpEarly = false;
+                        _CoyoteUsable = false;
+                        _JumpBuffer = false;
+                    }
+                    else {
+                        _CurrentVerticalSpeed = Mathf.Max(_CurrentVerticalSpeed - FallDecrease, MaxFallSpeed);
+                    }
+
+                }
             }
-            else
+            // Add slide down wall on IN AIR
+        }
+        #endregion
+
+        #region move
+        [Header("Move")]
+        [SerializeField] float MoveSpeed;
+        void CalculateMove() {
+            // Apex 
+            // Move 
+            if (!_CollisionRight && Input.X > 0)
             {
-                JumpingThisFrame = false;
+                _CurrentHorizontalSpeed = MoveSpeed;
+            }
+            else if (!_CollisionLeft && Input.X < 0)
+            {
+                _CurrentHorizontalSpeed = -MoveSpeed;
+            }
+            else {
+                _CurrentHorizontalSpeed = 0;
             }
 
-            // End the jump early if button released
-            if (!_colDown && Input.JumpUp && !_endedJumpEarly && Velocity.y > 0)
+        }
+        #endregion
+        #region Animation
+        [Header("Animation")]
+        private bool IsJumping;
+        private bool IsLanding;
+        void UpdateAnimation() {
+            animator.SetBool("IsJumping", IsJumping);
+            animator.SetBool("IsLanding", IsLanding);
+            animator.SetFloat("HorizontalSpeed", _CurrentHorizontalSpeed);
+            animator.SetFloat("VerticalSpeed", _CurrentVerticalSpeed);
+        }
+        #endregion
+        #region Move 
+        [Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
+        [SerializeField] int _ColliderIterations = 10;
+        void Move() {
+            var pos = transform.position + _CharacterBounds.center;
+            var move = new Vector3(_CurrentHorizontalSpeed, _CurrentVerticalSpeed) * Time.deltaTime; ; 
+            var furthestPoint = pos + move;
+
+            // might have bug whild low fps
+            var hit = Physics2D.OverlapBox(furthestPoint, _CharacterBounds.size, 0, _GroundLayer);
+            if (!hit)
             {
-                // _currentVerticalSpeed = 0;
-                _endedJumpEarly = true;
+                transform.position += move;
+                return;
             }
 
-            if (_colUp)
+            // otherwise increment away from current pos; see what closest position we can move to
+            var InitialPosition = transform.position;
+            for (int i = 1; i < _ColliderIterations; i++)
             {
-                if (_currentVerticalSpeed > 0) _currentVerticalSpeed = 0;
-            }*/
+                // increment to check all but furthestPoint - we did that already
+                var t = (float)i / _ColliderIterations;
+                var posToTry = Vector2.Lerp(pos, furthestPoint, t);
+
+                if (Physics2D.OverlapBox(posToTry, _CharacterBounds.size, 0, _GroundLayer))
+                {
+                    transform.position = InitialPosition;
+
+                    // We've landed on a corner or hit our head on a ledge. Nudge the player gently
+                    if (i == 1)
+                    {
+                        if (_CurrentVerticalSpeed < 0) _CurrentVerticalSpeed = 0;
+                        var dir = transform.position - hit.transform.position;
+                        transform.position += dir.normalized * move.magnitude;
+                    }
+
+                    return;
+                }
+
+                InitialPosition = posToTry;
+            }
         }
         #endregion
     }
+
 
 }
