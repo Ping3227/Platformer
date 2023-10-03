@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 576560076}
   - component: {fileID: 576560075}
   - component: {fileID: 576560077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10363,12 +10363,12 @@ GameObject:
   m_Component:
   - component: {fileID: 678985457}
   - component: {fileID: 678985456}
-  - component: {fileID: 678985458}
   - component: {fileID: 678985459}
   - component: {fileID: 678985460}
   - component: {fileID: 678985461}
   - component: {fileID: 678985463}
   - component: {fileID: 678985462}
+  - component: {fileID: 678985464}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10437,26 +10437,12 @@ Transform:
   m_GameObject: {fileID: 678985455}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.927, y: -3.685, z: 0}
+  m_LocalPosition: {x: 8.927, y: -2.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &678985458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678985455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acdc3f63260bdcb4e862d75cb6e66737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4.5
-  jumpForce: 10
 --- !u!50 &678985459
 Rigidbody2D:
   serializedVersion: 4
@@ -10577,6 +10563,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHP: 2
+--- !u!114 &678985464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678985455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8024e3944fed1994eb9debc534eefa07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _CharacterBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.15, y: 0.3, z: 0}
+  _GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _DetectionRayLength: 0.1
+  _DetectorCount: 2
+  _RayBuffer: 0.1
+  JumpAllowTime: 0
+  CoyoteAllowTime: 0.1
+  JumpDecrease: 5
+  JumpSpeed: 10
+  FallSpeed: -10
+  FallDecrease: 5
+  MaxFallSpeed: -20
+  MoveSpeed: 10
+  _ColliderIterations: 10
 --- !u!1 &943183683
 GameObject:
   m_ObjectHideFlags: 0
@@ -10604,7 +10620,7 @@ Transform:
   m_GameObject: {fileID: 943183683}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -414.4735, y: -179.9343, z: -11.639937}
+  m_LocalPosition: {x: -414.4735, y: -178.9693, z: -11.639937}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11011,7 +11027,7 @@ Transform:
   m_GameObject: {fileID: 2001822306}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.927005, y: 0.014450073, z: -10}
+  m_LocalPosition: {x: 8.926991, y: 0.014450073, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Timeline;
+
 namespace Platformer.Mechanics
 {
     /// <summary>
@@ -36,6 +38,7 @@ namespace Platformer.Mechanics
             {
                 _TimePressedJump = Time.time;
             }
+            if (_CurrentHorizontalSpeed != 0) transform.localScale = new Vector3(Mathf.Sign(_CurrentHorizontalSpeed), 1, 1);
 
         }
         private InputCollection Input;
@@ -50,8 +53,11 @@ namespace Platformer.Mechanics
         void FixedUpdate()
         {
             CalculateCollision();
+            
             CalculateMove();
+            
             CalculateJump();
+            
             Move();
             // UpdateAnimation(); 
         }
@@ -82,7 +88,7 @@ namespace Platformer.Mechanics
             _CollisionUP = RunDetection(new Vector2(b.min.x + _RayBuffer, b.max.y), new Vector2(b.max.x - _RayBuffer, b.max.y), Vector2.up);
             _CollisionLeft = RunDetection(new Vector2(b.min.x, b.min.y + _RayBuffer), new Vector2(b.min.x, b.max.y - _RayBuffer), Vector2.left);
             _CollisionRight = RunDetection(new Vector2(b.max.x, b.min.y + _RayBuffer), new Vector2(b.max.x, b.max.y - _RayBuffer), Vector2.right);
-
+            Debug.Log($"Down:{_CollisionDown}, UP:{_CollisionUP}, Left: {_CollisionLeft}, Right: {_CollisionRight}");
 
 
             bool RunDetection(Vector2 start, Vector2 end, Vector2 Direction)
@@ -171,10 +177,13 @@ namespace Platformer.Mechanics
             if (!_CollisionRight && Input.X > 0)
             {
                 _CurrentHorizontalSpeed = MoveSpeed;
+                Debug.Log($"Move{_CurrentHorizontalSpeed}");
             }
-            else if (!_CollisionLeft && Input.X < 0)
+            else if (!_CollisionLeft && Input.X <0)
             {
+      
                 _CurrentHorizontalSpeed = -MoveSpeed;
+                Debug.Log($"Move{_CurrentHorizontalSpeed}");
             }
             else {
                 _CurrentHorizontalSpeed = 0;
@@ -198,13 +207,15 @@ namespace Platformer.Mechanics
         [SerializeField] int _ColliderIterations = 10;
         void Move() {
             var pos = transform.position + _CharacterBounds.center;
-            var move = new Vector3(_CurrentHorizontalSpeed, _CurrentVerticalSpeed) * Time.deltaTime; ; 
+            var move = new Vector3(_CurrentHorizontalSpeed, _CurrentVerticalSpeed) * Time.fixedDeltaTime;  
             var furthestPoint = pos + move;
+            
 
             // might have bug whild low fps
             var hit = Physics2D.OverlapBox(furthestPoint, _CharacterBounds.size, 0, _GroundLayer);
             if (!hit)
             {
+                Debug.Log($"Move scale {move}");
                 transform.position += move;
                 return;
             }
@@ -234,6 +245,23 @@ namespace Platformer.Mechanics
 
                 InitialPosition = posToTry;
             }
+            Debug.Log($"Move scale {move}");
+        }
+        #endregion
+        #region Gizmos
+        private void OnDrawGizmos()
+        {
+            // Bounds
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position + _CharacterBounds.center, _CharacterBounds.size);
+
+           
+            if (!Application.isPlaying) return;
+
+            // Draw the future position. Handy for visualizing gravity
+            Gizmos.color = Color.red;
+            var move = new Vector3(_CurrentHorizontalSpeed, _CurrentVerticalSpeed) * Time.deltaTime;
+            Gizmos.DrawWireCube(transform.position + _CharacterBounds.center + move, _CharacterBounds.size);
         }
         #endregion
     }
