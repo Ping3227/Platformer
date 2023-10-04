@@ -26,22 +26,23 @@ namespace Platformer.Mechanics
         /// <summary>
         /// Receive input 
         /// </summary>
-
+        private int UpdateCount=0;
+        private int FixedUpdateCount=0;
         void Update()
         {
-            Input = new InputCollection {
-                JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
-                JumpUp = UnityEngine.Input.GetButtonUp("Jump"),
-                X = UnityEngine.Input.GetAxisRaw("Horizontal")
-            };
+            Input.JumpDown = UnityEngine.Input.GetButtonDown("Jump");
+            Input.JumpUp = UnityEngine.Input.GetButtonUp("Jump");
+            Input.X = UnityEngine.Input.GetAxisRaw("Horizontal");
             if (Input.JumpDown)
             {
+                _JumpBuffer=true;
                 _TimePressedJump = Time.time;
             }
             if (_CurrentHorizontalSpeed != 0) transform.localScale = new Vector3(Mathf.Sign(_CurrentHorizontalSpeed), 1, 1);
-
+            //Debug.Log($"Update {UpdateCount++}");
+            //UpdateAnimation();
         }
-        private InputCollection Input;
+        private static InputCollection Input;
         #region Input
         public struct InputCollection
         {
@@ -53,13 +54,11 @@ namespace Platformer.Mechanics
         void FixedUpdate()
         {
             CalculateCollision();
-            
             CalculateMove();
-            
             CalculateJump();
-            
             Move();
             // UpdateAnimation(); 
+            //Debug.Log($"FixedUpdate {FixedUpdateCount++}");
         }
         private float _CurrentVerticalSpeed;
         private float _CurrentHorizontalSpeed;
@@ -88,8 +87,8 @@ namespace Platformer.Mechanics
             _CollisionUP = RunDetection(new Vector2(b.min.x + _RayBuffer, b.max.y), new Vector2(b.max.x - _RayBuffer, b.max.y), Vector2.up);
             _CollisionLeft = RunDetection(new Vector2(b.min.x, b.min.y + _RayBuffer), new Vector2(b.min.x, b.max.y - _RayBuffer), Vector2.left);
             _CollisionRight = RunDetection(new Vector2(b.max.x, b.min.y + _RayBuffer), new Vector2(b.max.x, b.max.y - _RayBuffer), Vector2.right);
-            Debug.Log($"Down:{_CollisionDown}, UP:{_CollisionUP}, Left: {_CollisionLeft}, Right: {_CollisionRight}");
-
+            
+            Debug.Log($"Collision down {_CollisionDown} up {_CollisionUP} left {_CollisionLeft} right {_CollisionRight}");
 
             bool RunDetection(Vector2 start, Vector2 end, Vector2 Direction)
             {
@@ -118,9 +117,12 @@ namespace Platformer.Mechanics
         private bool CanUseCoyote => _CoyoteUsable && !_CollisionDown && Time.time - _TimeLeftGround < CoyoteAllowTime;
         private float _TimeLeftGround;
         bool EndJumpEarly;
+        [Tooltip("Decrease when jumping up")]
         [SerializeField] float JumpDecrease;
         [SerializeField] float JumpSpeed;
+        [Tooltip("Early Fall Speed")]
         [SerializeField] float FallSpeed;
+        [Tooltip("Decrease when falling down")]
         [SerializeField] float FallDecrease;
         [SerializeField] float MaxFallSpeed;
         private bool _EndJumpEarly;
@@ -151,6 +153,7 @@ namespace Platformer.Mechanics
                     if (_CollisionUP) _CurrentVerticalSpeed = 0;
                 }
                 else { //Falling 
+                    Debug.Log("Falling");
                     if (CanUseCoyote && (Input.JumpDown || _JumpBuffer)) //Jump
                     {
                         _CurrentVerticalSpeed = JumpSpeed;
@@ -164,6 +167,7 @@ namespace Platformer.Mechanics
 
                 }
             }
+            
             // Add slide down wall on IN AIR
         }
         #endregion
@@ -177,13 +181,13 @@ namespace Platformer.Mechanics
             if (!_CollisionRight && Input.X > 0)
             {
                 _CurrentHorizontalSpeed = MoveSpeed;
-                Debug.Log($"Move{_CurrentHorizontalSpeed}");
+                
             }
             else if (!_CollisionLeft && Input.X <0)
             {
       
                 _CurrentHorizontalSpeed = -MoveSpeed;
-                Debug.Log($"Move{_CurrentHorizontalSpeed}");
+                
             }
             else {
                 _CurrentHorizontalSpeed = 0;
