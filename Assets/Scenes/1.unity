@@ -10451,7 +10451,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678985455}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -10586,13 +10586,13 @@ MonoBehaviour:
   _RayBuffer: 0.1
   JumpAllowTime: 0
   CoyoteAllowTime: 0.1
-  JumpDecrease: 5
-  JumpSpeed: 10
-  FallSpeed: -10
-  FallDecrease: 5
+  JumpDecrease: 1
+  JumpSpeed: 30
+  FallSpeed: -5
+  FallDecrease: 1
   MaxFallSpeed: -20
   MoveSpeed: 10
-  _ColliderIterations: 10
+  _ColliderIterations: 20
 --- !u!1 &943183683
 GameObject:
   m_ObjectHideFlags: 0
@@ -11027,7 +11027,7 @@ Transform:
   m_GameObject: {fileID: 2001822306}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.926991, y: 0.014450073, z: -10}
+  m_LocalPosition: {x: 8.926995, y: 0.014450073, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
