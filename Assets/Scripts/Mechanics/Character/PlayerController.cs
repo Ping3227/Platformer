@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Timeline;
+using UnityEditor.Build;
 
 namespace Platformer.Mechanics
 {
@@ -17,17 +18,21 @@ namespace Platformer.Mechanics
         private Stamina stamina;
         private Health health;
         private Animator animator;
+        private Rigidbody2D rigbody;
+        
+
+
         void OnEnable()
         {
             stamina = GetComponent<Stamina>();
             health = GetComponent<Health>();
             animator = GetComponent<Animator>();
+            rigbody = GetComponent<Rigidbody2D>();
         }
         /// <summary>
         /// Receive input 
         /// </summary>
-        private int UpdateCount=0;
-        private int FixedUpdateCount=0;
+  
         void Update()
         {
             Input.JumpDown = UnityEngine.Input.GetButtonDown("Jump");
@@ -57,7 +62,7 @@ namespace Platformer.Mechanics
             CalculateMove();
             CalculateJump();
             Move();
-            // UpdateAnimation(); 
+ 
             //Debug.Log($"FixedUpdate {FixedUpdateCount++}");
         }
         private float _CurrentVerticalSpeed;
@@ -65,6 +70,7 @@ namespace Platformer.Mechanics
         #region Collision
 
         [Header("Collision")]
+        
         private bool _CollisionUP, _CollisionRight, _CollisionDown, _CollisionLeft;
         [SerializeField] private Bounds _CharacterBounds;
         [SerializeField] private LayerMask _GroundLayer;
@@ -76,7 +82,7 @@ namespace Platformer.Mechanics
             var b = new Bounds(transform.position + _CharacterBounds.center, _CharacterBounds.size);
 
             var NewCollisionDown = RunDetection(new Vector2(b.min.x + _RayBuffer, b.min.y), new Vector2(b.max.x - _RayBuffer, b.min.y), Vector2.down);
-
+            
             if (_CollisionDown && !NewCollisionDown) _TimeLeftGround = Time.time; // Only trigger when first leaving
             else if (!_CollisionDown && NewCollisionDown)
             {
@@ -88,7 +94,7 @@ namespace Platformer.Mechanics
             _CollisionLeft = RunDetection(new Vector2(b.min.x, b.min.y + _RayBuffer), new Vector2(b.min.x, b.max.y - _RayBuffer), Vector2.left);
             _CollisionRight = RunDetection(new Vector2(b.max.x, b.min.y + _RayBuffer), new Vector2(b.max.x, b.max.y - _RayBuffer), Vector2.right);
             
-            Debug.Log($"Collision down {_CollisionDown} up {_CollisionUP} left {_CollisionLeft} right {_CollisionRight}");
+            
 
             bool RunDetection(Vector2 start, Vector2 end, Vector2 Direction)
             {
@@ -153,7 +159,7 @@ namespace Platformer.Mechanics
                     if (_CollisionUP) _CurrentVerticalSpeed = 0;
                 }
                 else { //Falling 
-                    Debug.Log("Falling");
+                    
                     if (CanUseCoyote && (Input.JumpDown || _JumpBuffer)) //Jump
                     {
                         _CurrentVerticalSpeed = JumpSpeed;
@@ -206,50 +212,18 @@ namespace Platformer.Mechanics
             animator.SetFloat("VerticalSpeed", _CurrentVerticalSpeed);
         }
         #endregion
+        List<RaycastHit2D> _RaycastHits =new List<RaycastHit2D>();
         #region Move 
-        [Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
-        [SerializeField] int _ColliderIterations = 10;
         void Move() {
-            var pos = transform.position + _CharacterBounds.center;
-            var move = new Vector3(_CurrentHorizontalSpeed, _CurrentVerticalSpeed) * Time.fixedDeltaTime;  
-            var furthestPoint = pos + move;
             
+            var move = new Vector2(_CurrentHorizontalSpeed, _CurrentVerticalSpeed);
+            Debug.Log($"initial Move {move}");
+            /*rigbody.Cast(move, _RaycastHits, move.magnitude*Time.fixedDeltaTime);
+            if (_RaycastHits.Count != 0) {
+                move=Vector2.zero;
+            }*/
+            rigbody.velocity = move;
 
-            // might have bug whild low fps
-            var hit = Physics2D.OverlapBox(furthestPoint, _CharacterBounds.size, 0, _GroundLayer);
-            if (!hit)
-            {
-                Debug.Log($"Move scale {move}");
-                transform.position += move;
-                return;
-            }
-
-            // otherwise increment away from current pos; see what closest position we can move to
-            var InitialPosition = transform.position;
-            for (int i = 1; i < _ColliderIterations; i++)
-            {
-                // increment to check all but furthestPoint - we did that already
-                var t = (float)i / _ColliderIterations;
-                var posToTry = Vector2.Lerp(pos, furthestPoint, t);
-
-                if (Physics2D.OverlapBox(posToTry, _CharacterBounds.size, 0, _GroundLayer))
-                {
-                    transform.position = InitialPosition;
-
-                    // We've landed on a corner or hit our head on a ledge. Nudge the player gently
-                    if (i == 1)
-                    {
-                        if (_CurrentVerticalSpeed < 0) _CurrentVerticalSpeed = 0;
-                        var dir = transform.position - hit.transform.position;
-                        transform.position += dir.normalized * move.magnitude;
-                    }
-
-                    return;
-                }
-
-                InitialPosition = posToTry;
-            }
-            Debug.Log($"Move scale {move}");
         }
         #endregion
         #region Gizmos
@@ -259,7 +233,7 @@ namespace Platformer.Mechanics
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(transform.position + _CharacterBounds.center, _CharacterBounds.size);
 
-           
+
             if (!Application.isPlaying) return;
 
             // Draw the future position. Handy for visualizing gravity
@@ -267,6 +241,7 @@ namespace Platformer.Mechanics
             var move = new Vector3(_CurrentHorizontalSpeed, _CurrentVerticalSpeed) * Time.deltaTime;
             Gizmos.DrawWireCube(transform.position + _CharacterBounds.center + move, _CharacterBounds.size);
         }
+            
         #endregion
     }
 
