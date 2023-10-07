@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Timeline;
 using UnityEditor.Build;
+using Cinemachine;
 
 namespace Platformer.Mechanics
 {
@@ -19,7 +20,7 @@ namespace Platformer.Mechanics
         private Health health;
         private Animator animator;
         private Rigidbody2D rigbody;
-        
+        public CinemachineVirtualCamera CurrentCamera;
 
 
         void OnEnable()
