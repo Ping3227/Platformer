@@ -1,4 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
 
 
 namespace Platformer.UI {
@@ -8,6 +15,9 @@ namespace Platformer.UI {
     /// </summary>
     public class UIController : MonoBehaviour
     {
+        public Button playButton;
+        public Button quitButton;
+        private bool IsPause;
         /// <summary>
         /// must at least contain Health,Stamina 
         /// </summary>
@@ -19,7 +29,14 @@ namespace Platformer.UI {
         /// <summary>
         /// boolean to check if the game is paused
         /// </summary>
-        private bool IsPause;
+        
+        void Start ()
+        {
+   
+            playButton.onClick.AddListener(PlayGame);
+            quitButton.onClick.AddListener(QuitGame);
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -68,10 +85,16 @@ namespace Platformer.UI {
         /// <summary>
         /// Quit the game, bind to the Quit button
         /// </summary>
-        void Quit() {
+        void QuitGame() 
+        {
             Application.Quit();
         }
-        
+
+        void PlayGame()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
     }
 
 
