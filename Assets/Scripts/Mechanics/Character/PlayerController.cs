@@ -223,7 +223,7 @@ namespace Platformer.Mechanics
             if (_RaycastHits.Count != 0) {
                 move=Vector2.zero;
             }*/
-            rigbody.velocity = move;
+           rigbody.MovePosition(rigbody.position + move * Time.fixedDeltaTime);
 
         }
         #endregion
