@@ -16,6 +16,8 @@ namespace Platformer.UI
         [SerializeField] Canvas HUDCanvas;
    
         [SerializeField] Canvas PauseCanvas;
+
+        [SerializeField] Slider healthbar;
        
 
 
@@ -66,5 +68,18 @@ namespace Platformer.UI
         {
             Application.Quit();
         }
+
+        public void SetMaxHealth( int health)
+        {
+            healthbar.maxValue = health;
+            healthbar.value = health;
+        }
+
+        public void SetHealth( int health )
+        {
+            healthbar.value = health;
+        }
+
+
     }
 }
