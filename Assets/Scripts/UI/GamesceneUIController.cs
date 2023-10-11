@@ -11,6 +11,7 @@ namespace Platformer.UI
 {
     public class GamesceneUIController : MonoBehaviour
     {
+        public static GamesceneUIController instance { get; private set; }
         public static bool IsPause = false;
         
         [SerializeField] Canvas HUDCanvas;
@@ -18,10 +19,21 @@ namespace Platformer.UI
         [SerializeField] Canvas PauseCanvas;
 
         [SerializeField] Slider healthbar;
-       
+        [SerializeField] Slider Stamina;
+        private void Awake()
+        {
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
-
-        void Update()
+            void Update()
         {
             if (Input.GetButtonDown("Cancel"))
             {
@@ -69,17 +81,24 @@ namespace Platformer.UI
             Application.Quit();
         }
 
-        public void SetMaxHealth( int health)
+        public void SetMaxHealth(int health)
         {
             healthbar.maxValue = health;
             healthbar.value = health;
         }
 
-        public void SetHealth( int health )
+        public void SetHealth(int health )
         {
             healthbar.value = health;
         }
 
-
+        public void SetStamina(int stamina) { 
+            Stamina.value = stamina;
+        }
+        public void SetMaxStamina(int stamina)
+        {
+            Stamina.maxValue = stamina;
+            Stamina.value = stamina;
+        }   
     }
 }
