@@ -45,6 +45,7 @@ namespace Platformer.Mechanics
                 _TimePressedJump = Time.time;
             }
             if (_CurrentHorizontalSpeed != 0) transform.localScale = new Vector3(Mathf.Sign(_CurrentHorizontalSpeed), 1, 1);
+            Attack();
             //Debug.Log($"Update {UpdateCount++}");
             //UpdateAnimation();
         }
@@ -55,6 +56,11 @@ namespace Platformer.Mechanics
             public float X;
             public bool JumpDown;
             public bool JumpUp;
+
+            internal bool GetKeyDown(KeyCode k)
+            {
+                throw new NotImplementedException();
+            }
         }
         #endregion
         void FixedUpdate()
@@ -242,8 +248,23 @@ namespace Platformer.Mechanics
             var move = new Vector3(_CurrentHorizontalSpeed, _CurrentVerticalSpeed) * Time.deltaTime;
             Gizmos.DrawWireCube(transform.position + _CharacterBounds.center + move, _CharacterBounds.size);
         }
-            
+
         #endregion
+
+        private void Attack()
+        {
+            // 检测是否按下K键
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                // 设置攻击参数为true，触发攻击状态
+                animator.SetBool("IsAttacking", true);
+            }
+            else
+            {
+                // 当不攻击时，将攻击参数设置为false
+                animator.SetBool("IsAttacking", false);
+            }
+        }
     }
 
 
