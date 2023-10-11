@@ -224,7 +224,7 @@ namespace Platformer.Mechanics
         void Move() {
             
             var move = new Vector2(_CurrentHorizontalSpeed, _CurrentVerticalSpeed);
-            Debug.Log($"initial Move {move}");
+            //Debug.Log($"initial Move {move}");
             /*rigbody.Cast(move, _RaycastHits, move.magnitude*Time.fixedDeltaTime);
             if (_RaycastHits.Count != 0) {
                 move=Vector2.zero;
