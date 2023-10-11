@@ -33,7 +33,7 @@ public class EnemyTestController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("TEst");
+        Debug.Log("TestTest");
         // 检查碰撞对象的标签是否为"Attack_Area"
         if (other.gameObject.CompareTag("Attack_Area"))
         {
