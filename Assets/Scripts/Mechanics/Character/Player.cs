@@ -1,3 +1,4 @@
+using Platformer.Mechanics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,14 +23,21 @@ public class Player : MonoBehaviour
     private float jumpTimeCounter;
 
     private Rigidbody2D rb;
+    private Animator anim;
+    private Collider2D coll;
+    private Health health;
+    private Stamina stamina;
     private float moveInput;
     private RaycastHit2D groundHit;
-    private Collider2D coll;
+    
     
     private void Start()
     {
         coll= GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        health = GetComponent<Health>();
+        stamina = GetComponent<Stamina>();
     }
     private void Update()
     {

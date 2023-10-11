@@ -1,3 +1,4 @@
+using Platformer.UI;
 using UnityEngine;
 namespace Platformer.Mechanics {
     /// <summary>
@@ -6,9 +7,12 @@ namespace Platformer.Mechanics {
     public class Health : MonoBehaviour
     {
         private int currentHP;
+        public GamesceneUIController healthbar;
 
         [SerializeField] int MaxHP;
         public bool IsAlive => currentHP > 0;
+
+       
         public void Heal(int value)
         {
             currentHP += value;
@@ -16,6 +20,8 @@ namespace Platformer.Mechanics {
             {
                 currentHP = MaxHP;
             }
+
+            healthbar.SetHealth(currentHP);
         }
         public void Hurt(int value)
         {
@@ -24,10 +30,13 @@ namespace Platformer.Mechanics {
             {
                 currentHP = 0;
             }
+
+            healthbar.SetHealth(currentHP);
         }
         void OnEnable()
         {
             currentHP = MaxHP;
+            healthbar.SetMaxHealth(MaxHP);
         }
 
     }
