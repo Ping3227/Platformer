@@ -8,22 +8,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Move")]
-    [SerializeField] private float moveSpeed = 7.5f;
+    [SerializeField] private float moveSpeed = 3f;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float jumpTime = 0.5f;
     [SerializeField] private float jumpCost = 0.5f;
     [SerializeField] private float doubleJumpForce = 2f;
-    [SerializeField] private float doubleJumpCost = 0.5f;
+    [SerializeField] private float doubleJumpCost = 0.1f;
     [SerializeField] private float doubleJumpTime = 0.3f;
     [Tooltip("Bonus movement distance while jumping")]
-    [SerializeField] private float ApexBonus = 0.5f;
+    [SerializeField] private float ApexBonus = 0.8f;
 
     [Header("Dash")]
     [SerializeField] private float dashForce = 10f;
-    [SerializeField] private float dashCost = 0.5f;
-    [SerializeField] private float dashTime = 0.3f;
+    [SerializeField] private float dashCost = 0.3f;
+    [SerializeField] private float dashTime = 0.1f;
 
     [Header("Ground check")]
     [Tooltip("Check Ground Distance")]
@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     private bool IsJumping = false;
     private bool IsDoubleJumping =false;
     private bool FinishDoubleJump = false;
+    private bool IsAttacking = false;
     private bool IsFalling;
     private float jumpTimeCounter;
     private float DashTimeCounter;
@@ -66,11 +67,20 @@ public class Player : MonoBehaviour
         if (!IsDashing) {
             Jump();
             Move();
-            
+            Attack();
+        }
+        
+    }
+
+    private void Attack()
+    {
+        if(UserInput.instance.controls.Attack.Attack.WasPressedThisFrame())
+        {
+            anim.SetTrigger("Attack");
         }
     }
 
-    
+
     #region movement
     private void Move()
     {
@@ -81,7 +91,7 @@ public class Player : MonoBehaviour
         }
         
         rb.velocity = new Vector2(moveInput * moveSpeed* (1+JumpApex) , rb.velocity.y);
-        Debug.Log("Movement"+rb.velocity);
+        
     }
     
     private void Jump() {
