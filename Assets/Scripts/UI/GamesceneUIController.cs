@@ -13,7 +13,7 @@ namespace Platformer.UI
     {
         public static GamesceneUIController instance { get; private set; }
         public static bool IsPause = false;
-        [SerializeField] Canvas Prefab;
+        [SerializeField] GameObject Pausemenu;
         [SerializeField] Canvas HUDCanvas;
         [SerializeField] Canvas PauseCanvas;
         [SerializeField] Slider healthbar;
@@ -23,13 +23,9 @@ namespace Platformer.UI
         {
             if (instance == null)
             {
-                Instantiate(Prefab);
-                HUDCanvas = GameObject.Find("HUDCanvas").GetComponent<Canvas>();
-                PauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
-                healthbar = GameObject.Find("Health").GetComponent<Slider>();
-                Stamina = GameObject.Find("Stamina").GetComponent<Slider>();
                 instance = this;
                 DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(Pausemenu.gameObject);
             }
             else
             {

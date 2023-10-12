@@ -2404,7 +2404,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -5.2934594, y: 4.332919}
+    - - {x: -5.246945, y: 7.216756}
       - {x: -5.329596, y: -2.5991182}
       - {x: 19.671135, y: -2.5735042}
       - {x: 19.572353, y: 1.772361}
@@ -2920,7 +2920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58f684a100786c49bff096b55960321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 0}
+  Pausemenu: {fileID: 1502188245}
   HUDCanvas: {fileID: 1873296882}
   PauseCanvas: {fileID: 1873296879}
   healthbar: {fileID: 1873296881}
@@ -3013,6 +3013,11 @@ MonoBehaviour:
   m_BoundingShape2D: {fileID: 1133157705}
   m_Damping: 0.5
   m_MaxWindowSize: 0
+--- !u!1 &1502188245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7745984963936868596, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
+  m_PrefabInstance: {fileID: 1873296878}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1543977144
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,6 +3242,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5415547469872612452, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1360556098}
+    - target: {fileID: 5415547469872612452, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 6095650376206997466, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.455685
@@ -3388,7 +3401,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 4.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3413,7 +3426,7 @@ Transform:
   m_GameObject: {fileID: 1923689930}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.882412, y: -2.38868, z: -10}
+  m_LocalPosition: {x: 5.330472, y: -0.05689764, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
