@@ -6,10 +6,9 @@ namespace Platformer.Mechanics {
     /// </summary>
     public class Health : MonoBehaviour
     {
-        private int currentHP;
-        public GamesceneUIController healthbar;
+        private float currentHP;
 
-        [SerializeField] int MaxHP;
+        [SerializeField] float MaxHP;
         public bool IsAlive => currentHP > 0;
 
        
@@ -20,8 +19,7 @@ namespace Platformer.Mechanics {
             {
                 currentHP = MaxHP;
             }
-
-            healthbar.SetHealth(currentHP);
+            GamesceneUIController.instance.SetHealth(currentHP);
         }
         public void Hurt(int value)
         {
@@ -30,13 +28,13 @@ namespace Platformer.Mechanics {
             {
                 currentHP = 0;
             }
+            GamesceneUIController.instance.SetHealth(currentHP);
 
-            healthbar.SetHealth(currentHP);
         }
-        void OnEnable()
+        void Start()
         {
             currentHP = MaxHP;
-            healthbar.SetMaxHealth(MaxHP);
+            GamesceneUIController.instance.SetMaxHealth(MaxHP);
         }
 
     }

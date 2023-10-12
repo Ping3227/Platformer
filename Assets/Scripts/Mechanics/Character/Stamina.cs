@@ -1,3 +1,4 @@
+using Platformer.UI;
 using UnityEngine;
 namespace Platformer.Mechanics
 {
@@ -6,29 +7,45 @@ namespace Platformer.Mechanics
     /// </summary>
     public class Stamina : MonoBehaviour
     {
-        private int CurrentStamina;
-
-        [SerializeField] int MaxStamina;
-
-        [SerializeField] int RechargingRate;
+        private float CurrentStamina;
+        private float CoolDownTime;
+        [SerializeField] float MaxStamina = 1f;
+        [SerializeField] float RechargeCoolDown = 0.5f;
+        [SerializeField] float RechargingRate =0.1f;
         /// <summary>
         /// can only be charging while player is finished speical actions
         /// </summary>
-        bool IsCharging;
+        bool IsCharging =false;
         /// <summary>
         /// charge stamina while player is not doing speical actions
         /// </summary>
         void Update()
         {
-            if (IsCharging)
+            
+            if (!IsCharging && CoolDownTime>0)
             {
-                CurrentStamina += RechargingRate;
-                // Schedule<UpdateStamina>
+                
+                CoolDownTime -= Time.deltaTime;
+                
+                if (CoolDownTime <= 0) { 
+                    CoolDownTime = 0;
+                    IsCharging = true;
+                }
+                
+            }
+            if(IsCharging)
+            {
+                CurrentStamina += RechargingRate*Time.deltaTime;
+
                 if (CurrentStamina > MaxStamina)
                 {
                     CurrentStamina = MaxStamina;
                     IsCharging = false;
                 }
+                else { 
+                    GamesceneUIController.instance.SetStamina(CurrentStamina);
+                }
+
             }
         }
         /// <summary>
@@ -36,11 +53,14 @@ namespace Platformer.Mechanics
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public bool ConsumeStamina(int Value) { 
+        public bool ConsumeStamina(float Value) { 
             if (CurrentStamina >= Value)
             {
+               
                 CurrentStamina -= Value;
-                // Scedule<UpdateStamina>
+                UI.GamesceneUIController.instance.SetStamina(CurrentStamina);
+                IsCharging = false;
+                CoolDownTime = RechargeCoolDown;
                 return true;
             }
             return false;

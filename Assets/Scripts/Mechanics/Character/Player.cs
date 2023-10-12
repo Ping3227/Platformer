@@ -1,4 +1,6 @@
 using Platformer.Mechanics;
+using Platformer.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,16 +13,30 @@ public class Player : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
     [SerializeField ] private float jumpTime = 0.5f;
+    [SerializeField] private float jumpCost = 0.5f;
+    [SerializeField] private float doubleJumpForce = 2f;
+    [SerializeField] private float doubleJumpCost = 0.5f;
+    [SerializeField] private float doubleJumpTime = 0.3f;
+
+    [Header("Dash")]
+    [SerializeField] private float dashForce = 10f;
+    [SerializeField] private float dashCost = 0.5f;
+    [SerializeField]private float dashTime = 0.3f;
 
     [Header("Ground check")]
     [SerializeField] private float extraHeight = 0.25f;
     [SerializeField] private LayerMask whatIsGround;
 
     private bool IsFacingRight = true;
-
+    private bool IsDashing = false;
     private bool IsJumping = false;
+    private bool IsDoubleJumping =false;
+    private bool FinishDoubleJump = false;
     private bool IsFalling;
     private float jumpTimeCounter;
+    private float DashTimeCounter;
+    private float doubleJumpTimeCounter;
+    
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -41,10 +57,14 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        
-        Move();
-        Jump();
+        Dash();
+        if (!IsDashing) {
+            Move();
+            Jump();
+        }
     }
+
+    
     #region movement
     private void Move()
     {
@@ -57,16 +77,19 @@ public class Player : MonoBehaviour
     }
     
     private void Jump() {
-        if (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()&&IsGrounded()) { 
-            Debug.Log($"Jumping {IsGrounded()}");
+        if (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()
+                && IsGrounded() && stamina.ConsumeStamina(jumpCost*Time.deltaTime)) { 
+            
             IsJumping = true;
+            FinishDoubleJump = false;
             jumpTimeCounter = jumpTime;
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce); 
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             
         }
         if(UserInput.instance.controls.Jumping.Jump.IsPressed())
         {
-            if (jumpTimeCounter > 0 && IsJumping)
+            
+            if (jumpTimeCounter > 0 && IsJumping&& stamina.ConsumeStamina(jumpCost * Time.deltaTime))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
@@ -81,6 +104,48 @@ public class Player : MonoBehaviour
         {
             IsJumping = false;
         }
+        /// Below is double jump logic 
+        if (!IsJumping && !IsGrounded() && !FinishDoubleJump
+                && UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()
+                && stamina.ConsumeStamina(doubleJumpCost) ) {
+
+            doubleJumpTimeCounter = doubleJumpTime;
+            IsDoubleJumping = true;
+            FinishDoubleJump = false;
+        }
+        if (IsDoubleJumping) {
+            rb.velocity = new Vector2(rb.velocity.x, doubleJumpForce);
+            doubleJumpTimeCounter -= Time.deltaTime;
+            Debug.Log("is double jumping");
+            if (doubleJumpTimeCounter <= 0) {
+                FinishDoubleJump = true;
+                IsDoubleJumping = false;
+            }
+        }
+       
+        
+    }
+    private void Dash()
+    {
+        if(DashTimeCounter ==0&& UserInput.instance.controls.Dash.Dash.WasPressedThisFrame()&& stamina.ConsumeStamina(dashCost))
+        {
+            IsDashing = true;
+            DashTimeCounter = dashTime;
+        }
+        DashTimeCounter -= Time.deltaTime;
+        if (DashTimeCounter <= 0) {
+            DashTimeCounter = 0;
+            IsDashing = false;
+        }
+        if (IsDashing) {
+            if (IsFacingRight) {
+                rb.velocity = new Vector2(dashForce, rb.velocity.y);
+            }
+            else {
+                rb.velocity = new Vector2(-dashForce, rb.velocity.y);
+            }
+        }
+
         
     }
     #endregion
@@ -130,7 +195,7 @@ public class Player : MonoBehaviour
     }
     #endregion
     #region Debug function
-    private void OnDrawGizmos()
+    private void DrawDebug()
     {
         Color rayColor;
         if (IsGrounded())

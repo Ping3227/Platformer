@@ -20,6 +20,7 @@ namespace Platformer.UI
 
         [SerializeField] Slider healthbar;
         [SerializeField] Slider Stamina;
+        
         private void Awake()
         {
             if (instance == null)
@@ -33,8 +34,9 @@ namespace Platformer.UI
             }
         }
 
-            void Update()
+        void Update()
         {
+
             if (Input.GetButtonDown("Cancel"))
             {
           
@@ -81,21 +83,22 @@ namespace Platformer.UI
             Application.Quit();
         }
 
-        public void SetMaxHealth(int health)
+        public void SetMaxHealth(float health)
         {
             healthbar.maxValue = health;
             healthbar.value = health;
+            
         }
 
-        public void SetHealth(int health )
+        public void SetHealth(float health )
         {
             healthbar.value = health;
         }
 
-        public void SetStamina(int stamina) { 
+        public void SetStamina(float stamina) { 
             Stamina.value = stamina;
         }
-        public void SetMaxStamina(int stamina)
+        public void SetMaxStamina(float stamina)
         {
             Stamina.maxValue = stamina;
             Stamina.value = stamina;
