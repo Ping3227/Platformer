@@ -10,6 +10,7 @@ namespace Platformer.Mechanics
         private float CurrentStamina;
         private float CoolDownTime;
         [SerializeField] float MaxStamina = 1f;
+        [Tooltip("Time need to wait for recharging after using special movement")]
         [SerializeField] float RechargeCoolDown = 0.5f;
         [SerializeField] float RechargingRate =0.1f;
         /// <summary>

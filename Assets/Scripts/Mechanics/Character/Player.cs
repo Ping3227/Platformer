@@ -12,18 +12,21 @@ public class Player : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField ] private float jumpTime = 0.5f;
+    [SerializeField] private float jumpTime = 0.5f;
     [SerializeField] private float jumpCost = 0.5f;
     [SerializeField] private float doubleJumpForce = 2f;
     [SerializeField] private float doubleJumpCost = 0.5f;
     [SerializeField] private float doubleJumpTime = 0.3f;
+    [Tooltip("Bonus movement distance while jumping")]
+    [SerializeField] private float ApexBonus = 0.5f;
 
     [Header("Dash")]
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float dashCost = 0.5f;
-    [SerializeField]private float dashTime = 0.3f;
+    [SerializeField] private float dashTime = 0.3f;
 
     [Header("Ground check")]
+    [Tooltip("Check Ground Distance")]
     [SerializeField] private float extraHeight = 0.25f;
     [SerializeField] private LayerMask whatIsGround;
 
@@ -36,6 +39,8 @@ public class Player : MonoBehaviour
     private float jumpTimeCounter;
     private float DashTimeCounter;
     private float doubleJumpTimeCounter;
+    private float JumpApex =0f;
+   
     
 
     private Rigidbody2D rb;
@@ -59,8 +64,9 @@ public class Player : MonoBehaviour
     {
         Dash();
         if (!IsDashing) {
-            Move();
             Jump();
+            Move();
+            
         }
     }
 
@@ -73,7 +79,9 @@ public class Player : MonoBehaviour
         {
             TurnCheck();
         }
-        rb.velocity = new Vector2(moveInput * 5, rb.velocity.y);
+        
+        rb.velocity = new Vector2(moveInput * moveSpeed* (1+JumpApex) , rb.velocity.y);
+        Debug.Log("Movement"+rb.velocity);
     }
     
     private void Jump() {
@@ -93,9 +101,13 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
+                if(jumpTimeCounter<0) jumpTimeCounter = 0;
+                JumpApex= (jumpTime-jumpTimeCounter)*ApexBonus/jumpTime;
+                
             }
             else
             {
+                JumpApex = 0;
                 IsJumping = false;
             }
             
@@ -103,6 +115,7 @@ public class Player : MonoBehaviour
         if (UserInput.instance.controls.Jumping.Jump.WasReleasedThisFrame())
         {
             IsJumping = false;
+            JumpApex = 0;
         }
         /// Below is double jump logic 
         if (!IsJumping && !IsGrounded() && !FinishDoubleJump
@@ -116,7 +129,7 @@ public class Player : MonoBehaviour
         if (IsDoubleJumping) {
             rb.velocity = new Vector2(rb.velocity.x, doubleJumpForce);
             doubleJumpTimeCounter -= Time.deltaTime;
-            Debug.Log("is double jumping");
+            
             if (doubleJumpTimeCounter <= 0) {
                 FinishDoubleJump = true;
                 IsDoubleJumping = false;
