@@ -15,23 +15,23 @@ public class PlayerTestController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        //Attack();
     }
 
-    private void Attack()
-    {
-        // 检测是否按下K键
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            // 设置攻击参数为true，触发攻击状态
-            animator.SetBool("IsAttacking", true);
-        }
-        else
-        {
-            // 当不攻击时，将攻击参数设置为false
-            animator.SetBool("IsAttacking", false);
-        }
-    }
+    //private void Attack()
+    //{
+    //    // 检测是否按下K键
+    //    if (Input.GetKeyDown(KeyCode.K))
+    //    {
+    //        // 设置攻击参数为true，触发攻击状态
+    //        animator.SetBool("IsAttacking", true);
+    //    }
+    //    else
+    //    {
+    //        // 当不攻击时，将攻击参数设置为false
+    //        animator.SetBool("IsAttacking", false);
+    //    }
+    //}
         
     //private void OnTriggerEnter2D(Collider2D other)
     //    {
