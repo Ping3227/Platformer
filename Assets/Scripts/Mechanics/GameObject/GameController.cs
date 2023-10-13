@@ -7,10 +7,12 @@ namespace Platformer.Mechanics {
     /// </summary>
     public class GameController : MonoBehaviour
     {
+        public static GameObject player { get; private set; }
         public static GameController Instance { get; private set; }
         void OnEnable()
         {
             Instance = this;
+            player = GameObject.FindGameObjectWithTag("Player");
         }
 
         void OnDisable()
