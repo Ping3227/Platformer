@@ -69,7 +69,14 @@ public class Player : MonoBehaviour
             Move();
             Attack();
         }
+        UpdateAnimation();
         
+    }
+
+    private void UpdateAnimation()
+    {
+        anim.SetBool("IsJump", IsJumping);
+        anim.SetBool("IsDash", IsDashing);
     }
 
     private void Attack()
