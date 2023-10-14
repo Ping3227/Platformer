@@ -10,15 +10,16 @@ public class DodgeAttack : StateMachineBehaviour
     Bounds coll;
     BoxCollider2D area;
     Vector2 targetPosition;
+    bool IsMoved ;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameController.player;
         rb = animator.GetComponent<Rigidbody2D>();
         area = animator.GetComponent<Boss>().Area;
         coll = animator.GetComponent<Renderer>().bounds;
+        IsMoved = false;
         if (player.transform.position.x > area.bounds.center.x) {
             targetPosition = new Vector2(area.bounds.min.x+coll.extents.x, area.bounds.min.y + coll.extents.y);
-            
         }
         else
         {
@@ -28,7 +29,11 @@ public class DodgeAttack : StateMachineBehaviour
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb.position = targetPosition;
+        if (!IsMoved) {
+            rb.position = targetPosition;
+            IsMoved = true;
+        }
+        
         
     }
 }

@@ -5,4 +5,5 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     public BoxCollider2D Area;
+    
 }
