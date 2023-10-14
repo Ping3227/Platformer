@@ -864,6 +864,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5088884409745995124, guid: a85517f01cbf54ef2a8690c950d0ba11, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 7748093990346355793, guid: a85517f01cbf54ef2a8690c950d0ba11, type: 3}
       propertyPath: m_Name
       value: Player
@@ -894,7 +898,7 @@ GameObject:
   - component: {fileID: 1337078542}
   - component: {fileID: 1337078546}
   - component: {fileID: 1337078547}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
