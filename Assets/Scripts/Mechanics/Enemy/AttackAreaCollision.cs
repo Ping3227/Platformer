@@ -57,7 +57,11 @@ public class AttackAreaCollision : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Test");
+            Debug.Log("Player进入了AttackArea！");
+        }
+        else if (other.CompareTag("Enemy"))
+        {
+            Debug.Log("Enemy进入了AttackArea！");
         }
     }
 
