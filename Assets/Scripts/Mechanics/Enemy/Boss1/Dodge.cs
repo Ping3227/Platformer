@@ -16,19 +16,19 @@ public class DodgeAttack : StateMachineBehaviour
         rb = animator.GetComponent<Rigidbody2D>();
         area = animator.GetComponent<Boss>().Area;
         coll = animator.GetComponent<Renderer>().bounds;
-        Debug.Log("height: " + coll.size.y);
         if (player.transform.position.x > area.bounds.center.x) {
-            targetPosition = new Vector2(area.bounds.min.x+coll.size.x, coll.size.y);
+            targetPosition = new Vector2(area.bounds.min.x+coll.extents.x, area.bounds.min.y + coll.extents.y);
             
         }
         else
         {
-            targetPosition = new Vector2(area.bounds.max.x-coll.size.x, coll.size.y);
+            targetPosition = new Vector2(area.bounds.max.x-coll.extents.x, area.bounds.min.y+coll.extents.y);
         }
+        animator.SetFloat("Distance", Vector2.Distance(animator.transform.position, player.transform.position));
     }
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rb.position = targetPosition;
-        animator.SetFloat("Distance", Vector2.Distance(animator.transform.position, player.transform.position));
+        
     }
 }

@@ -866,7 +866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748093990346355793, guid: a85517f01cbf54ef2a8690c950d0ba11, type: 3}
       propertyPath: m_Name
-      value: w
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7278025389839724809, guid: a85517f01cbf54ef2a8690c950d0ba11, type: 3}
@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 1337078547}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -909,7 +909,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337078541}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
