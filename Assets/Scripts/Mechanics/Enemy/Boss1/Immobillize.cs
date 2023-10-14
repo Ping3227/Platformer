@@ -1,36 +1,34 @@
+using Platformer.Mechanics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using UnityEditor;
 using UnityEngine;
 
 public class Immobillize : StateMachineBehaviour
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+    private GameObject player;
+    private BoxCollider2D area;
+    Vector2 targetPosition;
+    [SerializeField] GameObject ImmobillizeField;
+    [SerializeField] float ImmobillizeSize;
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        player = GameController.player;
+        animator.SetFloat("Distance", Vector2.Distance(animator.transform.position, player.transform.position));
+        targetPosition =CheckPosition(player.transform.position);
+        Instantiate(ImmobillizeField,targetPosition , Quaternion.identity);
+    }
+    private Vector2 CheckPosition(Vector3 Position) {
+        if(Position.x > area.bounds.max.x-ImmobillizeSize )
+        {
+            return new Vector2(area.bounds.max.x - ImmobillizeSize,area.bounds.min.y );
+        }
+        if(Position.x < area.bounds.min.x + ImmobillizeSize)
+        {
+            return new Vector2(area.bounds.min.x + ImmobillizeSize, area.bounds.min.y);
+        }
+        return new Vector2(Position.x, area.bounds.min.y);
+        
+    } 
 }
