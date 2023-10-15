@@ -894,6 +894,8 @@ GameObject:
   - component: {fileID: 1337078542}
   - component: {fileID: 1337078546}
   - component: {fileID: 1337078547}
+  - component: {fileID: 1337078549}
+  - component: {fileID: 1337078548}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -1074,6 +1076,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Area: {fileID: 1853719546}
+--- !u!114 &1337078548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337078541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7610c63ecb36e6646975b834a70a0034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  IsImmobilized: 0
+  Far: 1
+  IsInfront: 1
+  IsBlocked: 0
+--- !u!114 &1337078549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337078541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e43e7170fb45b4b81dcd16d0ff55d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 4900000, guid: adad7fe3c9ac6a646910facbbf5d5f45, type: 3}
+  autoReset: 1
+  tickOn: 0
+  sourceInfos:
+  - isFoldout: 1
+    breakPoints: 
+    breakPointStatuses: 
+    collapsedLines: 02000000050000000c00000010000000
+    btScript: 
 --- !u!1 &1461665462
 GameObject:
   m_ObjectHideFlags: 0
