@@ -1,2 +1,44 @@
 tree("Root")
-	Succeed
+	sequence 
+		tree("Attack")
+		tree("Dodge")
+tree("Attack")
+	sequence 
+		Far
+		random(0.6,0.2,0.2)
+			tree("teleportAttack")
+			tree("immobilizeAttack")
+			tree("FastAttack")
+tree("teleportAttack")
+	Sequence
+		Teleport
+		Attack
+tree("immobilizeAttack")
+	Sequence 
+		Immobilize
+		Wait(1)
+		IsImmobilized
+		BackAttack
+tree("FastAttack")
+	repeat 3
+		sequence 
+			FastTeleport
+			FastAttack
+			IsInfront
+tree("Dodge")
+	sequence
+		not Far
+		TeleportBack
+		sequence
+			not Far
+			Blocking
+			IsBlocked
+			counterattack
+			not Far
+			BackAttack
+			TeleportBack
+
+	
+
+
+		
