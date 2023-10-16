@@ -17,15 +17,15 @@ public class BossAttackCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Attack_Area"))
         {
-            anim.SetTrigger("Hurt");
-            Debug.Log("Player进入了AttackArea！");
+            anim.SetTrigger("IsReflected");
+            Debug.Log("Player进入了反擊領域！");
         }
         else if (other.CompareTag("Enemy"))
         {
