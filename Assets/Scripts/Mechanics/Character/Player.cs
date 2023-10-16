@@ -236,7 +236,25 @@ public class Player : MonoBehaviour
         Debug.DrawRay(coll.bounds.center - new Vector3(coll.bounds.extents.x, 0), Vector2.down * (coll.bounds.extents.y + extraHeight), rayColor);
         Debug.DrawRay(coll.bounds.center - new Vector3(coll.bounds.extents.x, coll.bounds.extents.y + extraHeight), Vector2.right * (coll.bounds.extents.x * 2), rayColor);
     }
-    #endregion 
+    #endregion
+    #region query function
+    public bool IsBehind(Vector2 postion) {
+        if (IsFacingRight && postion.x < transform.position.x)
+        {
+            return true;
+        }
+        if (!IsFacingRight && postion.x > transform.position.x)
+        {
+            return true;
+        }
+        return false;
+    }
+    #endregion
+    #region trigger function
+    public void Immobilized() {
+        Debug.Log("Immobolized");
+    }
+    #endregion
 }
 
 

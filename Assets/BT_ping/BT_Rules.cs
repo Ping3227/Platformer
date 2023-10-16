@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class BT_Rules : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    bool animateSuccess =false;
     private List<Vector2> moveOptions = new List<Vector2>();
     [Task]
     public bool IsImmobilized =false;
@@ -17,9 +18,7 @@ public class BT_Rules : MonoBehaviour
     public bool IsBlocked = false;
     [Task]
     void Teleport() {
-        //animator.SetTrigger("Teleport");
-        moveOptions.Clear();
-        ThisTask.Succeed();
+        
     }
     [Task]
     void Attack() {

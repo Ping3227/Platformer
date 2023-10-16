@@ -32,7 +32,7 @@ public class Attack : StateMachineBehaviour {
         boss.SetNextPosition(options[Random.Range(0, options.Count)]);
         options.Clear();
 
-        void InRange(Vector3 position)
+        void InRange(Vector2 position)
         {
             if (position.x > area.bounds.min.x && position.x < area.bounds.max.x
                 && position.y > area.bounds.min.y && position.y < area.bounds.max.y)

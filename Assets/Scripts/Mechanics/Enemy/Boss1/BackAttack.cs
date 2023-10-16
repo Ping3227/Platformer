@@ -1,36 +1,50 @@
+using Platformer.Mechanics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BackAttack : StateMachineBehaviour
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    private GameObject player;
+    private Bounds playerColl;
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    private BoxCollider2D area;
+    private Boss boss;
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    private List<Vector2> options = new List<Vector2>();
 
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
+    [Header("Attack")]
+    [SerializeField] float attackDistance;
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        player = GameController.player;
+        playerColl = player.GetComponent<Renderer>().bounds;
 
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
+        area = animator.GetComponent<Boss>().Area;
+        boss = animator.GetComponent<Boss>();
+
+        FindPosition();
+    }
+    private void FindPosition()
+    {
+        
+        
+        InRange(new Vector2(playerColl.center.x, playerColl.max.y) + (attackDistance * Vector2.up));
+        InRange(new Vector2(playerColl.min.x, playerColl.center.y) + (attackDistance * Vector2.left));
+        InRange(new Vector2(playerColl.max.x, playerColl.center.y) + (attackDistance * Vector2.right));
+
+        boss.SetNextPosition(options[Random.Range(0, options.Count)]);
+        options.Clear();
+
+        void InRange(Vector2 position)
+        {
+            if (position.x > area.bounds.min.x && position.x < area.bounds.max.x
+                && position.y > area.bounds.min.y && position.y < area.bounds.max.y)
+                if (player.gameObject.GetComponent<Player>().IsBehind(position)) {
+                    options.Add(position);
+                }
+                
+        }
+
+    }
 }
