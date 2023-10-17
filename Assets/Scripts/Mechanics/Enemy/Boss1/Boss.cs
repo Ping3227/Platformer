@@ -1,7 +1,5 @@
-using Panda.Examples.Move;
+
 using Platformer.Mechanics;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -22,7 +20,7 @@ public class Boss : MonoBehaviour
     public void Move() {
         anim.SetFloat("Distance", Vector2.Distance(targetPosition, GameController.player.transform.position));
         rb.position = targetPosition;
-        Debug.Log("Move: "+targetPosition);
+        
         CheckTurn();
         
     }

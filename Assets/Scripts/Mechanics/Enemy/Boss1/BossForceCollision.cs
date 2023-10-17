@@ -1,35 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using Platformer.Mechanics;
 
 public class BossReflectCollision : MonoBehaviour
 {
-    GameObject player;
-    Animator anim;
+    Player player;
+    [SerializeField] float damage;
     // Start is called before the first frame update
     void Start()
     {
-        player = GameController.player;
-        anim = player.GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        player = GameController.player.gameObject.GetComponent<Player>();
         
     }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            anim.SetTrigger("Hurt");
-            Debug.Log("进入了AttackArea！");
+            
+            Debug.Log("Player hurt ");
+            player.Hurt(damage);
         }
-        else if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("Enemy进入了反擊領域！");
-        }
+       
     }
 }

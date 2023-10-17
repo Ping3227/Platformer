@@ -10,31 +10,31 @@ namespace Platformer.Mechanics {
 
         [SerializeField] float MaxHP;
         public bool IsAlive => currentHP > 0;
-
+        private float healthPercentage => currentHP / MaxHP;
        
-        public void Heal(int value)
+        public void Heal(float value)
         {
             currentHP += value;
             if (currentHP > MaxHP)
             {
                 currentHP = MaxHP;
             }
-            GamesceneUIController.instance.SetHealth(currentHP);
+            GamesceneUIController.instance.SetHealth(healthPercentage);
         }
-        public void Hurt(int value)
+        public void Hurt(float  value)
         {
             currentHP -= value;
             if (currentHP <= 0)
             {
                 currentHP = 0;
             }
-            GamesceneUIController.instance.SetHealth(currentHP);
+            GamesceneUIController.instance.SetHealth(healthPercentage);
 
         }
         void Start()
         {
             currentHP = MaxHP;
-            GamesceneUIController.instance.SetMaxHealth(MaxHP);
+            GamesceneUIController.instance.SetMaxHealth(1);
         }
 
     }

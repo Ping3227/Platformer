@@ -12,6 +12,7 @@ public class ImmobolizeField : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             collision.GetComponent<Player>().Immobilized();
+            Debug.Log("Immobolized");
         }
     }
 }

@@ -254,6 +254,10 @@ public class Player : MonoBehaviour
     public void Immobilized() {
         Debug.Log("Immobolized");
     }
+    public void Hurt(float damage) {
+        anim.SetTrigger("Hurt");
+        health.Hurt(damage);
+    }
     #endregion
 }
 
