@@ -11,16 +11,19 @@ public class EnemyAI : MonoBehaviour
     {
         Roaming,
         ChasePlayer,
-    }
+        Attack,       }
 
-    [SerializeField] private float moveSpeed = 1.5f;
+    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float AttackRange = 1f;
     private Transform pointleft; 
     private Transform pointright; 
-    private Transform currentTarget; 
+    private Transform currentTarget;
+    private Transform player;
+
     private bool isFacingRight = true;
     private State state;
     private Vector3 initialPosition;
-    Transform player;
+    
    
 
     void Start()
@@ -62,7 +65,7 @@ public class EnemyAI : MonoBehaviour
                 Debug.Log("roaming");
                 break;
             case State.ChasePlayer:
-                transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, moveSpeed *1.5f* Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, moveSpeed *2f* Time.deltaTime);
                 Debug.Log("chasing");
                 break;
         }
@@ -108,6 +111,16 @@ public class EnemyAI : MonoBehaviour
         else if(Vector3.Distance(initialPosition, player.position) > targetrange)
         {
             state = State.Roaming;
+        }
+    }
+    private void Attack()
+    {   
+
+        if(state == State.ChasePlayer && Vector3.Distance(transform.position, player.position) < AttackRange)
+        {
+            state = State.Attack;
+
+
         }
     }
 
