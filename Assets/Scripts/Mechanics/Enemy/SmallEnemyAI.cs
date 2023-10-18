@@ -4,23 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EnemyAI : MonoBehaviour
+public class SmallEnemyAI : MonoBehaviour
 
 {
     private enum State
     {
         Roaming,
         ChasePlayer,
-        Attack,       }
+                      }
 
-    [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float AttackRange = 1f;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float ChaseSpeed;
+    [SerializeField] private float AttackRange;
+    [SerializeField] private float AttackRate;
     private Transform pointleft; 
     private Transform pointright; 
     private Transform currentTarget;
     private Transform player;
 
     private bool isFacingRight = true;
+    private float targetrange = 3f;
+    private float AttackTime = 0f;
     private State state;
     private Vector3 initialPosition;
     
@@ -36,7 +40,6 @@ public class EnemyAI : MonoBehaviour
         // get left and right position 
         pointleft = new GameObject("PointA").transform;
         pointleft.position = new Vector3(initialPosition.x - 3f, initialPosition.y, initialPosition.z);
-
         pointright = new GameObject("PointB").transform;
         pointright.position = new Vector3(initialPosition.x + 3f, initialPosition.y, initialPosition.z);
 
@@ -51,6 +54,7 @@ public class EnemyAI : MonoBehaviour
         switch (state){
 
             case State.Roaming:
+
                 if (currentTarget == player.transform)
                 {
                     currentTarget = pointleft;
@@ -64,12 +68,26 @@ public class EnemyAI : MonoBehaviour
                 }
                 Debug.Log("roaming");
                 break;
+
             case State.ChasePlayer:
-                transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, moveSpeed *2f* Time.deltaTime);
-                Debug.Log("chasing");
+
+               
+                transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, ChaseSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, player.position) < AttackRange)
+                {
+
+                   
+                    if (Time.time > AttackTime)
+                    {
+                        Attack();
+                        AttackTime = Time.time + AttackRate;
+                    }
+                    
+                }
+                
                 break;
         }
-
         Vector3 moveDirection = currentTarget.position - transform.position;
         if (moveDirection.x > 0 && !isFacingRight || moveDirection.x < 0 && isFacingRight)
         {
@@ -101,7 +119,6 @@ public class EnemyAI : MonoBehaviour
 
     private void FindPlayer()
     {
-        float targetrange = 3f;
         if (Vector3.Distance(initialPosition,player.position) < targetrange)
         {
             state = State.ChasePlayer;
@@ -114,15 +131,8 @@ public class EnemyAI : MonoBehaviour
         }
     }
     private void Attack()
-    {   
-
-        if(state == State.ChasePlayer && Vector3.Distance(transform.position, player.position) < AttackRange)
-        {
-            state = State.Attack;
-
-
-        }
+    {
+        Debug.Log("Attacking");
     }
-
 
 }
