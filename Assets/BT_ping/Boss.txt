@@ -1,4 +1,7 @@
 tree("Root")
-	Attack
+	sequence 
+		Attack
+		Teleport(0.1)
+		Blocking
 
 		

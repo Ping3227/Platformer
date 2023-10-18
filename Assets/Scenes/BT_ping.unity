@@ -1384,7 +1384,7 @@ Transform:
   m_GameObject: {fileID: 1337078541}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.96, y: -3.52, z: 0}
+  m_LocalPosition: {x: 3.96, y: -3.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1406,11 +1406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7610c63ecb36e6646975b834a70a0034, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackAnimation: {fileID: 7400000, guid: 6fd0e1017f097d14593dc413315fb0d5, type: 2}
-  teleportAnimation: {fileID: 7400000, guid: 53456274839dc4fceb80bb5fbc848803, type: 2}
+  attackAnimation: {fileID: 7400000, guid: 0c893702eb9bca344bb42e5bae91380c, type: 2}
+  teleportAnimation: {fileID: 7400000, guid: 8311b150b37e61b4084a937fe3f4c720, type: 2}
   TeleportTime: 0
-  idleAnimation: {fileID: 0}
-  blockAnimation: {fileID: 7400000, guid: c34b61d675c59d84d964852f10f1e261, type: 2}
+  idleAnimation: {fileID: 7400000, guid: 4250d46d420dc984190b73e7adac39c3, type: 2}
+  blockAnimation: {fileID: 7400000, guid: 4250d46d420dc984190b73e7adac39c3, type: 2}
   player: {fileID: 72121754}
   Area: {fileID: 1853719546}
   IsImmobilized: 0
@@ -1434,7 +1434,7 @@ MonoBehaviour:
   - isFoldout: 1
     breakPoints: 
     breakPointStatuses: 
-    collapsedLines: 02000000050000000c00000010000000
+    collapsedLines: 050000000c00000010000000
     btScript: 
 --- !u!111 &1337078550
 Animation:
@@ -1447,12 +1447,12 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 7400000, guid: 53456274839dc4fceb80bb5fbc848803, type: 2}
-  - {fileID: 7400000, guid: 6fd0e1017f097d14593dc413315fb0d5, type: 2}
-  - {fileID: 7400000, guid: c34b61d675c59d84d964852f10f1e261, type: 2}
-  - {fileID: 7400000, guid: 53456274839dc4fceb80bb5fbc848803, type: 2}
+  - {fileID: 7400000, guid: 0c893702eb9bca344bb42e5bae91380c, type: 2}
+  - {fileID: 7400000, guid: 4250d46d420dc984190b73e7adac39c3, type: 2}
+  - {fileID: 7400000, guid: 7ac47e695a96ac246a64711f00b2f152, type: 2}
+  - {fileID: 7400000, guid: 8311b150b37e61b4084a937fe3f4c720, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1 &1435061672

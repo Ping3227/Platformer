@@ -236,7 +236,7 @@ AnimatorStateMachine:
     m_Position: {x: -890, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3316751814419630294}
-    m_Position: {x: -800, y: 330, z: 0}
+    m_Position: {x: -800, y: 340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2326733490170471018}
     m_Position: {x: -690, y: 490, z: 0}
@@ -248,14 +248,14 @@ AnimatorStateMachine:
     m_Position: {x: -530, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8477977864125522216}
-    m_Position: {x: -610, y: 190, z: 0}
+    m_Position: {x: -640, y: 170, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -3200661096734803422}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -580, y: 100, z: 0}
+  m_AnyStatePosition: {x: -620, y: 80, z: 0}
   m_EntryPosition: {x: -1330, y: 290, z: 0}
   m_ExitPosition: {x: -560, y: 280, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -429,7 +429,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss
+  m_Name: BT_Boss
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Distance

@@ -24,7 +24,7 @@ public class BT_Rules : MonoBehaviour
     [Task]
     [HideInInspector]
     public bool IsImmobilized = false;
-
+    
     private void Start()
     {    
         anim = gameObject.GetComponent<Animation>();
@@ -36,6 +36,8 @@ public class BT_Rules : MonoBehaviour
         ev.time = TeleportTime;
         ev.functionName = "Move";
         teleportAnimation.AddEvent(ev);
+        PandaBehaviour pd = GetComponent<PandaBehaviour>();
+        pd.Tick();
         
     }
 
