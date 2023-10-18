@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f778e4ac4944364ba94424dda0a86ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 1.5
+  attackDistance: 1
 --- !u!1102 &-6662741152504865051
 AnimatorState:
   serializedVersion: 6

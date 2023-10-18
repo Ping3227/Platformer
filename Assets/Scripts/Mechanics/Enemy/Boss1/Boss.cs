@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [SerializeField] GameObject ImmobolizePrefab;
+    private Player player;
     public BoxCollider2D Area;
     private Vector2 targetPosition;
     private Rigidbody2D rb;

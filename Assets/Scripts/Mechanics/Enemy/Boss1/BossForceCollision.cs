@@ -2,7 +2,7 @@
 using UnityEngine;
 using Platformer.Mechanics;
 
-public class BossReflectCollision : MonoBehaviour
+public class BossForceCollision : MonoBehaviour
 {
     Player player;
     [SerializeField] float damage;

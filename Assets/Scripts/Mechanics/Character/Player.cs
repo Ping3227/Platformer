@@ -26,15 +26,19 @@ public class Player : MonoBehaviour
     [SerializeField] private float extraHeight = 0.25f;
     [SerializeField] private LayerMask whatIsGround;
 
+    
+
     private bool IsFacingRight = true;
     private bool IsDashing = false;
     private bool IsJumping = false;
     private bool IsDoubleJumping =false;
     private bool FinishDoubleJump = false;
     private bool IsAttacking = false;
+    private bool IsMoveable = true;
     private bool IsFalling;
     private float jumpTimeCounter;
     private float DashTimeCounter;
+    private float ImmobileTimeCounter;
     private float doubleJumpTimeCounter;
     private float JumpApex =0f;
    
@@ -59,13 +63,18 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-        Dash();
-        if (!IsDashing) {
-            Jump();
-            Move();
-            Attack();
+        Moveable();
+        if (IsMoveable) {
+            Dash();
+            if (!IsDashing)
+            {
+                Jump();
+                Move();
+                Attack();
+            }
+            UpdateAnimation();
         }
-        UpdateAnimation();
+        
         
     }
 
@@ -174,6 +183,17 @@ public class Player : MonoBehaviour
 
         
     }
+    private void Moveable() {
+        if (ImmobileTimeCounter > 0)
+        {
+            ImmobileTimeCounter -= Time.deltaTime;
+        }
+        else {
+            ImmobileTimeCounter = 0;
+            IsMoveable = true;
+        }
+
+    }
     #endregion
     #region Turn check
     private void TurnCheck()
@@ -253,6 +273,9 @@ public class Player : MonoBehaviour
     #region trigger function
     public void Immobilized() {
         Debug.Log("Immobolized");
+        anim.SetTrigger("IsImmobolized");
+        IsMoveable = false;
+        ImmobileTimeCounter = 0.5f;
     }
     public void Hurt(float damage) {
         anim.SetTrigger("Hurt");

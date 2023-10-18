@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Platformer.Mechanics;
 
-public class BossAttackCollision : MonoBehaviour
+public class BossReflectCollision : MonoBehaviour
 {
     GameObject player;
     Animator anim;
@@ -14,22 +14,15 @@ public class BossAttackCollision : MonoBehaviour
         anim = player.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Attack_Area"))
+        if (other.CompareTag("Player"))
         {
             anim.SetTrigger("IsReflected");
-            Debug.Log("Player进入了反擊領域！");
+            Debug.Log("Reflected attack");
         }
-        else if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("Enemy进入了AttackArea！");
-        }
+        
     }
 }
