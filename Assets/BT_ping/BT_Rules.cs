@@ -2,11 +2,13 @@
 using UnityEngine;
 using Panda;
 using System.Collections.Generic;
+using System.Collections;
 
 public class BT_Rules : MonoBehaviour
 {
     [Header("AnimationClips")]
-    private Animation anim;
+    private Animator anim;
+    
     [SerializeField] AnimationClip attackAnimation;
     [SerializeField] AnimationClip teleportAnimation;
     [SerializeField] float TeleportTime ;
@@ -26,8 +28,9 @@ public class BT_Rules : MonoBehaviour
     public bool IsImmobilized = false;
     
     private void Start()
-    {    
-        anim = gameObject.GetComponent<Animation>();
+    {
+        anim = GetComponent<Animator>();
+        
         rb= GetComponent<Rigidbody2D>();
 
         // Set teleport animation time
@@ -50,7 +53,7 @@ public class BT_Rules : MonoBehaviour
     #region Normal function
     [Task]
     void SetNextLocation(Vector2 NextLocation) {
-        if (!anim.isPlaying)
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
             this.NextLocation = NextLocation;
             ThisTask.Succeed();
@@ -58,7 +61,7 @@ public class BT_Rules : MonoBehaviour
     }
     [Task]
     void CalculateDistance() {
-        if (!anim.isPlaying) {
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) {
             DistancetoPlayer = Vector2.Distance(player.transform.position, transform.position);
             ThisTask.Succeed();
         }
@@ -69,28 +72,32 @@ public class BT_Rules : MonoBehaviour
     #region Animation
     [Task]
     void Teleport(float speed) {
-        if (!anim.isPlaying) {
-            anim[teleportAnimation.name].speed = speed;
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) {
+            anim.speed = speed;
             anim.Play(teleportAnimation.name);
             ThisTask.Succeed();
         }
     }
     [Task]
     void Attack() {
-        if (!anim.isPlaying)
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
+            anim.speed = 1.0f;
             anim.Play(attackAnimation.name);
             ThisTask.Succeed();
         }
     }
     [Task]
     void Blocking() { 
-        if (!anim.isPlaying)
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
         {
+            anim.speed = 1.0f;
             anim.Play(blockAnimation.name);
             ThisTask.Succeed();
         }
     }
     #endregion
+
+    
 
 }

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BT_reflect
+  m_Name: BT_Reflect
   serializedVersion: 7
   m_Legacy: 1
   m_Compressed: 0
@@ -335,7 +335,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 3363864077627311183, guid: 81d21271a458548adbb4aa021ddb273f, type: 3}
     - time: 0.06666667
-      value: {fileID: -1051017137649905156, guid: 81d21271a458548adbb4aa021ddb273f, type: 3}
+      value: {fileID: 3363864077627311183, guid: 81d21271a458548adbb4aa021ddb273f, type: 3}
     - time: 0.15
       value: {fileID: 5854907903781544484, guid: 81d21271a458548adbb4aa021ddb273f, type: 3}
     - time: 0.21666667
