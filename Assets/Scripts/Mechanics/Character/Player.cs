@@ -276,6 +276,7 @@ public class Player : MonoBehaviour
         anim.SetTrigger("IsImmobolized");
         IsMoveable = false;
         ImmobileTimeCounter = 0.5f;
+        rb.velocity = Vector2.zero;
     }
     public void Hurt(float damage) {
         anim.SetTrigger("Hurt");
