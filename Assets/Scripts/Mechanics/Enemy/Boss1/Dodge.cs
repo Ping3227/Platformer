@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DodgeAttack : StateMachineBehaviour
 {
-    GameObject player;
+    Player player;
     
     Bounds coll;
     BoxCollider2D area;

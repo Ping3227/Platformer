@@ -258,7 +258,7 @@ public class Player : MonoBehaviour
     }
     #endregion
     #region query function
-    public bool IsBehind(Vector2 postion) {
+    public bool IsBehindPlayer(Vector2 postion) {
         if (IsFacingRight && postion.x < transform.position.x)
         {
             return true;

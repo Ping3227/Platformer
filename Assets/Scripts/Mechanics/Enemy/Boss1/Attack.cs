@@ -2,7 +2,7 @@ using Platformer.Mechanics;
 using System.Collections.Generic;
 using UnityEngine;
 public class Attack : StateMachineBehaviour { 
-    private GameObject player;
+    private Player player;
     private Bounds playerColl;
     
     private BoxCollider2D area;

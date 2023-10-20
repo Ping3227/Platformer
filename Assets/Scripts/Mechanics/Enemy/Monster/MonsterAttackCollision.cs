@@ -5,7 +5,7 @@ using Platformer.Mechanics;
 
 public class AttackAreaCollision : MonoBehaviour
 {
-    GameObject player;
+    Player player;
     Animator anim;
     // Start is called before the first frame update
     void Start()

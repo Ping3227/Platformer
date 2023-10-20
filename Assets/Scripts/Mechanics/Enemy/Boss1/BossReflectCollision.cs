@@ -5,7 +5,7 @@ using Platformer.Mechanics;
 
 public class BossReflectCollision : MonoBehaviour
 {
-    GameObject player;
+    Player player;
     Animator anim;
     // Start is called before the first frame update
     void Start()

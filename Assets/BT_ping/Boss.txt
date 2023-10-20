@@ -1,7 +1,44 @@
 tree("Root")
-	sequence 
-		Attack
-		Teleport(0.1)
-		Blocking
-
+	sequence
+		CalculateDistance
+		// If far => attack, If too close => Dodge 
+		fallback
+			sequence 
+				CloserThan(3.0)
+				tree("Dodge")
+			tree("Normal Attack")	
+			
 		
+tree("Attack")
+	random(0.9,0.1)
+		tree("Normal Attack")
+		Approach(0.7)
+
+
+tree("Normal Attack")
+	sequence
+		FindNextLocation(false)
+		Teleport(0.7)
+		Attack
+		Wait(1.0)
+		
+		
+tree("Dodge")
+	sequence
+		FindNextLocation(true)
+		Teleport(0.7)
+		Wait(1)
+		CalculateDistance
+		CloserThan(4.0)
+		tree("Counter Attack")
+
+tree("Counter Attack")
+	random(0.8,0.2)
+		Blocking
+		tree("Strong Attack")
+
+tree("Strong Attack")
+	sequence
+		Wait(0.5)
+		StrongAttack
+		Wait(1.5)

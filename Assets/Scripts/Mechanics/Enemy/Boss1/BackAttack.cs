@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BackAttack : StateMachineBehaviour
 {
-    private GameObject player;
+    private Player player;
     private Bounds playerColl;
 
     private BoxCollider2D area;
@@ -40,7 +40,7 @@ public class BackAttack : StateMachineBehaviour
         {
             if (position.x > area.bounds.min.x && position.x < area.bounds.max.x
                 && position.y > area.bounds.min.y && position.y < area.bounds.max.y)
-                if (player.gameObject.GetComponent<Player>().IsBehind(position)) {
+                if (player.gameObject.GetComponent<Player>().IsBehindPlayer(position)) {
                     options.Add(position);
                 }
                 
