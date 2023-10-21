@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ImmobolizeField : MonoBehaviour
 {
+    [SerializeField] BT_Rules Enemy;
     public void EndAnimation() {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
             collision.GetComponent<Player>().Immobilized();
-            Debug.Log("Immobolized");
+            Enemy.IsImmobilized = true;
         }
     }
 }

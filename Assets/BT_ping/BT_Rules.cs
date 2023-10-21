@@ -4,14 +4,11 @@ using Panda;
 using System.Collections.Generic;
 using Platformer.Mechanics;
 
+
 public class BT_Rules : MonoBehaviour
 {
-    [Header("AnimationClips")]
+    [Header("Animation")]
     private Animator anim;
-    [SerializeField] AnimationClip teleportAnimation;
-    [SerializeField] float TeleportTime ;
-    [SerializeField] AnimationClip ImmobolizeAnimation;
-    [SerializeField] float ImmobolizeTime;
     [SerializeField] GameObject ImmobolizePrefab;
 
     [Header("Attack")]
@@ -24,18 +21,14 @@ public class BT_Rules : MonoBehaviour
 
     [Header("Move")]
     private Rigidbody2D rb;
-    private Vector2 NextLocation;
     private List<Vector2> MoveOptions = new List<Vector2>();
+    private Vector2 NextLocation;
+    [SerializeField] BoxCollider2D Area;
     [SerializeField] Player player;
     private BoxCollider2D playerColl;
-    [SerializeField] BoxCollider2D Area;
-    Vector3 heightDiffer;
-    
     private float DistancetoPlayer = 0f;
-
-    [Task]
-    [HideInInspector]
-    public bool IsImmobilized = false;
+    private Vector3 heightDiffer;
+    
     
     private void Start()
     {
@@ -43,14 +36,28 @@ public class BT_Rules : MonoBehaviour
         rb= GetComponent<Rigidbody2D>();
         player = GameController.player;
         playerColl= player.gameObject.GetComponent<BoxCollider2D>();
-        // Set teleport animation time
         PandaBehaviour pd = GetComponent<PandaBehaviour>();
+        heightDiffer = Vector3.up * (transform.position.y - playerColl.bounds.center.y);
+
         pd.Tick();
-        heightDiffer = Vector3.up *(transform.position.y-playerColl.bounds.center.y);
+        
         
     }
-    
+    private void Update()
+    {
+        Debug.Log($"IsPlayerInfront: {IsPlayerInfront()}, Angle: {transform.localEulerAngles}");
+        
+    }
 
+    [Task]
+    [HideInInspector]
+    public bool IsImmobilized = false;
+    [Task]
+    private bool ResetImmobilized()
+    {
+        IsImmobilized = false;
+        return true;
+    }
     #region NonTask function
     private void Move()
     {
@@ -63,9 +70,7 @@ public class BT_Rules : MonoBehaviour
             rb.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
-    private void Immobolize() {
-        ImmobolizePrefab.SetActive(true);
-    }
+    
     #endregion
     #region Location 
     [Task]
@@ -105,12 +110,13 @@ public class BT_Rules : MonoBehaviour
         ThisTask.Succeed();
     }
     [Task]
-    void Approach(float Approachspeed)
+    bool ApproachPlayer(float Approachspeed)
     {
         this.NextLocation = Vector2.MoveTowards(transform.position, playerColl.transform.position, Approachspeed);
+        return true;
     }
     [Task]
-    bool GoBehind() {
+    bool GoBehindPlayer() {
         Vector3 tmpLocation = player.transform.position + (AttactRange * Vector3.left) + heightDiffer;
         if (!player.IsBehindPlayer(tmpLocation)) {
             tmpLocation = player.transform.position + (AttactRange * Vector3.right) + heightDiffer;
@@ -122,7 +128,7 @@ public class BT_Rules : MonoBehaviour
         }
         return false;
     }
-[Task]
+    [Task]
     void CalculateDistance() {
         if (!anim.GetBool("IsAnimating"))
         {
@@ -132,6 +138,9 @@ public class BT_Rules : MonoBehaviour
     }
     [Task]
     bool CloserThan(float distance) => DistancetoPlayer < distance;
+    [Task]
+    bool IsPlayerInfront() => (player.transform.position.x < transform.position.x && transform.localEulerAngles.y == 180) ||
+                            (transform.position.x < player.transform.position.x && transform.localEulerAngles.y==0);
     #endregion
     #region Animation
     [Task]
@@ -174,6 +183,18 @@ public class BT_Rules : MonoBehaviour
             ThisTask.Succeed();
         }
         
+    }
+    [Task]
+    void Immobolize() {
+        if (!anim.GetBool("IsAnimating"))
+        {
+            if (ImmobolizePrefab)
+            {
+                ImmobolizePrefab.transform.position = new Vector3(player.transform.position.x,Area.bounds.min.y);
+                ImmobolizePrefab.SetActive(true);
+            }
+            ThisTask.Succeed();
+        }
     }
     #endregion
 
