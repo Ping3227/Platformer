@@ -37,6 +37,7 @@ namespace Platformer.UI
             }
             else{
                 Destroy(gameObject);
+                Destroy(Canvas.gameObject);
             }
         }
         
@@ -51,7 +52,6 @@ namespace Platformer.UI
                     }
                 }
             }
-            Debug.Log($"UI: {instance == null}, {instance == this}");
         }
        
         public void Resume()
@@ -106,7 +106,7 @@ namespace Platformer.UI
         }
         public void Restart()
         {
-            LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 0, 1f).setEase(LeanTweenType.easeOutCubic);
+            LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 0, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(1.5f);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Platformer.Core;
 using Platformer.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,7 +14,11 @@ namespace Platformer.Gameplay
         public override void Execute()
         {
             Debug.Log("Player died.");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+            
+            GamesceneUIController.instance.Death();
+            var reload =Simulation.Schedule<LoadScene>(1.5f);
+            reload.SceneName = SceneManager.GetActiveScene().name;
             GamesceneUIController.instance.Restart();
         }
     }

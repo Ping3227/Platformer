@@ -1,3 +1,5 @@
+using Platformer.Core;
+using Platformer.Gameplay;
 using Platformer.UI;
 using UnityEngine;
 namespace Platformer.Mechanics {
@@ -27,6 +29,8 @@ namespace Platformer.Mechanics {
             if (currentHP <= 0)
             {
                 currentHP = 0;
+                GetComponent<Player>().Dead();
+                Simulation.Schedule<PlayerDeath>();
             }
             GamesceneUIController.instance.SetHealth(healthPercentage);
 

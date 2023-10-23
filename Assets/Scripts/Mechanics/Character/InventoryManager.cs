@@ -12,7 +12,17 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Transform itemSlot;
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            
+        }
+        
     }
     public void AddItem(Item item) {
         if (!items.Contains(item)) {
@@ -45,5 +55,8 @@ public class InventoryManager : MonoBehaviour
             itemSlot.Find("Image").GetComponent<Image>().sprite = items[CurrentIndex].icon;
             itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
         }
+    }
+    public bool Contain(Item item) {
+        return items.Contains(item);
     }
 }

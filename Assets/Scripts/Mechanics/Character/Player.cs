@@ -287,7 +287,7 @@ public class Player : MonoBehaviour
         anim.SetTrigger("Pounded");
     }
     public void Dead() {
-        //anim.SetTrigger("Dead");
+        anim.SetTrigger("Dead");
     }
     #endregion
 

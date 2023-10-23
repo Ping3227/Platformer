@@ -11,7 +11,7 @@ namespace Platformer.Mechanics
         [SerializeField] float Speed;
         
         private bool IsMoving =false;
-        private bool IsOpening = true;
+        [SerializeField] bool IsClosing = false;
         private void Start()
         {
             StartPosition = transform.position;
@@ -20,7 +20,7 @@ namespace Platformer.Mechanics
         private void Update()
         {
             if (IsMoving == true) { 
-                if (IsOpening)
+                if (IsClosing)
                 {
                     transform.position = Vector2.MoveTowards(transform.position, Endpoisiton, Speed * Time.deltaTime);
                     if (transform.position == Endpoisiton)
@@ -41,7 +41,7 @@ namespace Platformer.Mechanics
         }
         override public void Action() {
             IsMoving = true;
-            IsOpening = !IsOpening;
+            IsClosing = !IsClosing;
         }
         
     }
