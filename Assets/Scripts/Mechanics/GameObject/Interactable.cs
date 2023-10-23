@@ -77,7 +77,7 @@ namespace Platformer.Mechanics
                 
                 foreach (InteractActor actioner in InteractionObjects){    
                     actioner.Action();
-                    Debug.Log(actioner.name);    
+                        
                 }
             }
             

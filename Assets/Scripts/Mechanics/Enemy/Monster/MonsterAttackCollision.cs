@@ -7,6 +7,7 @@ public class AttackAreaCollision : MonoBehaviour
 {
     Player player;
     Animator anim;
+    [SerializeField] float damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,23 +15,15 @@ public class AttackAreaCollision : MonoBehaviour
         anim = player.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             anim.SetTrigger("Hurt");
-            Debug.Log("Player进入了AttackArea！");
+            player.Hurt(damage);    
         }
-        else if (other.CompareTag("Enemy"))
-        {
-            Debug.Log("Enemy进入了AttackArea！");
-        }
+        
     }
 
 }
