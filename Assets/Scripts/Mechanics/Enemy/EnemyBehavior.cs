@@ -15,6 +15,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] float errorAllowed = 0.1f;
     private Vector2 PatrolPoint =new Vector2();
     private bool FinishPatrol;
+    private bool IsFacingRight = true;
 
     [Header("Chase")]
     private Player player;
@@ -93,4 +94,5 @@ public class EnemyBehavior : MonoBehaviour
             Debug.Log("Patrol");
         }
     }
+    
 }
