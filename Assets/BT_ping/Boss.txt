@@ -7,7 +7,7 @@ tree("Root")
 				CloserThan(3.0)
 				tree("Dodge")
 			sequence 
-				CloserThan(10.0)
+				CloserThan(8.0)
 				tree("Normal Attack")
 			sequence
 				tree("Special Attack")
@@ -39,7 +39,7 @@ tree("Consecutive Attack")
 					CalculateDistance
 					mute 
 						sequence 
-							CloserThan(3.0)
+							CloserThan(2.0)
 							Attack
 					not CloserThan(3.0)
 		IsPlayerInfront

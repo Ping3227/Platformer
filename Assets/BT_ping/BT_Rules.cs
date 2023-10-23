@@ -45,7 +45,7 @@ public class BT_Rules : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log($"IsPlayerInfront: {IsPlayerInfront()}, Angle: {transform.localEulerAngles}");
+        Debug.Log($"IsPlayerInfront: {IsPlayerInfront()}, Angle : {transform.localEulerAngles}");
         
     }
 

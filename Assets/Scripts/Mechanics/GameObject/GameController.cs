@@ -11,8 +11,16 @@ namespace Platformer.Mechanics {
         public static GameController Instance { get; private set; }
         void OnEnable()
         {
-            Instance = this;
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else { 
+                Destroy(gameObject);
+            }
+            
         }
 
         void OnDisable()
@@ -23,6 +31,7 @@ namespace Platformer.Mechanics {
         void Update()
         {
             if (Instance == this) Simulation.Tick();
+            
         }
     }
 }

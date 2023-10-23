@@ -3,12 +3,45 @@ namespace Platformer.Mechanics
 {
     public class Door : InteractActor
     {
-        [SerializeField] GameObject DoorObject;
-        private float Endpoisiton;
-        private float StartPosition;
-        private float IsMoving;
+        
+        
+        private Vector3 StartPosition;
+        private Vector3 Endpoisiton;
+        [SerializeField] Vector3 MoveToward;
+        [SerializeField] float Speed;
+        
+        private bool IsMoving =false;
+        private bool IsOpening = true;
+        private void Start()
+        {
+            StartPosition = transform.position;
+            Endpoisiton = StartPosition + MoveToward;
+        }
+        private void Update()
+        {
+            if (IsMoving == true) { 
+                if (IsOpening)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, Endpoisiton, Speed * Time.deltaTime);
+                    if (transform.position == Endpoisiton)
+                    {
+                        IsMoving = false;
+                    }
+                }
+                else
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, StartPosition, Speed * Time.deltaTime);
+                    if (transform.position == StartPosition)
+                    {
+                        IsMoving = false;
+                    }
+                }
+               
+            }
+        }
         override public void Action() {
-            
+            IsMoving = true;
+            IsOpening = !IsOpening;
         }
         
     }

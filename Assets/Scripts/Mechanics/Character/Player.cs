@@ -26,12 +26,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float extraHeight = 0.25f;
     [SerializeField] private LayerMask whatIsGround;
 
-    
+
 
     private bool IsFacingRight = true;
     private bool IsDashing = false;
     private bool IsJumping = false;
-    private bool IsDoubleJumping =false;
+    private bool IsDoubleJumping = false;
     private bool FinishDoubleJump = false;
     private bool IsAttacking = false;
     private bool IsMoveable = true;
@@ -40,9 +40,9 @@ public class Player : MonoBehaviour
     private float DashTimeCounter;
     private float ImmobileTimeCounter;
     private float doubleJumpTimeCounter;
-    private float JumpApex =0f;
-   
-    
+    private float JumpApex = 0f;
+
+
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -51,11 +51,11 @@ public class Player : MonoBehaviour
     private Stamina stamina;
     private float moveInput;
     private RaycastHit2D groundHit;
-    
-    
+
+
     private void Start()
     {
-        coll= GetComponent<Collider2D>();
+        coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         health = GetComponent<Health>();
@@ -74,8 +74,8 @@ public class Player : MonoBehaviour
             }
             UpdateAnimation();
         }
-        
-        
+
+
     }
 
     private void UpdateAnimation()
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        if(UserInput.instance.controls.Attack.Attack.WasPressedThisFrame())
+        if (UserInput.instance.controls.Attack.Attack.WasPressedThisFrame())
         {
             anim.SetTrigger("Attack");
         }
@@ -101,38 +101,38 @@ public class Player : MonoBehaviour
         {
             TurnCheck();
         }
-        
-        rb.velocity = new Vector2(moveInput * moveSpeed* (1+JumpApex) , rb.velocity.y);
-        
+
+        rb.velocity = new Vector2(moveInput * moveSpeed * (1 + JumpApex), rb.velocity.y);
+
     }
-    
+
     private void Jump() {
         if (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()
-                && IsGrounded() && stamina.ConsumeStamina(jumpCost*Time.deltaTime)) { 
-            
+                && IsGrounded() && stamina.ConsumeStamina(jumpCost * Time.deltaTime)) {
+
             IsJumping = true;
             FinishDoubleJump = false;
             jumpTimeCounter = jumpTime;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            
+
         }
-        if(UserInput.instance.controls.Jumping.Jump.IsPressed())
+        if (UserInput.instance.controls.Jumping.Jump.IsPressed())
         {
-            
-            if (jumpTimeCounter > 0 && IsJumping&& stamina.ConsumeStamina(jumpCost * Time.deltaTime))
+
+            if (jumpTimeCounter > 0 && IsJumping && stamina.ConsumeStamina(jumpCost * Time.deltaTime))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
-                if(jumpTimeCounter<0) jumpTimeCounter = 0;
-                JumpApex= (jumpTime-jumpTimeCounter)*ApexBonus/jumpTime;
-                
+                if (jumpTimeCounter < 0) jumpTimeCounter = 0;
+                JumpApex = (jumpTime - jumpTimeCounter) * ApexBonus / jumpTime;
+
             }
             else
             {
                 JumpApex = 0;
                 IsJumping = false;
             }
-            
+
         }
         if (UserInput.instance.controls.Jumping.Jump.WasReleasedThisFrame())
         {
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
         /// Below is double jump logic 
         if (!IsJumping && !IsGrounded() && !FinishDoubleJump
                 && UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()
-                && stamina.ConsumeStamina(doubleJumpCost) ) {
+                && stamina.ConsumeStamina(doubleJumpCost)) {
 
             doubleJumpTimeCounter = doubleJumpTime;
             IsDoubleJumping = true;
@@ -151,18 +151,18 @@ public class Player : MonoBehaviour
         if (IsDoubleJumping) {
             rb.velocity = new Vector2(rb.velocity.x, doubleJumpForce);
             doubleJumpTimeCounter -= Time.deltaTime;
-            
+
             if (doubleJumpTimeCounter <= 0) {
                 FinishDoubleJump = true;
                 IsDoubleJumping = false;
             }
         }
-       
-        
+
+
     }
     private void Dash()
     {
-        if(DashTimeCounter ==0&& UserInput.instance.controls.Dash.Dash.WasPressedThisFrame()&& stamina.ConsumeStamina(dashCost))
+        if (DashTimeCounter == 0 && UserInput.instance.controls.Dash.Dash.WasPressedThisFrame() && stamina.ConsumeStamina(dashCost))
         {
             IsDashing = true;
             DashTimeCounter = dashTime;
@@ -181,7 +181,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        
+
     }
     private void Moveable() {
         if (ImmobileTimeCounter > 0)
@@ -224,19 +224,19 @@ public class Player : MonoBehaviour
     }
     #endregion
     #region Ground check
-    private bool IsGrounded() { 
-        groundHit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, extraHeight,whatIsGround);
+    private bool IsGrounded() {
+        groundHit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, extraHeight, whatIsGround);
         if (groundHit.collider != null) {
-            
+
             return true;
-            
+
         }
         else
         {
-            
+
             return false;
-            
-        }   
+
+        }
 
     }
     #endregion
@@ -282,7 +282,16 @@ public class Player : MonoBehaviour
         anim.SetTrigger("Hurt");
         health.Hurt(damage);
     }
+    public void Pounded()
+    {
+        anim.SetTrigger("Pounded");
+    }
+    public void Dead() {
+        //anim.SetTrigger("Dead");
+    }
     #endregion
+
+
 }
 
 

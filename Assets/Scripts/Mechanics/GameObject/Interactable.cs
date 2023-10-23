@@ -49,11 +49,11 @@ namespace Platformer.Mechanics
         {
             if (IsInteractable &&Input.GetKeyDown(InteractionKey))
             {
-                Debug.Log("Interact");
+                
                 foreach (InteractActor actioner in InteractionObjects)
                 {    
                     actioner.Action();
-                        
+                    Debug.Log(actioner.name);    
                 }
             }
             
