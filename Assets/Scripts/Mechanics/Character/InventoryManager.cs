@@ -31,6 +31,7 @@ public class InventoryManager : MonoBehaviour
             if (CurrentIndex == -1)
             {
                 CurrentIndex = 0;
+                itemSlot.Find("Image").GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
                 itemSlot.Find("Image").GetComponent<Image>().sprite = item.icon;
                 items[CurrentIndex].counts=1;
                 itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
@@ -58,5 +59,10 @@ public class InventoryManager : MonoBehaviour
     }
     public bool Contain(Item item) {
         return items.Contains(item);
+    }
+    public void Clear() {
+        items.Clear();
+        itemSlot.Find("Image").GetComponent<Image>().color=new Vector4 (0,0,0,0 );
+        itemSlot.Find("Number").GetComponent<TMP_Text>().text = "0";
     }
 }

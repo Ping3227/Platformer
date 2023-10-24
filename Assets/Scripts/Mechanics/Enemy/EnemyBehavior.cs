@@ -69,18 +69,42 @@ public class EnemyBehavior : MonoBehaviour
     {
         anim.SetTrigger("Attack");
     }
-    void CalculateDistance() {
+    void CalculateDistance()
+    {
         FinishPatrol = Vector2.Distance(transform.position, PatrolPoint) < errorAllowed;
         DistanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         if (DistanceToPlayer <= ChaseRange &&
                 player.transform.position.x > ChaseArea.bounds.min.x && player.transform.position.x < ChaseArea.bounds.max.x &&
-                player.transform.position.y > ChaseArea.bounds.min.y && player.transform.position.y < ChaseArea.bounds.max.y) { 
+                player.transform.position.y > ChaseArea.bounds.min.y && player.transform.position.y < ChaseArea.bounds.max.y)
+        {
             IsChasing = true;
         }
-        else{
+        else
+        {
             IsChasing = false;
         }
 
+    }
+    private void TurnCheck() {
+        if (IsChasing) {
+            IsFacingRight = player.transform.position.x > transform.position.x;
+            if(IsFacingRight){
+                transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            else{
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+            
+        }
+        else {
+            IsFacingRight = PatrolPoint.x > transform.position.x;
+            if (IsFacingRight){
+                transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
+            else{
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+        }
     }
     private void Update()
     {
@@ -93,6 +117,7 @@ public class EnemyBehavior : MonoBehaviour
             Patrol();
             Debug.Log("Patrol");
         }
+        TurnCheck();
     }
     
 }

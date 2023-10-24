@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Platformer.Core;
+using Platformer.Gameplay;
 
 namespace Platformer.UI
 {
@@ -18,6 +20,8 @@ namespace Platformer.UI
         [SerializeField] Canvas HUDCanvas;
         [SerializeField] Slider healthbar;
         [SerializeField] Slider Stamina;
+        [SerializeField] TMP_Text ShowTime;
+        private float TimeCounter;
 
         [Header("Pause")]
         [SerializeField] Canvas PauseCanvas;
@@ -26,7 +30,10 @@ namespace Platformer.UI
         [Header("Death")]
         [SerializeField] Canvas DeathCanvas;
         [SerializeField] TMP_Text DeathText;
-        
+
+        [Header("Victory")]
+        [SerializeField] Canvas VictoryCanvas;
+        [SerializeField] TMP_Text VictoryTime;
         private void Awake()
         {
             if (instance == null)
@@ -39,6 +46,7 @@ namespace Platformer.UI
                 Destroy(gameObject);
                 Destroy(Canvas.gameObject);
             }
+            TimeCounter = 0;
         }
         
         void Update(){
@@ -52,6 +60,12 @@ namespace Platformer.UI
                     }
                 }
             }
+            if (ShowTime) {
+                TimeCounter += Time.deltaTime;
+                ShowTime.text = TimeCounter.ToString("F1");
+                
+            }
+            
         }
        
         public void Resume()
@@ -104,9 +118,25 @@ namespace Platformer.UI
             
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(0.5f);
         }
+        public void Respawn()
+        {
+            InventoryManager.Instance.Clear();
+            LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 0, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(1.5f);
+        }
+        public void Victory()
+        {
+            VictoryCanvas.gameObject.SetActive(true);
+            VictoryCanvas.GetComponent<CanvasGroup>().alpha = 0;
+            LeanTween.alphaCanvas(VictoryCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic);
+            VictoryTime.text = "Pass Time: "+TimeCounter.ToString("F1")+" S";
+        }
         public void Restart()
         {
-            LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 0, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(1.5f);
+            VictoryCanvas.gameObject.SetActive(false);
+            var reload = Simulation.Schedule<LoadScene>();
+            reload.SceneName = SceneManager.GetActiveScene().name;
+            TimeCounter = 0;
+            InventoryManager.Instance.Clear();
         }
     }
 }
