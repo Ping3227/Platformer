@@ -5,12 +5,12 @@ using static Platformer.Core.Simulation;
 namespace Platformer.Mechanics {
     public class HurtZone : MonoBehaviour
     {
+        [SerializeField] float damage;
         void OnTriggerStay2D(Collider2D collider)
         {
-            if (collider.gameObject.GetComponent<PlatfromerPlayer>())
+            if (collider.CompareTag("Player"))
             {
-                var ev = Schedule<PlayerHurt>();
-                ev.Damage = 1;
+                collider.GetComponent<Player>().Hurt(damage);
             }
         }
         

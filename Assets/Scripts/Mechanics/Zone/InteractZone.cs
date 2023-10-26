@@ -26,7 +26,7 @@ public class InteractZone : MonoBehaviour
 
         if (triggerType == TriggerType.Once && m_AlreadyTriggered)
             return;
-
+        Debug.Log("Triggering director");
         director.Play();
         m_AlreadyTriggered = true;
         OnDirectorPlay.Invoke();

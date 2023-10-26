@@ -85,6 +85,7 @@ namespace Platformer.UI
 
         public void LoadMenu(){
             Time.timeScale = 1f;
+            PauseCanvas.gameObject.SetActive(false);
             SceneManager.LoadScene("MainMenu");
         }
 
@@ -128,7 +129,7 @@ namespace Platformer.UI
             VictoryCanvas.gameObject.SetActive(true);
             VictoryCanvas.GetComponent<CanvasGroup>().alpha = 0;
             LeanTween.alphaCanvas(VictoryCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic);
-            VictoryTime.text = "Pass Time: "+TimeCounter.ToString("F1")+" S";
+            VictoryTime.text = "Pass Time:\n"+TimeCounter.ToString("F1")+" s";
         }
         public void Restart()
         {
