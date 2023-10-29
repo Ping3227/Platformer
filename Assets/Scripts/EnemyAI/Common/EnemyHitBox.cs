@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Platformer.Mechanics;
 
-public class AttackHitBox : MonoBehaviour
+public class EnemyHitBox : MonoBehaviour
 {
     Player player;
     [SerializeField] float damage;
