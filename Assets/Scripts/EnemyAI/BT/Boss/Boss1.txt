@@ -68,7 +68,7 @@ tree("Dodge")
 		tree("Counter Attack")
 
 tree("Counter Attack")
-	random(0.8,0.2)
+	random(0.3,0.7)
 		Blocking
 		tree("Strong Attack")
 

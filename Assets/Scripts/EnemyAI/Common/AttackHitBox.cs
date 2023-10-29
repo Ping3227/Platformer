@@ -6,13 +6,12 @@ using Platformer.Mechanics;
 public class AttackHitBox : MonoBehaviour
 {
     Player player;
-    Animator anim;
     [SerializeField] float damage;
     // Start is called before the first frame update
     void Start()
     {
         player = GameController.player;
-        anim = player.GetComponent<Animator>();
+        
     }
 
 
@@ -20,7 +19,7 @@ public class AttackHitBox : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            anim.SetTrigger("Hurt");
+            
             player.Hurt(damage);    
         }
         
