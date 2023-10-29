@@ -1,10 +1,16 @@
+using Platformer.Core;
+using Platformer.Gameplay;
 using Platformer.Mechanics;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 [RequireComponent(typeof(Health), typeof(Stamina))]
 public class Player : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float moveSpeed = 3f;
+
+    [Header("Attack")]
+    [SerializeField] private float AttackTime = 0.2f;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
@@ -20,29 +26,43 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float dashCost = 0.3f;
     [SerializeField] private float dashTime = 0.1f;
+    [SerializeField] private float dashInvincibleTime = 0.05f;
 
     [Header("Ground check")]
     [Tooltip("Check Ground Distance")]
     [SerializeField] private float extraHeight = 0.25f;
     [SerializeField] private LayerMask whatIsGround;
 
+    [Header("Hurt")]
+    [SerializeField] private ParticleSystem hurtEffect;
+    [SerializeField] private float hurtInvincibleTime;
+    [SerializeField] private float ShakeAmpitude;
+    [SerializeField] private float ShakeFrequency;
+    [SerializeField] private float ShakeDuration;
+    [Tooltip("Slow Time while hurt")]
+    [SerializeField][Range(0, 1)] private float TimeSlower;
+    [Tooltip("Recover Time from TimeSlower")]
+    [SerializeField] private float TimeRecoverRate;
 
-
+    [Header("Status")]
     private bool IsFacingRight = true;
     private bool IsDashing = false;
     private bool IsJumping = false;
     private bool IsDoubleJumping = false;
+    private bool IsInvincible = false;
     private bool FinishDoubleJump = false;
     private bool IsAttacking = false;
     private bool IsMoveable = true;
     private bool IsFalling;
+
+    [Header("Counter")]
     private float jumpTimeCounter;
+    private float doubleJumpTimeCounter;
     private float DashTimeCounter;
     private float ImmobileTimeCounter;
-    private float doubleJumpTimeCounter;
+    private float InvincibleCounter;
+
     private float JumpApex = 0f;
-
-
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -55,6 +75,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        hurtEffect.Pause();
         coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -64,6 +85,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Moveable();
+        Invincible();
         if (IsMoveable) {
             Dash();
             if (!IsDashing)
@@ -89,6 +111,9 @@ public class Player : MonoBehaviour
         if (UserInput.instance.controls.Attack.Attack.WasPressedThisFrame())
         {
             anim.SetTrigger("Attack");
+            ImmobileTimeCounter = AttackTime;
+            IsMoveable = false;
+            rb.velocity = new Vector2(0,rb.velocity.y);
         }
     }
 
@@ -166,7 +191,10 @@ public class Player : MonoBehaviour
         {
             IsDashing = true;
             DashTimeCounter = dashTime;
+            InvincibleCounter = dashInvincibleTime;
+            IsInvincible = true;
         }
+       
         DashTimeCounter -= Time.deltaTime;
         if (DashTimeCounter <= 0) {
             DashTimeCounter = 0;
@@ -193,6 +221,14 @@ public class Player : MonoBehaviour
             IsMoveable = true;
         }
 
+    }
+    private void Invincible() {
+        InvincibleCounter -= Time.deltaTime;
+        if (InvincibleCounter <= 0)
+        {
+            IsInvincible = false;
+            InvincibleCounter = 0;
+        }
     }
     #endregion
     #region Turn check
@@ -268,6 +304,7 @@ public class Player : MonoBehaviour
     #endregion
     #region trigger function
     public void Immobilized() {
+        if (IsInvincible) return;
         Debug.Log("Immobolized");
         anim.SetTrigger("IsImmobolized");
         IsMoveable = false;
@@ -275,11 +312,24 @@ public class Player : MonoBehaviour
         rb.velocity = Vector2.zero;
     }
     public void Hurt(float damage) {
+        if(IsInvincible) return;
         anim.SetTrigger("Hurt");
+        hurtEffect.transform.position = transform.position;
+        hurtEffect.Play();
         health.Hurt(damage);
+        InvincibleCounter = hurtInvincibleTime;
+        IsInvincible = true;
+
+        var ev =Simulation.Schedule<PlayerHurt>();
+        ev.RecoverRate = TimeRecoverRate;
+        ev.TimeSlower = TimeSlower;
+        ev.ShakeAmp = ShakeAmpitude;
+        ev.ShakeFrequency = ShakeFrequency;
+        ev.ShakeDuration = ShakeDuration;
     }
     public void Pounded()
     {
+        if (IsInvincible) return;
         anim.SetTrigger("Pounded");
     }
     public void Dead() {

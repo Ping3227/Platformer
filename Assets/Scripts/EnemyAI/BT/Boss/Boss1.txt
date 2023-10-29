@@ -50,10 +50,10 @@ tree("Consecutive Attack")
 tree("Immobolize")
 	sequence 
 		Immobolize
-		Wait(2.0)
+		Wait(1.0)
 		IsImmobilized
 		GoBehindPlayer
-		Teleport(5.0)
+		Teleport(6.0)
 		Attack
 		ResetImmobilized
 

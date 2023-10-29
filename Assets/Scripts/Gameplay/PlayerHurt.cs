@@ -9,15 +9,19 @@ namespace Platformer.Gameplay
     /// <typeparam name="PlayerHurt"></typeparam>
     public class PlayerHurt : Event<PlayerHurt>
     {
-        public int Damage;
+        public float TimeSlower;
+        public float RecoverRate;
+        public float ShakeAmp;
+        public float ShakeFrequency;
+        public float ShakeDuration;
         public override void Execute()
         {
-            var health= GameObject.Find("Player").GetComponent<Health>();
-            health.Hurt(Damage);
-            Debug.Log($"Damage: {Damage},IsAlive:{health.IsAlive}");
-            if (true) {
-                PlayerDeath ev = Schedule<PlayerDeath>();
-            }
+            Time.timeScale= TimeSlower;
+           
+            var ev =Schedule<RecoverTime>(0.1f);
+            ev.RecoverRate = RecoverRate;
+            CamearaController.Instance.ShakeCamera(ShakeAmp, ShakeFrequency, ShakeDuration);
+            //TODO: Camera shake and time slower 
         }
     }
 }

@@ -26,6 +26,8 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] float maxJumpForce = 5f;
     [SerializeField] float ChaseRange = 5f;
     [SerializeField] float AttackRange = 1f;
+    [SerializeField] float AttackInterval = 0.5f;
+    private float AttackCounter = 0f;
     private RaycastHit2D groundHit;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private float extraHeight = 0.25f;
@@ -67,7 +69,12 @@ public class EnemyBehavior : MonoBehaviour
     }
     void Attack()
     {
-        anim.SetTrigger("Attack");
+        if (AttackCounter <= 0)
+        {
+            anim.SetTrigger("Attack");
+            AttackCounter = AttackInterval;
+        }
+        
     }
     void CalculateDistance()
     {
@@ -108,7 +115,9 @@ public class EnemyBehavior : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(transform.position.x == PatrolPoint.x);
+        AttackCounter -= Time.deltaTime;
+        if (AttackCounter <= 0) AttackCounter = 0; 
+        
         CalculateDistance();
         if (IsChasing){
             Chase();
