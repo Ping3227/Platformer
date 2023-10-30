@@ -198,6 +198,5 @@ public class Boos1 : MonoBehaviour
     }
     #endregion
 
-    
 
 }

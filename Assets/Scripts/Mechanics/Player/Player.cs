@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        hurtEffect.Pause();
+        if(hurtEffect) hurtEffect.Pause();
         coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -335,8 +335,12 @@ public class Player : MonoBehaviour
     public void Dead() {
         anim.SetTrigger("Dead");
     }
+    public void Reflected(float damage) { 
+        anim.SetTrigger("IsReflected");
+        health.Hurt(damage);
+    }
     #endregion
-
+    
 
 }
 
