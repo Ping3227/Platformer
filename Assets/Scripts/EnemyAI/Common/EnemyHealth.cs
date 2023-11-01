@@ -6,10 +6,11 @@ public class EnemyHealth : MonoBehaviour
     private float _currentHP;
     [SerializeField] private float _maxHP;
     private SpriteRenderer _spriteRenderer;
-
+    [Tooltip("CumulateDamage for ability use")]
+    public float _cumulateDamage { private set; get; } 
 
     [Header("player hurt effect")]
-    public bool IsReflecting;
+    [HideInInspector]public bool IsReflecting;
     private  bool Isimmune;
     private Material _initialMaterial;
     [Tooltip("The material when player hurt")]
@@ -39,6 +40,7 @@ public class EnemyHealth : MonoBehaviour
         if (Isimmune) return;
        Debug.Log($"Enemy hurt {Time.time}");
        _currentHP -= damage;
+        _cumulateDamage += damage;
         if (_currentHP <= 0) {
             // TODO : Enemy dead effect 
             return;
@@ -51,6 +53,9 @@ public class EnemyHealth : MonoBehaviour
            _spriteRenderer.color = Color.white;
            Isimmune = false;
        });
+    }
+    public void ResetCumulateDamage() {
+        _cumulateDamage = 0;
     }
     
 }

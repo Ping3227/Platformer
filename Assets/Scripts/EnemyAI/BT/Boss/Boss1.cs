@@ -3,7 +3,7 @@ using UnityEngine;
 using Panda;
 using System.Collections.Generic;
 using Platformer.Mechanics;
-
+using System.Runtime.CompilerServices;
 
 public class Boos1 : MonoBehaviour
 {
@@ -28,19 +28,20 @@ public class Boos1 : MonoBehaviour
     private BoxCollider2D playerColl;
     private float DistancetoPlayer = 0f;
     private Vector3 heightDiffer;
-    
-    
+
+    [Header("status")]
+    EnemyHealth health;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
         rb= GetComponent<Rigidbody2D>();
+        health = GetComponent<EnemyHealth>();
         player = GameController.player;
         playerColl= player.gameObject.GetComponent<BoxCollider2D>();
         PandaBehaviour pd = GetComponent<PandaBehaviour>();
         heightDiffer = Vector3.up * (transform.position.y - playerColl.bounds.center.y);
-
         pd.Tick();
-        
         
     }
     private void Update()
@@ -49,15 +50,7 @@ public class Boos1 : MonoBehaviour
         
     }
 
-    [Task]
-    [HideInInspector]
-    public bool IsImmobilized = false;
-    [Task]
-    private bool ResetImmobilized()
-    {
-        IsImmobilized = false;
-        return true;
-    }
+    
     #region NonTask function
     private void Move()
     {
@@ -136,11 +129,31 @@ public class Boos1 : MonoBehaviour
             ThisTask.Succeed();
         }
     }
+
+    #endregion
+    #region status
     [Task]
     bool CloserThan(float distance) => DistancetoPlayer < distance;
     [Task]
     bool IsPlayerInfront() => (player.transform.position.x < transform.position.x && transform.localEulerAngles.y == 180) ||
-                            (transform.position.x < player.transform.position.x && transform.localEulerAngles.y==0);
+                            (transform.position.x < player.transform.position.x && transform.localEulerAngles.y == 0);
+    [Task]
+    [HideInInspector]
+    public bool IsImmobilized = false;
+    [Task]
+    private bool ResetImmobilized()
+    {
+        IsImmobilized = false;
+        return true;
+    }
+    [Task]
+    private bool IsCumulateDamageGreaterThan(float damage) {
+        if (health._cumulateDamage > damage){
+            health.ResetCumulateDamage();
+            return true;
+        }
+        else return false;
+    }
     #endregion
     #region Animation
     [Task]
@@ -197,6 +210,6 @@ public class Boos1 : MonoBehaviour
         }
     }
     #endregion
-
+    
 
 }
