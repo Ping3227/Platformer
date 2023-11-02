@@ -8,9 +8,12 @@ public class Player : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] float InputTimeAllowance = 0.1f;
 
     [Header("Attack")]
     [SerializeField] private float AttackTime = 0.2f;
+    private float LastAttackTime;
+    private float AttackBuffer;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
@@ -21,12 +24,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float doubleJumpTime = 0.3f;
     [Tooltip("Bonus movement distance while jumping")]
     [SerializeField] private float ApexBonus = 0.8f;
+    private float LastJumpTime;
+    private float JumpBuffer;
 
     [Header("Dash")]
     [SerializeField] private float dashForce = 10f;
     [SerializeField] private float dashCost = 0.3f;
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashInvincibleTime = 0.05f;
+    private float LastDashTime;
+    private float DashBuffer;
 
     [Header("Ground check")]
     [Tooltip("Check Ground Distance")]

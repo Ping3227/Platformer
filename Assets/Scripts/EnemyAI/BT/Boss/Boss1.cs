@@ -4,6 +4,8 @@ using Panda;
 using System.Collections.Generic;
 using Platformer.Mechanics;
 using System.Runtime.CompilerServices;
+using UnityEditor;
+using JetBrains.Annotations;
 
 public class Boos1 : MonoBehaviour
 {
@@ -13,11 +15,10 @@ public class Boos1 : MonoBehaviour
 
     [Header("Attack")]
     [SerializeField] float AttactRange;
-    [SerializeField] float AttackDamage;
     [SerializeField] float AttackDownSideRange;
-    [SerializeField] float AttackDownSideDamage;
-    [SerializeField] float StrongAttackRange;
-    [SerializeField] float StrongAttackDamage;
+    private bool fallAttackNext= false;
+    private int NormalAttackCount = 0;
+    private int FailAttackCount = 0;
 
     [Header("Move")]
     private Rigidbody2D rb;
@@ -63,43 +64,40 @@ public class Boos1 : MonoBehaviour
             rb.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
-    
+
     #endregion
-    #region Location 
+    #region MovePattern
     [Task]
-    void FindNextLocation(bool IsDodging) {
-        #region Dodging player 
-        if (IsDodging)
+    void DodgePlayer() {
+        //player is on the right side
+        if (playerColl.transform.position.x >= Area.bounds.center.x)
         {
-            //player is on the right side
-            if (playerColl.transform.position.x >= Area.bounds.center.x)
-            {
-                this.NextLocation=  new Vector2(Random.Range(Area.bounds.min.x, Area.bounds.center.x -playerColl.bounds.extents.x), transform.position.y);
-            }
-            //player is on the left side of the boss
-            else {
-                this.NextLocation = new Vector2(Random.Range(Area.bounds.center.x+playerColl.bounds.extents.x, Area.bounds.max.x), transform.position.y);
-            }
+            this.NextLocation = new Vector2(Random.Range(Area.bounds.min.x, Area.bounds.center.x - playerColl.bounds.extents.x), transform.position.y);
         }
-        #endregion
-        #region Attacking player
+        //player is on the left side of the boss
         else
         {
-            InRange(playerColl.transform.position + (AttackDownSideRange * Vector3.up));
-            InRange(playerColl.transform.position + (AttactRange * Vector3.left) +heightDiffer);
-            InRange(playerColl.transform.position + (AttactRange * Vector3.right)+heightDiffer);
-            this.NextLocation = MoveOptions[Random.Range(0, MoveOptions.Count)];
-            MoveOptions.Clear();
-            void InRange(Vector2 position)
-            {
-                if (Area.bounds.min.x < position.x && position.x < Area.bounds.max.x
-                     && Area.bounds.min.y < position.y && position.y < Area.bounds.max.y)
-                    MoveOptions.Add(position);
-            }
-
+            this.NextLocation = new Vector2(Random.Range(Area.bounds.center.x + playerColl.bounds.extents.x, Area.bounds.max.x), transform.position.y);
         }
-        #endregion
+        ThisTask.Succeed();
+    }
+    [Task]
+    void GoToPlayer() {
+
+        InRange(playerColl.transform.position + (AttackDownSideRange * Vector3.up));
+        InRange(playerColl.transform.position + (AttactRange * Vector3.left) + heightDiffer);
+        InRange(playerColl.transform.position + (AttactRange * Vector3.right) + heightDiffer);
+        int choice = Random.Range(0, MoveOptions.Count);
+        this.NextLocation = MoveOptions[choice];
+        MoveOptions.Clear();
+        if (choice==0) fallAttackNext = true;
         
+        void InRange(Vector2 position)
+        {
+            if (Area.bounds.min.x < position.x && position.x < Area.bounds.max.x
+                 && Area.bounds.min.y < position.y && position.y < Area.bounds.max.y)
+                MoveOptions.Add(position);
+        }
         ThisTask.Succeed();
     }
     [Task]
@@ -110,8 +108,12 @@ public class Boos1 : MonoBehaviour
     }
     [Task]
     bool GoBehindPlayer() {
-        Vector3 tmpLocation = player.transform.position + (AttactRange * Vector3.left) + heightDiffer;
-        if (!player.IsBehindPlayer(tmpLocation)) {
+        Vector3 tmpLocation;
+        if (playerColl.transform.position.x < transform.position.x)
+        {
+            tmpLocation = player.transform.position + (AttactRange * Vector3.left) + heightDiffer;
+        }
+        else {
             tmpLocation = player.transform.position + (AttactRange * Vector3.right) + heightDiffer;
         }
         if(Area.bounds.min.x< tmpLocation.x && tmpLocation.x < Area.bounds.max.x)
@@ -131,7 +133,11 @@ public class Boos1 : MonoBehaviour
     }
 
     #endregion
-    #region status
+    #region condition
+    [Task]
+    bool MissMoreThan(int number)=> FailAttackCount > number;
+    [Task]
+    bool NormalAttackMoreThan(int number) => NormalAttackCount > number;
     [Task]
     bool CloserThan(float distance) => DistancetoPlayer < distance;
     [Task]
@@ -166,11 +172,30 @@ public class Boos1 : MonoBehaviour
         }
     }
     [Task]
-    void Attack() {
+    void Attack(float speed,bool IsSpecialAttack) {
 
         if (!anim.GetBool("IsAnimating")){
-            anim.Play("OneSideAttack");
-            anim.SetBool("IsAnimating", true);
+            if (fallAttackNext)
+            {
+                //anim.Play("FallAttack");
+                //anim.SetBool("IsAnimating", true);
+                fallAttackNext = false;
+               
+            }
+            else {
+                anim.Play("OneSideAttack");
+                anim.SetBool("IsAnimating", true);
+                anim.SetFloat("AttackSpeed", speed);
+            }
+            if (IsSpecialAttack)
+            {
+                NormalAttackCount = 0;
+            }
+            else {
+                NormalAttackCount++;
+            }
+            FailAttackCount++;
+            
             ThisTask.Succeed();
         }
     }
@@ -181,11 +206,21 @@ public class Boos1 : MonoBehaviour
         {
             anim.Play("TwoSideAttack");
             anim.SetBool("IsAnimating", true);
+            NormalAttackCount = 0;
+            FailAttackCount++;
             ThisTask.Succeed();
         }
     }
     [Task]
-    void FallAttack() { 
+    void AreaAttack() {
+        if (!anim.GetBool("IsAnimating"))
+        {
+            //anim.Play("AreaAttack");
+            anim.SetBool("IsAnimating", true);
+            NormalAttackCount = 0;
+            FailAttackCount++;
+            ThisTask.Succeed();
+        }
     }
     [Task]
     void Blocking() {
@@ -210,6 +245,11 @@ public class Boos1 : MonoBehaviour
         }
     }
     #endregion
-    
+    #region trigger 
+    public void AttackSuccess()
+    {
+        FailAttackCount = 0;
+    }
+    #endregion
 
 }

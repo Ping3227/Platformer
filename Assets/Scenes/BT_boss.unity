@@ -323,6 +323,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62aa181d1147499dbb9a520e65c7b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1337078548}
+        m_TargetAssemblyTypeName: Boos1, Assembly-CSharp
+        m_MethodName: AttackSuccess
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   damage: 1
 --- !u!1 &72121747 stripped
 GameObject:
@@ -7106,11 +7121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ImmobolizePrefab: {fileID: 1735025876}
   AttactRange: 1
-  AttackDamage: 0
   AttackDownSideRange: 4
-  AttackDownSideDamage: 0
-  StrongAttackRange: 0
-  StrongAttackDamage: 0
   Area: {fileID: 1853719546}
   player: {fileID: 72121754}
   IsImmobilized: 0
@@ -7296,6 +7307,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62aa181d1147499dbb9a520e65c7b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1337078548}
+        m_TargetAssemblyTypeName: Boos1, Assembly-CSharp
+        m_MethodName: AttackSuccess
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   damage: 5
 --- !u!1 &1461665462
 GameObject:
@@ -7715,6 +7741,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62aa181d1147499dbb9a520e65c7b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
   damage: 0.7
 --- !u!50 &2019077288
 Rigidbody2D:

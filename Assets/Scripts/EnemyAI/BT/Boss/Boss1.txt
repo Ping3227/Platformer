@@ -17,9 +17,9 @@ tree("Root")
 // This region is attack action		
 tree("Normal Attack")
 	sequence
-		FindNextLocation(false)
+		GoToPlayer
 		Teleport(0.7)
-		Attack
+		Attack(1.0,false)
 		Wait(1.0)
 
 tree("Special Attack")
@@ -40,12 +40,12 @@ tree("Consecutive Attack")
 					mute 
 						sequence 
 							CloserThan(2.0)
-							Attack
+							Attack(1.0,true)
 					not CloserThan(3.0)
 		IsPlayerInfront
 		GoBehindPlayer
 		Teleport(4.0)
-		Attack
+		Attack(1.0,true)
 		
 tree("Immobolize")
 	sequence 
@@ -54,13 +54,13 @@ tree("Immobolize")
 		IsImmobilized
 		GoBehindPlayer
 		Teleport(6.0)
-		Attack
+		Attack(1.0,false)
 		ResetImmobilized
 
 // This region is for defense action		
 tree("Dodge")
 	sequence
-		FindNextLocation(true)
+		DodgePlayer
 		Teleport(0.7)
 		Wait(1)
 		CalculateDistance
