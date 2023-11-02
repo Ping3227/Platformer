@@ -340,8 +340,12 @@ public class Player : MonoBehaviour
         health.Hurt(damage);
     }
     #endregion
-    
 
+    //[ContextMenu("TestTrigger")]
+    //public void testTrigger() {
+    //    anim.SetBool("IsJump", true);
+    //    anim.SetTrigger("Hurt");
+    //}
 }
 
 
