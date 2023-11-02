@@ -189,16 +189,21 @@ public class Player : MonoBehaviour
     {
         if (DashTimeCounter == 0 && UserInput.instance.controls.Dash.Dash.WasPressedThisFrame() && stamina.ConsumeStamina(dashCost))
         {
+            
             IsDashing = true;
+            
+
             DashTimeCounter = dashTime;
             InvincibleCounter = dashInvincibleTime;
             IsInvincible = true;
+            if (IsJumping) { IsJumping = false; }
         }
        
         DashTimeCounter -= Time.deltaTime;
         if (DashTimeCounter <= 0) {
             DashTimeCounter = 0;
             IsDashing = false;
+            
         }
         if (IsDashing) {
             if (IsFacingRight) {
