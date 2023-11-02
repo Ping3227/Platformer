@@ -357,6 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  InputTimeAllowance: 0.1
   AttackTime: 0.5
   jumpForce: 5
   jumpTime: 0.5
@@ -6963,7 +6964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1337078542
 Rigidbody2D:
   serializedVersion: 4
