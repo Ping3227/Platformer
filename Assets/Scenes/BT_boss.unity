@@ -352,7 +352,7 @@ MonoBehaviour:
   ApexBonus: 0.8
   dashForce: 10
   dashCost: 0.3
-  dashTime: 0.1
+  dashTime: 0.5
   dashInvincibleTime: 0.05
   extraHeight: 0.25
   whatIsGround:
@@ -6948,7 +6948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1337078542
 Rigidbody2D:
   serializedVersion: 4
