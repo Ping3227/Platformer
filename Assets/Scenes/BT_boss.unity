@@ -396,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxStamina: 1
   RechargeCoolDown: 0.5
-  RechargingRate: 0.3
+  RechargingRate: 0.2
 --- !u!1 &73037689
 GameObject:
   m_ObjectHideFlags: 0
