@@ -18,6 +18,7 @@ namespace Platformer.UI
         
         [Header("HUD")]
         [SerializeField] Canvas HUDCanvas;
+        [SerializeField] Slider healthLoss;
         [SerializeField] Slider healthbar;
         [SerializeField] Slider Stamina;
         [SerializeField] TMP_Text ShowTime;
@@ -104,6 +105,12 @@ namespace Platformer.UI
         public void SetHealth(float health )
         {
             healthbar.value = health;
+            LeanTween.value(healthLoss.gameObject, healthLoss.value, health, 1.0f).setEase(LeanTweenType.easeOutCubic).setOnUpdate((float val) =>
+            {
+                Debug.Log(val);
+                healthLoss.value = val;
+            });
+            
         }
 
         public void SetStamina(float stamina) { 

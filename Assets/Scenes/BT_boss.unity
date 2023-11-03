@@ -338,7 +338,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  damage: 1
+  damage: 3
 --- !u!1 &72121747 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7748093990346355793, guid: a85517f01cbf54ef2a8690c950d0ba11, type: 3}
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6702abebdab40947a714fc76291efc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 3
   InputTimeAllowance: 0.3
   AttackTime: 0.5
   AttackCost: 0.1
@@ -367,10 +367,10 @@ MonoBehaviour:
   doubleJumpCost: 0.1
   doubleJumpTime: 0.3
   ApexBonus: 0.8
-  dashForce: 5
+  dashForce: 7
   dashCost: 0.3
-  dashTime: 0.5
-  dashInvincibleTime: 0.05
+  dashTime: 0.25
+  dashInvincibleTime: 0.2
   extraHeight: 0.25
   whatIsGround:
     serializedVersion: 2
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxStamina: 1
   RechargeCoolDown: 0.5
-  RechargingRate: 1
+  RechargingRate: 0.1
 --- !u!1 &73037689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1376,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2904138770907624787, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2904138770907624787, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6095650376206997466, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.455685
@@ -1427,6 +1435,10 @@ PrefabInstance:
     - target: {fileID: 7745984963936868596, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028746618753646983, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
+      propertyPath: m_Name
+      value: HealthLoss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6937,7 +6949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433db78e14ba01949b457e7f1d10f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 20
+  MaxHP: 15
 --- !u!4 &1094139111 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 17059194705489437, guid: a85517f01cbf54ef2a8690c950d0ba11, type: 3}
@@ -6965,7 +6977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1337078542
 Rigidbody2D:
   serializedVersion: 4
@@ -7122,7 +7134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ImmobolizePrefab: {fileID: 1735025876}
-  AttackRange: 0
+  AttackRange: 1
   AttackDownSideRange: 4
   Area: {fileID: 1853719546}
   player: {fileID: 72121754}
@@ -7182,7 +7194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f09c73e747890f48966badb03a146b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 20
+  _maxHP: 100
   IsReflecting: 0
   _flashMaterial: {fileID: 2100000, guid: e6c6e7521da528642b42db958fc525f5, type: 2}
   _flashColor: {r: 1, g: 1, b: 1, a: 0}
@@ -7525,6 +7537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Canvas: {fileID: 697609062}
   HUDCanvas: {fileID: 697609066}
+  healthLoss: {fileID: 1976986951}
   healthbar: {fileID: 697609065}
   Stamina: {fileID: 697609064}
   ShowTime: {fileID: 0}
@@ -7697,6 +7710,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 14, y: 8.2}
   m_EdgeRadius: 0
+--- !u!114 &1976986951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 294366868909430311, guid: 4a57bc2664e7aa844a8bc5878679843c, type: 3}
+  m_PrefabInstance: {fileID: 697609061}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2019077285
 GameObject:
   m_ObjectHideFlags: 0

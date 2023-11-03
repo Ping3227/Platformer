@@ -361,6 +361,7 @@ public class Player : MonoBehaviour
     public void Dead() {
         anim.SetTrigger("Dead");
         // Dead event 
+        rb.velocity= Vector2.zero;
     }
     public void Reflected(float damage) { 
         anim.SetTrigger("IsReflected");
