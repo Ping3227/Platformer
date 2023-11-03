@@ -176,8 +176,8 @@ public class Boos1 : MonoBehaviour
         if (!anim.GetBool("IsAnimating")){
             if (fallAttackNext)
             {
-                //anim.Play("FallAttack");
-                //anim.SetBool("IsAnimating", true);
+                anim.Play("FallAttack");
+                anim.SetBool("IsAnimating", true);
                 fallAttackNext = false;
                
             }
