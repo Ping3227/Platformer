@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
     private float _currentHP;
     [SerializeField] private float _maxHP;
     private SpriteRenderer _spriteRenderer;
+
     [Tooltip("CumulateDamage for ability use")]
     public float _cumulateDamage { private set; get; } 
 
@@ -38,12 +39,17 @@ public class EnemyHealth : MonoBehaviour
             return;
         }
         if (Isimmune) return;
-       Debug.Log($"Enemy hurt {Time.time}");
+        else{
+            Isimmune = true;
+        }
        _currentHP -= damage;
         _cumulateDamage += damage;
         if (_currentHP <= 0) {
-            // TODO : Enemy dead effect 
-            return;
+            // delete object after delay
+            LeanTween.delayedCall(gameObject,_hurtInterval, () =>{
+                Destroy(gameObject);
+            });
+            // delay after dead 
         }
         
         _spriteRenderer.material = _flashMaterial;
