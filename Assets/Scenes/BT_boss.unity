@@ -356,9 +356,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6702abebdab40947a714fc76291efc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  InputTimeAllowance: 0.1
+  moveSpeed: 4
+  InputTimeAllowance: 0.3
   AttackTime: 0.5
+  AttackCost: 0.1
   jumpForce: 5
   jumpTime: 0.5
   jumpCost: 0.5
@@ -366,7 +367,7 @@ MonoBehaviour:
   doubleJumpCost: 0.1
   doubleJumpTime: 0.3
   ApexBonus: 0.8
-  dashForce: 10
+  dashForce: 5
   dashCost: 0.3
   dashTime: 0.5
   dashInvincibleTime: 0.05
@@ -395,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxStamina: 1
   RechargeCoolDown: 0.5
-  RechargingRate: 0.1
+  RechargingRate: 1
 --- !u!1 &73037689
 GameObject:
   m_ObjectHideFlags: 0
@@ -6964,7 +6965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1337078542
 Rigidbody2D:
   serializedVersion: 4
@@ -7121,7 +7122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ImmobolizePrefab: {fileID: 1735025876}
-  AttactRange: 1
+  AttackRange: 0
   AttackDownSideRange: 4
   Area: {fileID: 1853719546}
   player: {fileID: 72121754}

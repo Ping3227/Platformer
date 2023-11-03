@@ -14,7 +14,7 @@ public class Boos1 : MonoBehaviour
     [SerializeField] GameObject ImmobolizePrefab;
 
     [Header("Attack")]
-    [SerializeField] float AttactRange;
+    [SerializeField] float AttackRange;
     [SerializeField] float AttackDownSideRange;
     private bool fallAttackNext= false;
     private int NormalAttackCount = 0;
@@ -85,8 +85,8 @@ public class Boos1 : MonoBehaviour
     void GoToPlayer() {
 
         InRange(playerColl.transform.position + (AttackDownSideRange * Vector3.up));
-        InRange(playerColl.transform.position + (AttactRange * Vector3.left) + heightDiffer);
-        InRange(playerColl.transform.position + (AttactRange * Vector3.right) + heightDiffer);
+        InRange(playerColl.transform.position + (AttackRange * Vector3.left) + heightDiffer);
+        InRange(playerColl.transform.position + (AttackRange * Vector3.right) + heightDiffer);
         int choice = Random.Range(0, MoveOptions.Count);
         this.NextLocation = MoveOptions[choice];
         MoveOptions.Clear();
@@ -111,10 +111,10 @@ public class Boos1 : MonoBehaviour
         Vector3 tmpLocation;
         if (playerColl.transform.position.x < transform.position.x)
         {
-            tmpLocation = player.transform.position + (AttactRange * Vector3.left) + heightDiffer;
+            tmpLocation = player.transform.position + (AttackRange * Vector3.left) + heightDiffer;
         }
         else {
-            tmpLocation = player.transform.position + (AttactRange * Vector3.right) + heightDiffer;
+            tmpLocation = player.transform.position + (AttackRange * Vector3.right) + heightDiffer;
         }
         if(Area.bounds.min.x< tmpLocation.x && tmpLocation.x < Area.bounds.max.x)
         {
@@ -131,7 +131,6 @@ public class Boos1 : MonoBehaviour
             ThisTask.Succeed();
         }
     }
-
     #endregion
     #region condition
     [Task]
@@ -154,7 +153,7 @@ public class Boos1 : MonoBehaviour
     }
     [Task]
     private bool IsCumulateDamageGreaterThan(float damage) {
-        if (health._cumulateDamage > damage){
+        if (health._cumulateDamage >= damage){
             health.ResetCumulateDamage();
             return true;
         }

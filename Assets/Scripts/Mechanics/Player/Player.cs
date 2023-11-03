@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
 
     [Header("Attack")]
     [SerializeField] private float AttackTime = 0.2f;
+    [SerializeField] private float AttackCost = 0.2f;
     private float LastAttackTime;
-    private float AttackBuffer;
+    private bool AttackBuffer;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 5f;
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour
     [Tooltip("Bonus movement distance while jumping")]
     [SerializeField] private float ApexBonus = 0.8f;
     private float LastJumpTime;
-    private float JumpBuffer;
+    private bool JumpBuffer;
 
     [Header("Dash")]
     [SerializeField] private float dashForce = 10f;
@@ -33,7 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashTime = 0.1f;
     [SerializeField] private float dashInvincibleTime = 0.05f;
     private float LastDashTime;
-    private float DashBuffer;
+    private bool DashBuffer;
 
     [Header("Ground check")]
     [Tooltip("Check Ground Distance")]
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
     private bool IsDoubleJumping = false;
     private bool IsInvincible = false;
     private bool FinishDoubleJump = false;
-    private bool IsAttacking = false;
+    
     private bool IsMoveable = true;
     private bool IsFalling;
 
@@ -89,22 +90,21 @@ public class Player : MonoBehaviour
         health = GetComponent<Health>();
         stamina = GetComponent<Stamina>();
     }
-    private void Update()
-    {
+    private void Update(){
         Moveable();
         Invincible();
+        CalculateBuffer();
         if (IsMoveable) {
             Dash();
-            if (!IsDashing)
-            {
-                Jump();
-                Move();
-                Attack();
-            }
+            // if not dashing then attack
+            Attack(); 
+            // if moveable and not dashing 
+            Jump();
+            Move();
             UpdateAnimation();
         }
 
-
+       
     }
 
     private void UpdateAnimation()
@@ -113,24 +113,24 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDash", IsDashing);
     }
 
-    private void Attack()
-    {
-        if (UserInput.instance.controls.Attack.Attack.WasPressedThisFrame())
+    private void Attack(){
+        if (IsDashing) return;
+        if ((UserInput.instance.controls.Attack.Attack.WasPressedThisFrame() ||  (AttackBuffer && (LastAttackTime + InputTimeAllowance) > Time.time))&& stamina.ConsumeStamina(AttackCost))
         {
+            
             anim.SetTrigger("Attack");
             ImmobileTimeCounter = AttackTime;
             IsMoveable = false;
-            rb.velocity = new Vector2(0,rb.velocity.y);
+            rb.velocity = new Vector2(rb.velocity.x,0);
         }
     }
 
 
     #region movement
-    private void Move()
-    {
+    private void Move(){
+        if(IsDashing|| !IsMoveable) return;
         moveInput = UserInput.instance.moveInput.x;
-        if (moveInput > 0 || moveInput < 0)
-        {
+        if (moveInput > 0 || moveInput < 0){
             TurnCheck();
         }
 
@@ -139,7 +139,19 @@ public class Player : MonoBehaviour
     }
 
     private void Jump() {
-        if (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()
+        #region Special case
+        if (IsDashing || !IsMoveable) { 
+            if(IsJumping) IsJumping = false;
+            if (IsDoubleJumping) {
+                FinishDoubleJump = true;
+                IsDoubleJumping = false;
+            }
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            JumpApex = 0;
+        }
+        #endregion
+        #region Jump
+        if ((UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()|| (JumpBuffer && (LastJumpTime + InputTimeAllowance) > Time.time))
                 && IsGrounded() && stamina.ConsumeStamina(jumpCost * Time.deltaTime)) {
 
             IsJumping = true;
@@ -148,32 +160,31 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
         }
-        if (UserInput.instance.controls.Jumping.Jump.IsPressed())
-        {
+        if (UserInput.instance.controls.Jumping.Jump.IsPressed()){
 
-            if (jumpTimeCounter > 0 && IsJumping && stamina.ConsumeStamina(jumpCost * Time.deltaTime))
-            {
+            if (jumpTimeCounter > 0 && IsJumping && stamina.ConsumeStamina(jumpCost * Time.deltaTime)){
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                JumpApex = (jumpTime - jumpTimeCounter) * ApexBonus / jumpTime;
+                // counter 
                 jumpTimeCounter -= Time.deltaTime;
                 if (jumpTimeCounter < 0) jumpTimeCounter = 0;
-                JumpApex = (jumpTime - jumpTimeCounter) * ApexBonus / jumpTime;
-
             }
-            else
-            {
+            else{
                 JumpApex = 0;
                 IsJumping = false;
+                IsFalling = true;
             }
 
         }
-        if (UserInput.instance.controls.Jumping.Jump.WasReleasedThisFrame())
-        {
+        if (UserInput.instance.controls.Jumping.Jump.WasReleasedThisFrame()){
             IsJumping = false;
             JumpApex = 0;
         }
-        /// Below is double jump logic 
+        #endregion
+        #region double jump
+        // constant jump 
         if (!IsJumping && !IsGrounded() && !FinishDoubleJump
-                && UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()
+                && (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame() || (JumpBuffer && (LastJumpTime + InputTimeAllowance) >Time.time))
                 && stamina.ConsumeStamina(doubleJumpCost)) {
 
             doubleJumpTimeCounter = doubleJumpTime;
@@ -182,6 +193,7 @@ public class Player : MonoBehaviour
         }
         if (IsDoubleJumping) {
             rb.velocity = new Vector2(rb.velocity.x, doubleJumpForce);
+            
             doubleJumpTimeCounter -= Time.deltaTime;
 
             if (doubleJumpTimeCounter <= 0) {
@@ -189,28 +201,26 @@ public class Player : MonoBehaviour
                 IsDoubleJumping = false;
             }
         }
-
+        #endregion
 
     }
-    private void Dash()
-    {
-        if (DashTimeCounter == 0 && UserInput.instance.controls.Dash.Dash.WasPressedThisFrame() && stamina.ConsumeStamina(dashCost))
-        {
-            
+    private void Dash(){
+
+        if (DashTimeCounter == 0 && 
+            ( UserInput.instance.controls.Dash.Dash.WasPressedThisFrame() || (DashBuffer && (LastDashTime+InputTimeAllowance)> Time.time)) 
+            && stamina.ConsumeStamina(dashCost)){
+            IsInvincible = true;
             IsDashing = true;
-            
+            if (IsJumping) IsJumping = false;
 
             DashTimeCounter = dashTime;
             InvincibleCounter = dashInvincibleTime;
-            IsInvincible = true;
-            if (IsJumping) { IsJumping = false; }
         }
        
         DashTimeCounter -= Time.deltaTime;
         if (DashTimeCounter <= 0) {
             DashTimeCounter = 0;
             IsDashing = false;
-            
         }
         if (IsDashing) {
             if (IsFacingRight) {
@@ -224,8 +234,7 @@ public class Player : MonoBehaviour
 
     }
     private void Moveable() {
-        if (ImmobileTimeCounter > 0)
-        {
+        if (ImmobileTimeCounter > 0){
             ImmobileTimeCounter -= Time.deltaTime;
         }
         else {
@@ -317,7 +326,6 @@ public class Player : MonoBehaviour
     #region trigger function
     public void Immobilized() {
         if (IsInvincible) return;
-        Debug.Log("Immobolized");
         anim.SetTrigger("IsImmobolized");
         IsMoveable = false;
         ImmobileTimeCounter = 0.5f;
@@ -326,38 +334,95 @@ public class Player : MonoBehaviour
     public void Hurt(float damage) {
         if(IsInvincible) return;
         anim.SetTrigger("Hurt");
-        hurtEffect.transform.position = transform.position;
-        hurtEffect.Play();
         health.Hurt(damage);
         InvincibleCounter = hurtInvincibleTime;
         IsInvincible = true;
 
+        #region hurt effect
         var ev =Simulation.Schedule<PlayerHurt>();
         ev.RecoverRate = TimeRecoverRate;
         ev.TimeSlower = TimeSlower;
         ev.ShakeAmp = ShakeAmpitude;
         ev.ShakeFrequency = ShakeFrequency;
         ev.ShakeDuration = ShakeDuration;
+        hurtEffect.transform.position = transform.position;
+        hurtEffect.Play();
+        #endregion
+        #region HitStun
+        //IsMoveable = false;
+        //ImmobileTimeCounter = 0.5f;
+        //rb.velocity = Vector2.zero;
+        #endregion
     }
-    public void Pounded()
-    {
+    public void Pounded(){
         if (IsInvincible) return;
         anim.SetTrigger("Pounded");
     }
     public void Dead() {
         anim.SetTrigger("Dead");
+        // Dead event 
     }
     public void Reflected(float damage) { 
         anim.SetTrigger("IsReflected");
         health.Hurt(damage);
+
+        InvincibleCounter = hurtInvincibleTime;
+        IsInvincible = true;
+
+        #region hurt effect
+        var ev = Simulation.Schedule<PlayerHurt>();
+        ev.RecoverRate = TimeRecoverRate;
+        ev.TimeSlower = TimeSlower;
+        ev.ShakeAmp = ShakeAmpitude;
+        ev.ShakeFrequency = ShakeFrequency;
+        ev.ShakeDuration = ShakeDuration;
+        hurtEffect.transform.position = transform.position;
+        hurtEffect.Play();
+        #endregion
+        #region HitStun
+        //IsMoveable = false;
+        //ImmobileTimeCounter = 0.5f;
+        //rb.velocity = Vector2.zero;
+        #endregion
     }
     #endregion
+    void CalculateBuffer() {
 
-    //[ContextMenu("TestTrigger")]
-    //public void testTrigger() {
-    //    anim.SetBool("IsJump", true);
-    //    anim.SetTrigger("Hurt");
-    //}
+        if (!IsMoveable)
+        {
+            // Dash 
+            if (UserInput.instance.controls.Dash.Dash.WasPressedThisFrame())
+            {
+                DashBuffer = true;
+                LastDashTime = Time.time;
+            }
+            else if (UserInput.instance.controls.Attack.Attack.WasPressedThisFrame())
+            {
+                AttackBuffer = true;
+                LastAttackTime = Time.time;
+            }
+            else if (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame())
+            {
+                JumpBuffer = true;
+                LastJumpTime = Time.time;
+            }
+
+        }
+        else if (IsDashing) {
+            if (UserInput.instance.controls.Attack.Attack.WasPressedThisFrame())
+            {
+                AttackBuffer = true;
+                LastAttackTime = Time.time;
+            }
+            else if (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame())
+            {
+                JumpBuffer = true;
+                LastJumpTime = Time.time;
+            }
+        }
+        
+    }
+
 }
 
 
