@@ -107,7 +107,7 @@ namespace Platformer.UI
             healthbar.value = health;
             LeanTween.value(healthLoss.gameObject, healthLoss.value, health, 1.0f).setEase(LeanTweenType.easeOutCubic).setOnUpdate((float val) =>
             {
-                Debug.Log(val);
+               
                 healthLoss.value = val;
             });
             

@@ -111,6 +111,8 @@ public class Player : MonoBehaviour
     {
         anim.SetBool("IsJump", IsJumping);
         anim.SetBool("IsDash", IsDashing);
+        anim.SetBool("IsFalling", IsFalling);
+        anim.SetBool("IsDoubleJump", IsDoubleJumping);
     }
 
     private void Attack(){
@@ -179,6 +181,7 @@ public class Player : MonoBehaviour
         if (UserInput.instance.controls.Jumping.Jump.WasReleasedThisFrame()){
             IsJumping = false;
             JumpApex = 0;
+            IsFalling = true;
         }
         #endregion
         #region double jump
@@ -190,6 +193,7 @@ public class Player : MonoBehaviour
             doubleJumpTimeCounter = doubleJumpTime;
             IsDoubleJumping = true;
             FinishDoubleJump = false;
+            
         }
         if (IsDoubleJumping) {
             rb.velocity = new Vector2(rb.velocity.x, doubleJumpForce);
@@ -199,10 +203,10 @@ public class Player : MonoBehaviour
             if (doubleJumpTimeCounter <= 0) {
                 FinishDoubleJump = true;
                 IsDoubleJumping = false;
+                IsFalling = true;
             }
         }
         #endregion
-
     }
     private void Dash(){
 
@@ -284,6 +288,7 @@ public class Player : MonoBehaviour
     private bool IsGrounded() {
         groundHit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, extraHeight, whatIsGround);
         if (groundHit.collider != null) {
+            IsFalling = false;
             return true;
         }
         else
