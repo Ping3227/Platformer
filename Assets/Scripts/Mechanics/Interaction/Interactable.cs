@@ -24,13 +24,14 @@ namespace Platformer.Mechanics
             TheHint = Instantiate(InteractionHint, transform.position+Offset, Quaternion.identity);
             
             TheHint.GetComponentInChildren<TMP_Text>().text = InteractionKey.ToString();
-            
+            TheHint.transform.SetParent(transform);
             TheHint.SetActive(false);
             if (ItemNeed) { 
                 NeedItem = true;
                 TheDialog = Instantiate(InteractionDialog, transform.position + Offset, Quaternion.identity);
                 TheDialog.GetComponentInChildren<TMP_Text>().text = "Need " + ItemNeed.Name;
                 TheDialog.SetActive(false);
+                TheDialog.transform.SetParent(transform);
             }
             
         }
