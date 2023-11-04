@@ -7991,6 +7991,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BT_Ray
       objectReference: {fileID: 0}
+    - target: {fileID: 2958877966941256869, guid: 04078e4c2d76b4ebe988963b25f94d57, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8107837626877077277, guid: 04078e4c2d76b4ebe988963b25f94d57, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.1999998
@@ -8084,8 +8088,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.46774197, y: -0.78787875}
-    oldSize: {x: 4.133333, y: 2.2}
+    pivot: {x: 0.46093753, y: -0.70422536}
+    oldSize: {x: 4.266667, y: 2.3666666}
     newSize: {x: 1.24, y: 0.66}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
