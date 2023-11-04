@@ -211,11 +211,22 @@ public class Boos1 : MonoBehaviour
         }
     }
     [Task]
-    void AreaAttack() {
+    void RayAim(float speed) {
         if (!anim.GetBool("IsAnimating"))
         {
-            //anim.Play("AreaAttack");
+            anim.Play("RayAim");
             anim.SetBool("IsAnimating", true);
+            anim.SetFloat("RayAimSpeed", speed);
+            ThisTask.Succeed();
+        }
+    }
+    [Task]
+    void RayAttack(float speed) {
+        if (!anim.GetBool("IsAnimating"))
+        {
+            anim.Play("RayAttack");
+            anim.SetBool("IsAnimating", true);
+            anim.SetFloat("RayAttackSpeed", speed);
             NormalAttackCount = 0;
             FailAttackCount++;
             ThisTask.Succeed();

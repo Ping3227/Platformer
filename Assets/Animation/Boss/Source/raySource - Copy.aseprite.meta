@@ -121,8 +121,8 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: raySource - Copy_Frame_0
     originalName: 
-    pivot: {x: 0.50537634, y: -15.333333}
-    alignment: 9
+    pivot: {x: 0, y: 0.5}
+    alignment: 4
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -141,8 +141,8 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 26}
   - name: raySource - Copy_Frame_1
     originalName: 
-    pivot: {x: 0.47959185, y: -6.214286}
-    alignment: 9
+    pivot: {x: 0, y: 0.5}
+    alignment: 4
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
