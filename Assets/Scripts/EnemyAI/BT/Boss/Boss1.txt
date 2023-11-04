@@ -56,7 +56,7 @@ tree("Immobolize")
 		Wait(1.0)
 		IsImmobilized
 		GoBehindPlayer
-		Teleport(6.0)
+		Teleport(7.0)
 		Attack(4.0,false)
 		ResetImmobilized
 
