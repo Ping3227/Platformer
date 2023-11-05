@@ -1,6 +1,0 @@
-tree("Root")
-	sequence
-		RayAim(0.1)
-		RayAttack(1.0)
-		
-		

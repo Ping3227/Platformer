@@ -396,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxStamina: 1
   RechargeCoolDown: 0.5
-  RechargingRate: 0.2
+  RechargingRate: 0.1
 --- !u!1 &73037689
 GameObject:
   m_ObjectHideFlags: 0
@@ -7107,7 +7107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 433db78e14ba01949b457e7f1d10f3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 20
+  MaxHP: 15
 --- !u!4 &1094139111 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 17059194705489437, guid: a85517f01cbf54ef2a8690c950d0ba11, type: 3}
@@ -7356,7 +7356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f09c73e747890f48966badb03a146b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 40
+  _maxHP: 60
   IsReflecting: 0
   _flashMaterial: {fileID: 2100000, guid: e6c6e7521da528642b42db958fc525f5, type: 2}
   _flashColor: {r: 1, g: 1, b: 1, a: 0}
