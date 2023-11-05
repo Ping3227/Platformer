@@ -1,6 +1,6 @@
 tree("Root")
 	sequence
-		RayAim(0.05)
-		RayAttack(0.05)
-		Wait(1.0)
+		RayAim(0.1)
+		RayAttack(1.0)
+		
 		
