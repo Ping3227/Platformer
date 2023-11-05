@@ -156,7 +156,7 @@ public class Boos1 : MonoBehaviour
         if (health._cumulateDamage >= damage){
             health.ResetCumulateDamage();
             return true;
-        }
+        }   
         else return false;
     }
     #endregion
