@@ -16,9 +16,19 @@ namespace Platformer.Mechanics
         private CinemachineBasicMultiChannelPerlin shake;
         void OnEnable()
         {
-            Instance = this;
             Current_camera.Priority = 10;
-            shake = Current_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            if (Instance != null && Instance != this)
+            {
+                Instance.Current_camera = Current_camera;
+                Instance.shake = Current_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+                Destroy(this);
+            }
+            else { 
+                Instance = this;
+                shake = Current_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            }
+            
+            
         }
 
         void OnDisable()
@@ -30,6 +40,7 @@ namespace Platformer.Mechanics
             Current_camera.Priority = 9;
             Current_camera = newCamera;
             Current_camera.Priority = 10;
+            shake= Current_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
         public void ShakeCamera(float amp, float frequency, float duration) {
             
