@@ -15881,6 +15881,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4825955706088288767, guid: 626871a063e04a4459472015f8538b8f, type: 3}
   m_PrefabInstance: {fileID: 1301057060}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &887546868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 887546870}
+  - component: {fileID: 887546869}
+  m_Layer: 0
+  m_Name: CameraController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &887546869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887546868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0575098e8270e984db3f46fb09cd3eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Current_camera: {fileID: 943183685}
+--- !u!4 &887546870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887546868}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 117.79921, y: 42.065155, z: -9.970296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888712145
 GameObject:
   m_ObjectHideFlags: 0
@@ -18745,7 +18790,7 @@ Transform:
   m_GameObject: {fileID: 1274197605}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.46, y: -11.04, z: 0}
+  m_LocalPosition: {x: -22.98, y: -11.04, z: 0}
   m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19481,7 +19526,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1321016218}
-  - component: {fileID: 1321016221}
   - component: {fileID: 1321016222}
   - component: {fileID: 1321016223}
   - component: {fileID: 1321016224}
@@ -19507,19 +19551,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1321016221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321016217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0575098e8270e984db3f46fb09cd3eaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Current_camera: {fileID: 943183685}
 --- !u!114 &1321016222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22711,7 +22742,7 @@ MonoBehaviour:
   OnDirectorFinish:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1321016221}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Platformer.Mechanics.CamearaController, Assembly-CSharp
         m_MethodName: SwitchCamera
         m_Mode: 2
@@ -24187,6 +24218,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1321016218}
+  - {fileID: 887546870}
   - {fileID: 96336982}
   - {fileID: 1032529280}
   - {fileID: 2146025703}
