@@ -125,9 +125,10 @@ GameObject:
   - component: {fileID: 6675885077206364005}
   - component: {fileID: 5072065601596565308}
   - component: {fileID: 6692874516653858135}
+  - component: {fileID: 2649227949253509247}
   m_Layer: 8
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,12 +313,33 @@ MonoBehaviour:
   ChaseSpeed: 5
   maxJumpForce: 10
   ChaseRange: 5
-  AttackRange: 2
-  AttackInterval: 0.5
+  AttackRange: 2.5
+  AttackInterval: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   extraHeight: 0.25
+--- !u!114 &2649227949253509247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2612417381394023475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f09c73e747890f48966badb03a146b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 2
+  IsReflecting: 0
+  _flashMaterial: {fileID: 2100000, guid: e6c6e7521da528642b42db958fc525f5, type: 2}
+  _flashColor: {r: 0.9056604, g: 0.046137344, b: 0.046137344, a: 0}
+  _hurtInterval: 0
+  hurtSound: 0
+  _deadAnimation: {fileID: 0}
+  _deadEffect: {fileID: 0}
+  _deadSound: {fileID: 0}
 --- !u!1 &4725862846192542193
 GameObject:
   m_ObjectHideFlags: 0

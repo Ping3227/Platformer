@@ -3,6 +3,8 @@ using Platformer.Gameplay;
 using Platformer.Mechanics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
+
 [RequireComponent(typeof(Health), typeof(Stamina))]
 public class Player : MonoBehaviour
 {
@@ -79,7 +81,8 @@ public class Player : MonoBehaviour
     private Stamina stamina;
     private float moveInput;
     private RaycastHit2D groundHit;
-
+    private Transform initialParent;
+    private Vector3 initialScale;
 
     private void Start()
     {
@@ -89,6 +92,8 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         health = GetComponent<Health>();
         stamina = GetComponent<Stamina>();
+        initialParent = transform.parent;
+        
     }
     private void Update(){
         Moveable();
@@ -103,8 +108,9 @@ public class Player : MonoBehaviour
             Move();
             UpdateAnimation();
         }
+        IsOnPlatform();
 
-       
+
     }
 
     private void UpdateAnimation()
@@ -288,6 +294,7 @@ public class Player : MonoBehaviour
     private bool IsGrounded() {
         groundHit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, extraHeight, whatIsGround);
         if (groundHit.collider != null) {
+            
             IsFalling = false;
             return true;
         }
@@ -295,6 +302,22 @@ public class Player : MonoBehaviour
         { 
             return false;
         }
+
+    }
+    #endregion
+    #region platform check
+    private void IsOnPlatform()
+    {
+        groundHit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, extraHeight, whatIsGround);
+        if (groundHit.collider != null && groundHit.collider.CompareTag("Platform")){
+
+            transform.SetParent(groundHit.collider.transform,true);
+        }
+        else
+        {
+            transform.SetParent(initialParent, true);
+        }
+       
 
     }
     #endregion

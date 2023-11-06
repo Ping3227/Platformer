@@ -76,7 +76,7 @@ public class laser : MonoBehaviour
      }
     void Aim() {
         hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, AttackRange, whichToHit);
-        if (hit.collider.CompareTag("Player"))
+        if (hit.collider!=null && hit.collider.CompareTag("Player"))
         {
             AttackCounter += Time.deltaTime;
             LastDirection = player.transform.position - transform.position;

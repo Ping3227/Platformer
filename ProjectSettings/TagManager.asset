@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Attack_Area
   - Enemy_Attack_Area
+  - Platform
   layers:
   - Default
   - TransparentFX

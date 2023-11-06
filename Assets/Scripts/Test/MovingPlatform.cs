@@ -5,11 +5,11 @@ using UnityEditor;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public Vector3 finishPos = Vector3.zero;
-    public float speed = 0.5f;
+    [SerializeField] Vector3 finishPos = Vector3.zero;
+    [SerializeField] float speed = 0.5f;
     private Vector3 startPos;
     private float trackPercent = 0;
-    private int direction = 1;
+    [SerializeField] int direction = 1;
     // Start is called before the first frame update
     void Start()
     {
