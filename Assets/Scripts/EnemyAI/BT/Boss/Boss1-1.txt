@@ -1,0 +1,169 @@
+tree("Root")
+	sequence
+		CalculateDistance
+		Wait(0.3)
+		fallback
+			sequence
+				not CloserThan(5.5)
+				IsCumulateDamageGreaterThan(14.0)
+				tree("Ray Attack")
+
+			sequence
+				MissMoreThan(10)
+				CloserThan(8.0)
+				not CloserThan(3.0)
+				Wait(1)
+				tree("Strong Attack")
+				
+			sequence 
+				CloserThan(3.0)
+				Wait(0.3)
+				random(0.98,0.02)
+					tree("Dodge")
+					tree("Normal Attack")
+					
+			sequence
+				CloserThan(7.0)
+				sequence
+					NormalAttackMoreThan(8)
+					Wait(0.5)
+					random(0.3,0.65,0.05)
+						Wait(0.1)
+						tree("Normal Attack")
+						tree("Special Attack")
+						
+				sequence
+					Wait(0.5)
+					random(0.2,0.3,0.49,0.01)
+						GoBehindPlayer
+						tree("Normal Attack")
+						tree("Special Attack")
+						tree("Continuous Move")
+
+			sequence
+				Wait(0.5)
+				random(0.25,0.6,0.15)
+					Wait(0.1)
+					tree("Special Attack")
+					tree("Continuous Move")
+			
+
+					
+			
+// This region is attack action		
+tree("Normal Attack")
+	sequence
+		GoToPlayer
+		Teleport(1.5)
+		Wait(0.5)
+		Attack(4.0,false)
+		Wait(1.0)
+
+tree("Special Attack")
+		random(0.5,0.5)
+			tree("Consecutive Attack")
+			tree("Immobolize")			
+
+		
+
+tree("Consecutive Attack")
+	sequence
+		mute 
+			repeat
+				sequence 
+					IsPlayerInfront
+					ApproachPlayer(3.0)
+					Teleport(5.0)
+					CalculateDistance
+					mute 
+						sequence 
+							CloserThan(3.0)
+							Attack(4.0,true)
+					not CloserThan(3.0)
+		Wait(1.0)
+		IsPlayerInfront
+		GoBehindPlayer
+		Teleport(5.0)
+		Attack(4.0,true)
+
+tree("Ray Attack")
+	sequence
+		RayAim(0.1)
+		RayAttack(1.0)		
+		
+tree("Immobolize")
+	sequence 
+		Immobolize
+		Wait(1.0)
+		IsImmobilized
+		GoBehindPlayer
+		Teleport(8.0)
+		Wait(0.5)
+		ResetImmobilized
+
+		CalculateDistance
+		CloserThan(3.0)
+		random(0.15,0.85)
+			Attack(5.0,true)
+			tree("Dodge")
+
+tree("Continuous Move")
+	repeat 3
+		sequence
+			GoBehindPlayer
+			Teleport(8.0)
+			Wait(0.5)
+
+			DodgePlayer
+			Teleport(9.0)
+			Wait(0.4)
+
+			CalculateDistance
+			CloserThan(1.0)
+
+			random(0.1,0.9)
+				Attack(4.0,false)
+				Wait(0.1)	
+
+
+// This region is for defense action		
+tree("Dodge")
+	sequence
+		DodgePlayer
+		Teleport(1.0)
+		Wait(1)
+		CalculateDistance
+		CloserThan(4.0)
+		random(0.35,0.65)
+			tree("Counter Attack")
+			DodgePlayer
+
+tree("Counter Attack")
+	random(0.45,0.35,0.2)
+		Wait(1)
+		Blocking
+		tree("Strong Attack")
+
+tree("Strong Attack")
+	fallback
+		sequence
+			CloserThan(1.0)
+			Wait(2)
+			StrongAttack
+			Wait(1.5)
+		sequence
+			Wait(1)
+			StrongAttack
+			Wait(1.5)
+
+
+tree("Go Behind Player")
+	sequence
+		GoBehindPlayer
+		Teleport(8.0)
+		Wait(0.5)
+
+
+
+
+		
