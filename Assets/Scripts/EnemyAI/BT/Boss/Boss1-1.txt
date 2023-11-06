@@ -1,7 +1,7 @@
 tree("Root")
 	sequence
 		CalculateDistance
-		Wait(0.5)
+		Wait(0.3)
 		fallback
 			sequence
 				not CloserThan(5.5)
@@ -11,14 +11,14 @@ tree("Root")
 			sequence
 				MissMoreThan(10)
 				CloserThan(8.0)
-				not CloserThan(4.0)
+				not CloserThan(3.0)
 				Wait(1)
 				tree("Strong Attack")
 				
 			sequence 
 				CloserThan(3.0)
 				Wait(0.3)
-				random(0.97,0.03)
+				random(0.98,0.02)
 					tree("Dodge")
 					tree("Normal Attack")
 					
@@ -27,14 +27,14 @@ tree("Root")
 				sequence
 					NormalAttackMoreThan(8)
 					Wait(0.5)
-					random(0.3,0.5,0.15,0.05)
+					random(0.3,0.65,0.05)
 						Wait(0.1)
 						tree("Normal Attack")
 						tree("Special Attack")
-						tree("Continuous Move")
+						
 				sequence
 					Wait(0.5)
-					random(0.4,0.3,0.18,0.02)
+					random(0.2,0.3,0.49,0.01)
 						GoBehindPlayer
 						tree("Normal Attack")
 						tree("Special Attack")
@@ -111,17 +111,18 @@ tree("Continuous Move")
 	repeat 3
 		sequence
 			GoBehindPlayer
-			Teleport(9.0)
-			Wait(0.3)
+			Teleport(8.0)
+			Wait(0.5)
+
 			DodgePlayer
-			Teleport(10.0)
+			Teleport(9.0)
 			Wait(0.4)
 
 			CalculateDistance
 			CloserThan(1.0)
 
 			random(0.1,0.9)
-				Attack(4.0,true)
+				Attack(4.0,false)
 				Wait(0.1)	
 
 
