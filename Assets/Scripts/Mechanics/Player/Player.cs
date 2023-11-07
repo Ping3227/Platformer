@@ -106,8 +106,9 @@ public class Player : MonoBehaviour
             // if moveable and not dashing 
             Jump();
             Move();
-            UpdateAnimation();
+            
         }
+        UpdateAnimation();
         IsOnPlatform();
 
 
@@ -119,6 +120,7 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDash", IsDashing);
         anim.SetBool("IsFalling", IsFalling);
         anim.SetBool("IsDoubleJump", IsDoubleJumping);
+        anim.SetFloat("Speed", rb.velocity.x);
     }
 
     private void Attack(){
