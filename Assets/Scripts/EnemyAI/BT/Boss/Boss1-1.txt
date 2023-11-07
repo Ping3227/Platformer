@@ -5,7 +5,7 @@ tree("Root")
 		fallback
 			sequence
 				not CloserThan(5.5)
-				IsCumulateDamageGreaterThan(14.0)
+				IsCumulateDamageGreaterThan(12.0)
 				tree("Ray Attack")
 
 			sequence
@@ -18,31 +18,34 @@ tree("Root")
 			sequence 
 				CloserThan(3.0)
 				Wait(0.3)
-				random(0.9,0.1)
+				random(0.95,0.05)
 					tree("Dodge")
 					tree("Normal Attack")
 					
 			sequence
 				CloserThan(7.0)
-				sequence
-					NormalAttackMoreThan(8)
-					Wait(0.5)
-					random(0.25,0.7,0.05)
-						Wait(0.1)
-						tree("Normal Attack")
-						tree("Special Attack")
+				fallback
+					sequence
+						NormalAttackMoreThan(8)
+						Wait(0.5)
+						random(0.2,0.15,0.6,0.05)
+							Wait(0.1)
+							tree("Normal Attack")
+							tree("Special Attack")
+							tree("Continuous Move")
 						
-				sequence
-					Wait(0.5)
-					random(0.1,0.4,0.48,0.02)
-						GoBehindPlayer
-						tree("Normal Attack")
-						tree("Special Attack")
-						tree("Continuous Move")
+					sequence
+						Wait(0.5)
+						random(0.15,0.2,0.35,0.25,0.05)
+							Wait(0.1)
+							GoBehindPlayer
+							tree("Normal Attack")
+							tree("Special Attack")
+							tree("Continuous Move")
 
 			sequence
 				Wait(0.3)
-				random(0.5,0.35,0.15)
+				random(0.5,0.3,0.2)
 					tree("Special Attack")
 					tree("Continuous Move")
 					GoBehindPlayer
@@ -108,22 +111,23 @@ tree("Immobolize")
 			tree("Dodge")
 
 tree("Continuous Move")
-	repeat 3
-		sequence
-			GoBehindPlayer
-			Teleport(8.0)
-			Wait(0.5)
+	repeat 2
+		mute
+			sequence
+				GoBehindPlayer
+				Teleport(8.0)
+				Wait(0.5)
 
-			DodgePlayer
-			Teleport(9.0)
-			Wait(0.4)
+				DodgePlayer
+				Teleport(9.0)
+				Wait(0.4)
 
-			CalculateDistance
-			CloserThan(2.0)
-
-			random(0.1,0.9)
-				Attack(4.0,false)
-				Wait(0.1)	
+				CalculateDistance
+				CloserThan(2.0)
+				Wait(0.3)
+				random(0.15,0.85)
+					Attack(4.0,false)
+					Wait(0.1)	
 
 
 // This region is for defense action		
@@ -160,7 +164,7 @@ tree("Strong Attack")
 tree("Go Behind Player")
 	sequence
 		GoBehindPlayer
-		Teleport(8.0)
+		Teleport(7.0)
 		Wait(0.5)
 
 
