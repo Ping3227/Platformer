@@ -9,7 +9,7 @@ tree("Root")
 				tree("Ray Attack")
 
 			sequence
-				MissMoreThan(10)
+				MissMoreThan(8)
 				CloserThan(8.0)
 				not CloserThan(3.0)
 				Wait(1)
@@ -36,7 +36,7 @@ tree("Root")
 						
 					sequence
 						Wait(0.5)
-						random(0.15,0.2,0.35,0.25,0.05)
+						random(0.05,0.05,0.45,0.25,0.2)
 							Wait(0.1)
 							GoBehindPlayer
 							tree("Normal Attack")
@@ -45,7 +45,7 @@ tree("Root")
 
 			sequence
 				Wait(0.3)
-				random(0.5,0.3,0.2)
+				random(0.6,0.2,0.2)
 					tree("Special Attack")
 					tree("Continuous Move")
 					GoBehindPlayer
@@ -91,8 +91,9 @@ tree("Consecutive Attack")
 
 tree("Ray Attack")
 	sequence
-		RayAim(0.1)
-		RayAttack(1.0)		
+		RayAim(0.05)
+		RayAttack(1.0)
+	
 		
 tree("Immobolize")
 	sequence 
@@ -111,7 +112,7 @@ tree("Immobolize")
 			tree("Dodge")
 
 tree("Continuous Move")
-	repeat 2
+	repeat 1
 		mute
 			sequence
 				GoBehindPlayer
@@ -122,10 +123,14 @@ tree("Continuous Move")
 				Teleport(9.0)
 				Wait(0.4)
 
+				GoBehindPlayer
+				Teleport(8.0)
+				Wait(0.5)
+
 				CalculateDistance
 				CloserThan(2.0)
 				Wait(0.3)
-				random(0.15,0.85)
+				random(0.35,0.65)
 					Attack(4.0,false)
 					Wait(0.1)	
 
