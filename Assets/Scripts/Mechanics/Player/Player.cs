@@ -129,7 +129,9 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Attack");
             ImmobileTimeCounter = AttackTime;
             IsMoveable = false;
-            rb.velocity = new Vector2(rb.velocity.x,0);
+            rb.AddForce(new Vector2(rb.velocity.x*50, 0));
+            rb.velocity = Vector2.zero;
+            
         }
     }
 
