@@ -25,7 +25,7 @@ namespace Platformer.Mechanics {
         }
         public void Hurt(float  value)
         {
-            currentHP -= value;
+            if(IsAlive) currentHP -= value;
             if (currentHP <= 0)
             {
                 currentHP = 0;
