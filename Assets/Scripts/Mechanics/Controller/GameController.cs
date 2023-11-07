@@ -10,12 +10,13 @@ namespace Platformer.Mechanics {
     {
         public static Player player { get; private set; }
         public static GameController Instance { get; private set; }
-        private Vector3 CheckPoint;
-        private bool IsSaved = false;
+        public  Vector3 CheckPoint{ get; private set; }
+        public bool IsSaved { get; private set; } 
         void OnEnable()
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            if(IsSaved) player.transform.position = CheckPoint;
+            IsSaved = false;
+            
             if (Instance == null)
             {
                 Instance = this;
@@ -41,6 +42,7 @@ namespace Platformer.Mechanics {
             CheckPoint = position;
             IsSaved = true;
         }
+
     }
 }
 

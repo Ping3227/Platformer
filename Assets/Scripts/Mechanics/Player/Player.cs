@@ -1,3 +1,4 @@
+using Panda.Examples.PlayTag;
 using Platformer.Core;
 using Platformer.Gameplay;
 using Platformer.Mechanics;
@@ -93,7 +94,7 @@ public class Player : MonoBehaviour
         health = GetComponent<Health>();
         stamina = GetComponent<Stamina>();
         initialParent = transform.parent;
-        
+        if(GameController.Instance.IsSaved) transform.position = GameController.Instance.CheckPoint;
     }
     private void Update(){
         Moveable();

@@ -9,6 +9,7 @@ public class CheckPoint : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
+            Debug.Log("CheckPoint");
             GameController.Instance.SetCheckPoint( transform.position);
         }
     }
