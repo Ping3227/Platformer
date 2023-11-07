@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638348779990396960
+  platformSettingsDirtyTick: 638349696163386590
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -841,8 +841,8 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 406}
   - name: MainChar (5)_Frame_36
     originalName: 
-    pivot: {x: 2.8461537, y: -2.2033896}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -861,8 +861,8 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 138}
   - name: MainChar (5)_Frame_37
     originalName: 
-    pivot: {x: 2.8461537, y: -2.2033896}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -881,8 +881,8 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 205}
   - name: MainChar (5)_Frame_38
     originalName: 
-    pivot: {x: 2.8846154, y: -2.2033896}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -901,8 +901,8 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 272}
   - name: MainChar (5)_Frame_39
     originalName: 
-    pivot: {x: 3.125, y: -2.2413793}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -921,8 +921,8 @@ ScriptedImporter:
     uvTransform: {x: 140, y: 201}
   - name: MainChar (5)_Frame_40
     originalName: 
-    pivot: {x: 3.2173913, y: -2.2413793}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -941,8 +941,8 @@ ScriptedImporter:
     uvTransform: {x: 175, y: 273}
   - name: MainChar (5)_Frame_41
     originalName: 
-    pivot: {x: 3.2173913, y: -2.2413793}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -961,8 +961,8 @@ ScriptedImporter:
     uvTransform: {x: 175, y: 339}
   - name: MainChar (5)_Frame_42
     originalName: 
-    pivot: {x: 3.2173913, y: -2.2413793}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -981,8 +981,8 @@ ScriptedImporter:
     uvTransform: {x: 175, y: 405}
   - name: MainChar (5)_Frame_43
     originalName: 
-    pivot: {x: 3.125, y: -2.2413793}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -1001,8 +1001,8 @@ ScriptedImporter:
     uvTransform: {x: 140, y: 267}
   - name: MainChar (5)_Frame_44
     originalName: 
-    pivot: {x: 2.8846154, y: -2.2033896}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -1021,8 +1021,8 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 339}
   - name: MainChar (5)_Frame_45
     originalName: 
-    pivot: {x: 2.8461537, y: -2.2033896}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -1041,8 +1041,8 @@ ScriptedImporter:
     uvTransform: {x: 38, y: 406}
   - name: MainChar (5)_Frame_46
     originalName: 
-    pivot: {x: 2.8461537, y: -2.2033896}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
