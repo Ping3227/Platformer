@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDash", IsDashing);
         anim.SetBool("IsFalling", IsFalling);
         anim.SetBool("IsDoubleJump", IsDoubleJumping);
-        anim.SetFloat("Speed", rb.velocity.x);
+        anim.SetFloat("Speed",Mathf.Abs( rb.velocity.x/moveSpeed));
     }
 
     private void Attack(){
