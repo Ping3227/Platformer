@@ -40,7 +40,11 @@ namespace Platformer.Mechanics {
             currentHP = MaxHP;
             GamesceneUIController.instance.SetMaxHealth(1);
         }
-
+        public void SetParameter(int index) { 
+            MaxHP = ModeManager.instance.modes[ModeManager.instance.index].health;
+            currentHP = MaxHP;
+            GamesceneUIController.instance.SetMaxHealth(1);
+        }
     }
 }
 

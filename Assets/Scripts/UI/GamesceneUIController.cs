@@ -45,6 +45,7 @@ namespace Platformer.UI
             }
             else{
                 Destroy(gameObject);
+                Debug.Log("Destroy");
                 Destroy(Canvas.gameObject);
             }
             TimeCounter = 0;
@@ -145,6 +146,10 @@ namespace Platformer.UI
             reload.SceneName = SceneManager.GetActiveScene().name;
             TimeCounter = 0;
             InventoryManager.Instance.Clear();
+        }
+        public void UpdateModeNumber() {
+            PauseCanvas.GetComponentsInChildren<TMP_Text>()[1].text = "Mode: " + ModeManager.instance.index;
+            
         }
     }
 }

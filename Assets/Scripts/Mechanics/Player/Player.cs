@@ -456,7 +456,15 @@ public class Player : MonoBehaviour
         }
         
     }
-
+    public void SetParameter() {
+        var index = ModeManager.instance.getNext();
+        
+        jumpForce = ModeManager.instance.modes[ModeManager.instance.index].Jumpforce;
+        doubleJumpForce = ModeManager.instance.modes[ModeManager.instance.index].DoubleJumpforce;
+        moveSpeed = ModeManager.instance.modes[ModeManager.instance.index].Movespeed;
+        stamina.setParameter(index);
+        health.SetParameter(index);
+    }
 }
 
 

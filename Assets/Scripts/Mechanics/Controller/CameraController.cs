@@ -19,7 +19,7 @@ namespace Platformer.Mechanics
             
             shake = Current_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             Instance = this;
-            Debug.Log("new");
+            
         }
 
         void OnDisable()

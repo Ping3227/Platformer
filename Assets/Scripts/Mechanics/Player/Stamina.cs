@@ -70,7 +70,11 @@ namespace Platformer.Mechanics
         {
             CurrentStamina = MaxStamina;
         }
-
+        public void setParameter(int index) { 
+            RechargingRate = ModeManager.instance.modes[ModeManager.instance.index].RechargeingRate;
+            RechargeCoolDown = ModeManager.instance.modes[ModeManager.instance.index].RechargeingDelay;
+        }
+        
     }
 
 }
