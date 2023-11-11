@@ -54,18 +54,23 @@ namespace Platformer.Mechanics
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public bool ConsumeStamina(float Value) { 
-            if (CurrentStamina >= Value)
+        public bool ConsumeStamina(float Value) {
+            if (CurrentStamina != 0)
             {
-               
+
                 CurrentStamina -= Value;
-                GamesceneUIController.instance.SetStamina(CurrentStamina);
+                if (CurrentStamina < 0){
+                    CurrentStamina = 0;
+                }
                 IsCharging = false;
                 CoolDownTime = RechargeCoolDown;
+                GamesceneUIController.instance.SetStamina(CurrentStamina);
                 return true;
             }
+
             return false;
         }
+        
         void OnEnable()
         {
             CurrentStamina = MaxStamina;

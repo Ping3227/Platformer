@@ -93,7 +93,7 @@ tree("Strong Attack")
 
 tree("Ray Attack")
 	sequence
-		RayAim(0.05)
+		RayAim(0.1)
 		RayAttack(1.0)
 	
 		

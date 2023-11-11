@@ -57,12 +57,33 @@ public class InventoryManager : MonoBehaviour
             itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
         }
     }
-    public bool Contain(Item item) {
-        return items.Contains(item);
-    }
+   
     public void Clear() {
         items.Clear();
         itemSlot.Find("Image").GetComponent<Image>().color=new Vector4 (0,0,0,0 );
         itemSlot.Find("Number").GetComponent<TMP_Text>().text = "0";
+    }
+    public bool UsedItem(Item item ) {
+        if (items.Contains(item)) {
+            if (item.counts >1)
+            {
+                item.counts--;
+                return true;
+            }
+            if (item.counts == 1) { 
+                item.counts++;
+                if (item.Isdelpletable) {
+                    items.Remove(item);
+                }
+                return true;
+            }
+            
+            
+        }
+        return false;
+    }
+    public bool Contain(Item item)
+    {
+        return items.Contains(item);
     }
 }

@@ -6,4 +6,5 @@ public class Item : ScriptableObject {
     public GameObject Object;
     public string Name;
     public int counts;
+    public bool Isdelpletable = false;
 }

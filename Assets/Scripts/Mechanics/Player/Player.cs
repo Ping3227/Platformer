@@ -1,17 +1,14 @@
-using Panda.Examples.PlayTag;
 using Platformer.Core;
 using Platformer.Gameplay;
 using Platformer.Mechanics;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Health), typeof(Stamina))]
 public class Player : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] float InputTimeAllowance = 0.1f;
+    [SerializeField] float InputTimeAllowance = 0.3f;
 
     [Header("Attack")]
     [SerializeField] private float AttackTime = 0.2f;
@@ -62,7 +59,7 @@ public class Player : MonoBehaviour
     private bool IsDoubleJumping = false;
     private bool IsInvincible = false;
     private bool FinishDoubleJump = false;
-    
+    private float JumpApex = 0f;
     private bool IsMoveable = true;
     private bool IsFalling;
 
@@ -73,7 +70,8 @@ public class Player : MonoBehaviour
     private float ImmobileTimeCounter;
     private float InvincibleCounter;
 
-    private float JumpApex = 0f;
+    [Header("Item")]
+    [SerializeField] Item HealItem;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -108,10 +106,11 @@ public class Player : MonoBehaviour
             Jump();
             Move();
             
+            
         }
         UpdateAnimation();
         IsOnPlatform();
-
+        
 
     }
 
@@ -203,7 +202,7 @@ public class Player : MonoBehaviour
 
             doubleJumpTimeCounter = doubleJumpTime;
             IsDoubleJumping = true;
-            FinishDoubleJump = false;
+            FinishDoubleJump = true;
             
         }
         if (IsDoubleJumping) {
@@ -212,7 +211,7 @@ public class Player : MonoBehaviour
             doubleJumpTimeCounter -= Time.deltaTime;
 
             if (doubleJumpTimeCounter <= 0) {
-                FinishDoubleJump = true;
+                
                 IsDoubleJumping = false;
                 IsFalling = true;
             }
@@ -266,6 +265,7 @@ public class Player : MonoBehaviour
             InvincibleCounter = 0;
         }
     }
+    
     #endregion
     #region Turn check
     private void TurnCheck()
@@ -418,6 +418,13 @@ public class Player : MonoBehaviour
         //ImmobileTimeCounter = 0.5f;
         //rb.velocity = Vector2.zero;
         #endregion
+    }
+
+    void Heal(){
+        if (InventoryManager.Instance.UsedItem(HealItem)){
+            health.Heal(5.0f);
+            
+        }
     }
     #endregion
     void CalculateBuffer() {
