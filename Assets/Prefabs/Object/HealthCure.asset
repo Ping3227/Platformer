@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05713df447cb37f499494d0db17d263c, type: 3}
   m_Name: HealthCure
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9525884bbc60848e4959998a395ab5ca, type: 3}
+  icon: {fileID: 2105860114815428498, guid: 09dca6e046c2b1d4f88df2845741ed37, type: 3}
   Object: {fileID: 0}
   Name: HealthCure
-  counts: 2
+  counts: 0
   Isdelpletable: 0

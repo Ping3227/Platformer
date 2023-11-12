@@ -11,6 +11,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] List<Item> items = new List<Item>();
     private int CurrentIndex=-1 ;
     [SerializeField] Transform itemSlot;
+    [HideInInspector] public Item currentItem;
     void Awake()
     {
         if (Instance == null)
@@ -25,14 +26,12 @@ public class InventoryManager : MonoBehaviour
         }
         CurrentIndex= items.Count >0?0:-1;
         if (CurrentIndex != -1) {
-            Debug.Log(CurrentIndex);
-            itemSlot.Find("Image").GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
-            itemSlot.Find("Image").GetComponent<Image>().sprite = items[CurrentIndex].icon;
-            itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
+            UpdateItem();
         }
         
 
     }
+    
     public void AddItem(Item item) {
         if (!items.Contains(item)) {
             Debug.Log("AddItem");
@@ -43,7 +42,7 @@ public class InventoryManager : MonoBehaviour
                 itemSlot.Find("Image").GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
                 itemSlot.Find("Image").GetComponent<Image>().sprite = item.icon;
                 items[CurrentIndex].counts=1;
-                itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
+                
             }
         }
         else
@@ -62,28 +61,42 @@ public class InventoryManager : MonoBehaviour
         if (items.Count >= 2) {
             
             CurrentIndex= (CurrentIndex == items.Count - 1)? 0 : ++CurrentIndex;
-            itemSlot.Find("Image").GetComponent<Image>().sprite = items[CurrentIndex].icon;
-            itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
+           
         }
+        else if(items.Count == 1)
+        {
+            CurrentIndex = 0;
+        }
+        else
+        {
+            CurrentIndex = -1;
+        }
+        UpdateItem();
     }
    
     public void Clear() {
         items.Clear();
-        itemSlot.Find("Image").GetComponent<Image>().color=new Vector4 (0,0,0,0 );
-        itemSlot.Find("Number").GetComponent<TMP_Text>().text = "0";
+        CurrentIndex = -1;
+        UpdateItem();
     }
-    public bool UsedItem(Item item ) {
+    public bool UsedItem(Item item) {
         if (items.Contains(item)) {
             if (item.counts >1)
             {
                 item.counts--;
+                UpdateItem();
                 return true;
             }
             if (item.counts == 1) { 
-                item.counts++;
-                if (item.Isdelpletable) {
+                item.counts--;
+                if (item.Isdelpletable)
+                {
                     items.Remove(item);
+                    if (item == currentItem) {
+                        NextItem();
+                    }
                 }
+                UpdateItem();
                 return true;
             }
             
@@ -94,5 +107,22 @@ public class InventoryManager : MonoBehaviour
     public bool Contain(Item item)
     {
         return items.Contains(item);
+    }
+    private void UpdateItem() {
+        if (CurrentIndex != -1)
+        {
+            currentItem = items[CurrentIndex];
+            itemSlot.Find("Image").GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
+            itemSlot.Find("Image").GetComponent<Image>().sprite = items[CurrentIndex].icon;
+            itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
+            
+        }
+        else {
+            itemSlot.Find("Image").GetComponent<Image>().color = new Vector4(0, 0, 0, 0);
+            itemSlot.Find("Image").GetComponent<Image>().sprite = null;
+            itemSlot.Find("Number").GetComponent<TMP_Text>().text = "";
+            //currentItem = null;
+        }
+        
     }
 }

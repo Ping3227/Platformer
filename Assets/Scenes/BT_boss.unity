@@ -3883,7 +3883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1337078542
 Rigidbody2D:
   serializedVersion: 4
@@ -4863,7 +4863,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: c4cad1701f1f3bd4198c6db79c72e5df, type: 2}
+  - {fileID: 11400000, guid: f1727bc14067bef49a28317832fb2bf6, type: 2}
   itemSlot: {fileID: 1959907343}
+  currentItem: {fileID: 0}
 --- !u!1 &1498437714
 GameObject:
   m_ObjectHideFlags: 0
@@ -6364,6 +6366,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2528261318622939957, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
+      propertyPath: HealItem
+      value: 
+      objectReference: {fileID: 11400000, guid: c4cad1701f1f3bd4198c6db79c72e5df, type: 2}
     - target: {fileID: 2528261318622939957, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
       propertyPath: jumpForce
       value: 6

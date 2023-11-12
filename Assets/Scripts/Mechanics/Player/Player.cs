@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
 
     [Header("Item")]
     [SerializeField] Item HealItem;
+    [SerializeField] float HealTime = 0.5f;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -110,7 +111,7 @@ public class Player : MonoBehaviour
         }
         UpdateAnimation();
         IsOnPlatform();
-        
+        ItemCheck();
 
     }
 
@@ -265,7 +266,26 @@ public class Player : MonoBehaviour
             InvincibleCounter = 0;
         }
     }
-    
+    private void ItemCheck()
+    {
+        if (UserInput.instance.controls.SwitchItem.SwitchItem.WasPressedThisFrame())
+        {
+            Debug.Log("...");
+            InventoryManager.Instance.NextItem();
+        }
+        else if (UserInput.instance.controls.UsedItem.UsedItem.WasPressedThisFrame() && IsMoveable && !IsDashing && !IsFalling)
+        {
+            if (InventoryManager.Instance.currentItem != null)
+            {
+                if (InventoryManager.Instance.currentItem==HealItem && InventoryManager.Instance.UsedItem(HealItem))
+                {
+                    anim.SetTrigger("Heal");
+                    ImmobileTimeCounter = HealTime;
+                    IsMoveable = false;
+                }
+            }
+        }
+    }
     #endregion
     #region Turn check
     private void TurnCheck()
@@ -421,10 +441,8 @@ public class Player : MonoBehaviour
     }
 
     void Heal(){
-        if (InventoryManager.Instance.UsedItem(HealItem)){
-            health.Heal(5.0f);
-            
-        }
+        InventoryManager.Instance.UsedItem(HealItem);
+        health.Heal(0.5f);
     }
     #endregion
     void CalculateBuffer() {

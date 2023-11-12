@@ -362,11 +362,67 @@
                 {
                     "name": "",
                     "id": "1a9d052e-effe-4be1-a6be-7d4b7e982ef1",
-                    "path": "<Keyboard>/j",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UsedItem",
+            "id": "a7048b8b-96f2-43ef-bf55-3c09ee0106ee",
+            "actions": [
+                {
+                    "name": "UsedItem",
+                    "type": "Button",
+                    "id": "96af48d8-afe3-45cb-be0a-044a094da5f1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dc7048aa-223f-4286-80f7-9546d1792b4b",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UsedItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "SwitchItem",
+            "id": "6027c784-74ba-4f79-97da-facc953ebe1d",
+            "actions": [
+                {
+                    "name": "SwitchItem",
+                    "type": "Button",
+                    "id": "a8d968c9-1ead-41a0-9fc2-f1b9ff3278a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b398fa1f-845e-4a96-bfc9-565d2a02dac9",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
