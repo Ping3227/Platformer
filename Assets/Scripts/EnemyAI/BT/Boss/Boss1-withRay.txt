@@ -70,7 +70,7 @@ tree("Dodge")
 		CalculateDistance
 		CloserThan(4.0)
 		random(0.5,0.5)
-			tree("Counter Attack")
+			tree("Strong Attack")
 			DodgePlayer
 
 tree("Counter Attack")
@@ -93,7 +93,7 @@ tree("Strong Attack")
 
 tree("Ray Attack")
 	sequence
-		RayAim(0.1)
+		RayAim(0.15)
 		RayAttack(1.0)
 	
 		

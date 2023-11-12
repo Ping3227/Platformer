@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Analytics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance { get; private set; }
-    private List<Item> items = new List<Item>();
+    [SerializeField] List<Item> items = new List<Item>();
     private int CurrentIndex=-1 ;
     [SerializeField] Transform itemSlot;
     void Awake()
@@ -22,7 +23,15 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
             
         }
+        CurrentIndex= items.Count >0?0:-1;
+        if (CurrentIndex != -1) {
+            Debug.Log(CurrentIndex);
+            itemSlot.Find("Image").GetComponent<Image>().color = new Vector4(255, 255, 255, 255);
+            itemSlot.Find("Image").GetComponent<Image>().sprite = items[CurrentIndex].icon;
+            itemSlot.Find("Number").GetComponent<TMP_Text>().text = items[CurrentIndex].counts.ToString();
+        }
         
+
     }
     public void AddItem(Item item) {
         if (!items.Contains(item)) {
