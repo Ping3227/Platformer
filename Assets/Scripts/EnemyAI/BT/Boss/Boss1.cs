@@ -57,11 +57,11 @@ public class Boos1 : MonoBehaviour
     {
         rb.position = NextLocation;
         if (rb.position.x < playerColl.bounds.center.x) { 
-            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+            rb.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
         else
         {
-            rb.transform.rotation = Quaternion.Euler(0, 180, 0);
+            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
@@ -88,7 +88,7 @@ public class Boos1 : MonoBehaviour
         InRange(playerColl.transform.position + (AttackRange * Vector3.left) + heightDiffer);
         InRange(playerColl.transform.position + (AttackRange * Vector3.right) + heightDiffer);
         int choice = Random.Range(0, MoveOptions.Count);
-        this.NextLocation = MoveOptions[choice];
+        NextLocation = MoveOptions[choice];
         MoveOptions.Clear();
         if (choice==0) fallAttackNext = true;
         
@@ -182,7 +182,7 @@ public class Boos1 : MonoBehaviour
                
             }
             else {
-                anim.Play("OneSideAttack");
+                anim.Play("NormalAttack");
                 anim.SetBool("IsAnimating", true);
                 anim.SetFloat("AttackSpeed", speed);
             }

@@ -124,7 +124,6 @@ public class EnemyBehavior : MonoBehaviour
         }
         else{
             Patrol();
-            Debug.Log("Patrol");
         }
         TurnCheck();
     }

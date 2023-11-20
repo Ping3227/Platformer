@@ -1,0 +1,94 @@
+tree("Root") 
+	random(0.7,0.3)
+		tree("Normal Attack")
+		tree("Special Attack")
+		
+tree("Normal Attack")
+	sequence
+		GoToPlayer
+		Teleport(1.5)
+		Attack(4.0,false)
+		Wait(1.0)
+		CloserThan(3.0)
+		Dodgeplayer
+
+tree("Special Attack")
+	random(0.3,0.3,0.3)
+		tree("Consecutive Attack")
+		tree("Immobolize")
+		tree("Ray Attack")
+		
+
+tree("Consecutive Attack")
+	sequence
+		mute sequence 
+			closerthan(3.0)
+			DodgePlayer
+			Teleport(0.7)
+		fallback
+			// if nearby attack immediately
+			sequence 
+				CloserThan(3.0)
+				// go to playerface
+				Attack(4.0,true)
+			sequence
+				ApproachPlayer(3.0)
+				Teleport(5.0)
+				IsPlayerInfront
+				CloserThan(3.0)
+				// Gotoplayerface
+				Attack(4.0,true)
+		sequence
+			// Go more further 
+			Teleport(5.0)
+			IsPlayerInfront
+			closerthan(3.0)
+			Attack(4.0,true)
+		
+		
+tree("Immobolize")
+	sequence 
+		Immobolize
+		Wait(1.0)
+		IsImmobilized
+		GoBehindPlayer
+		Teleport(7.0)
+		Attack(4.0,false)
+		ResetImmobilized
+
+// This region is for defense action		
+tree("Dodge")
+	sequence
+		DodgePlayer
+		Teleport(0.7)
+		Wait(1)
+		CalculateDistance
+		CloserThan(4.0)
+		random(0.5,0.5)
+			tree("Strong Attack")
+			DodgePlayer
+
+tree("Counter Attack")
+	random(0.3,0.7)
+		Blocking
+		tree("Strong Attack")
+
+tree("Strong Attack")
+	fallback
+		sequence
+			CloserThan(1.0)
+			Wait(1)
+			StrongAttack
+			Wait(1.5)
+		sequence
+			Wait(0.5)
+			StrongAttack
+			Wait(1.5)
+			
+
+tree("Ray Attack")
+	sequence
+		RayAim(0.15)
+		RayAttack(1.0)
+	
+		
