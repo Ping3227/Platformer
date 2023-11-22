@@ -5563,7 +5563,7 @@ PrefabInstance:
     - target: {fileID: 846140187621954364, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: ff9210803589ab24a93831436d4d7e55, type: 2}
+      objectReference: {fileID: 9100000, guid: 54bdc627b5ec69646a2e66058b4d6c96, type: 2}
     - target: {fileID: 965218447136607634, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: scripts.Array.data[0]
       value: 
