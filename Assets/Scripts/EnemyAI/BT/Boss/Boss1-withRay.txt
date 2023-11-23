@@ -20,8 +20,7 @@ tree("Root")
 tree("Normal Attack")
 	sequence
 		GoToPlayer
-		Teleport(1.5)
-		Attack(4.0,false)
+		Attack(1.0,false)
 		Wait(1.0)
 
 tree("Special Attack")
@@ -94,6 +93,6 @@ tree("Strong Attack")
 tree("Ray Attack")
 	sequence
 		RayAim(0.15)
-		RayAttack(1.0)
+		RayAttack(2.0)
 	
 		

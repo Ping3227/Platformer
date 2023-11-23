@@ -20047,11 +20047,11 @@ PrefabInstance:
     - target: {fileID: 846140187621954364, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 54bdc627b5ec69646a2e66058b4d6c96, type: 2}
+      objectReference: {fileID: 9100000, guid: ff9210803589ab24a93831436d4d7e55, type: 2}
     - target: {fileID: 965218447136607634, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: scripts.Array.data[0]
       value: 
-      objectReference: {fileID: 4900000, guid: 9509466437c64a74fbca097a0f13ee13, type: 3}
+      objectReference: {fileID: 4900000, guid: d52ceb03c21892041b9cb099f9c6765a, type: 3}
     - target: {fileID: 1443943694047110491, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: player
       value: 
@@ -20110,7 +20110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6384766202359197141, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7660374802131825455, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_LocalPosition.z
