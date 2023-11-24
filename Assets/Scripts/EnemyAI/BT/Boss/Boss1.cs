@@ -29,6 +29,7 @@ public class Boos1 : MonoBehaviour
     private BoxCollider2D playerColl;
     private float DistancetoPlayer = 0f;
     private Vector3 heightDiffer;
+    [SerializeField] float SmallestMoveDistance;
 
     [Header("status")]
     EnemyHealth health;
@@ -45,12 +46,7 @@ public class Boos1 : MonoBehaviour
         pd.Tick();
         
     }
-    private void Update()
-    {
-        Debug.Log($"IsPlayerInfront: {IsPlayerInfront()}, Angle : {transform.localEulerAngles}");
-        
-    }
-
+ 
     
     #region NonTask function
     private void Move()
@@ -69,16 +65,24 @@ public class Boos1 : MonoBehaviour
     #region MovePattern
     [Task]
     void DodgePlayer() {
+
         //player is on the right side
         if (playerColl.transform.position.x >= Area.bounds.center.x)
         {
-            this.NextLocation = new Vector2(Random.Range(Area.bounds.min.x, Area.bounds.center.x - playerColl.bounds.extents.x), transform.position.y);
+            
+            while (SmallestMoveDistance > Mathf.Abs(NextLocation.x-transform.position.x)) {
+                NextLocation = new Vector2(Random.Range(Area.bounds.min.x, Area.bounds.center.x - playerColl.bounds.extents.x), transform.position.y);
+            }
+            
         }
         //player is on the left side of the boss
         else
         {
-            this.NextLocation = new Vector2(Random.Range(Area.bounds.center.x + playerColl.bounds.extents.x, Area.bounds.max.x), transform.position.y);
+            while (SmallestMoveDistance > Mathf.Abs(NextLocation.x - transform.position.x)){
+                NextLocation = new Vector2(Random.Range(Area.bounds.center.x + playerColl.bounds.extents.x, Area.bounds.max.x), transform.position.y);
+            }
         }
+        
         ThisTask.Succeed();
     }
     [Task]
@@ -91,11 +95,13 @@ public class Boos1 : MonoBehaviour
         NextLocation = MoveOptions[choice];
         MoveOptions.Clear();
         if (choice==0) fallAttackNext = true;
-        
+        else fallAttackNext = false;
         void InRange(Vector2 position)
         {
             if (Area.bounds.min.x < position.x && position.x < Area.bounds.max.x
-                 && Area.bounds.min.y < position.y && position.y < Area.bounds.max.y)
+                 && Area.bounds.min.y < position.y && position.y < Area.bounds.max.y 
+                 && SmallestMoveDistance < Vector2.Distance(position, transform.position))
+
                 MoveOptions.Add(position);
         }
         ThisTask.Succeed();
@@ -117,6 +123,25 @@ public class Boos1 : MonoBehaviour
             tmpLocation = player.transform.position + (AttackRange * Vector3.right) + heightDiffer;
         }
         if(Area.bounds.min.x< tmpLocation.x && tmpLocation.x < Area.bounds.max.x)
+        {
+            this.NextLocation = tmpLocation;
+            return true;
+        }
+        return false;
+    }
+    [Task]
+    bool GoBeforePlayer()
+    {
+        Vector3 tmpLocation;
+        if (playerColl.transform.position.x < transform.position.x)
+        {
+            tmpLocation = player.transform.position + (AttackRange * Vector3.right) + heightDiffer;
+        }
+        else
+        {
+            tmpLocation = player.transform.position + (AttackRange * Vector3.left) + heightDiffer;
+        }
+        if (Area.bounds.min.x < tmpLocation.x && tmpLocation.x < Area.bounds.max.x)
         {
             this.NextLocation = tmpLocation;
             return true;

@@ -20051,7 +20051,7 @@ PrefabInstance:
     - target: {fileID: 965218447136607634, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: scripts.Array.data[0]
       value: 
-      objectReference: {fileID: 4900000, guid: d52ceb03c21892041b9cb099f9c6765a, type: 3}
+      objectReference: {fileID: 4900000, guid: b2077770f863d694fa99b5a22aaf543e, type: 3}
     - target: {fileID: 1443943694047110491, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: player
       value: 
@@ -20060,6 +20060,10 @@ PrefabInstance:
       propertyPath: ImmobolizePrefab
       value: 
       objectReference: {fileID: 114004557}
+    - target: {fileID: 1443943694047110491, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
+      propertyPath: SmallestMoveDistance
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1674876242451258921, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: target
       value: 
@@ -20111,6 +20115,14 @@ PrefabInstance:
     - target: {fileID: 6384766202359197141, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
+      propertyPath: _maxHP
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660374802131825455, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.7
       objectReference: {fileID: 0}
     - target: {fileID: 7660374802131825455, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_LocalPosition.z

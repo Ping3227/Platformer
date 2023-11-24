@@ -5,45 +5,59 @@ tree("Root")
 		
 tree("Normal Attack")
 	sequence
+		mute 
+			sequence 
+				CalculateDistance
+				CloserThan(2.0)
+				DodgePlayer
+				Teleport(2.0)
+				Wait(1.0)
 		GoToPlayer
-		Teleport(1.5)
-		Attack(4.0,false)
-		Wait(1.0)
+		Attack(1.0,false)
+		Wait(3.0)
+		CalculateDistance
 		CloserThan(3.0)
-		Dodgeplayer
+		Random(0.5,0.5)
+			tree("Dodge")
+			tree("Strong Attack")
+
 
 tree("Special Attack")
-	random(0.3,0.3,0.3)
-		tree("Consecutive Attack")
-		tree("Immobolize")
-		tree("Ray Attack")
+	sequence
+		random(0.3,0.3)
+			tree("Consecutive Attack")
+			tree("Ray Attack")
+			// tree("Immobolize")
+		CloserThan(3.0)
+		tree("Dodge")
 		
 
 tree("Consecutive Attack")
 	sequence
-		mute sequence 
-			closerthan(3.0)
-			DodgePlayer
-			Teleport(0.7)
-		fallback
-			// if nearby attack immediately
+		mute 
 			sequence 
 				CloserThan(3.0)
-				// go to playerface
-				Attack(4.0,true)
+				DodgePlayer
+				Teleport(2.0)
+				Wait(1.0)
+		CalculateDistance
+		fallback
 			sequence
-				ApproachPlayer(3.0)
+				CloserThan(7.0)
+				GoBeforePlayer
+				Attack(2.0,true)
+				Wait(3.0)
+			sequence
+				ApproachPlayer(5.0)
 				Teleport(5.0)
-				IsPlayerInfront
-				CloserThan(3.0)
-				// Gotoplayerface
-				Attack(4.0,true)
-		sequence
-			// Go more further 
-			Teleport(5.0)
-			IsPlayerInfront
-			closerthan(3.0)
-			Attack(4.0,true)
+				Wait(0.5)
+				sequence
+					CalculateDistance
+					IsPlayerInfront
+					CloserThan(5.0)
+					GoBeforePlayer
+					Attack(2.0,true)
+		
 		
 		
 tree("Immobolize")
@@ -52,21 +66,16 @@ tree("Immobolize")
 		Wait(1.0)
 		IsImmobilized
 		GoBehindPlayer
-		Teleport(7.0)
-		Attack(4.0,false)
+		Attack(1.0,false)
 		ResetImmobilized
 
 // This region is for defense action		
 tree("Dodge")
 	sequence
 		DodgePlayer
-		Teleport(0.7)
-		Wait(1)
-		CalculateDistance
-		CloserThan(4.0)
-		random(0.5,0.5)
-			tree("Strong Attack")
-			DodgePlayer
+		Teleport(2.0)
+		Wait(1.5)
+		
 
 tree("Counter Attack")
 	random(0.3,0.7)
@@ -74,20 +83,21 @@ tree("Counter Attack")
 		tree("Strong Attack")
 
 tree("Strong Attack")
-	fallback
-		sequence
-			CloserThan(1.0)
-			Wait(1)
-			StrongAttack
-			Wait(1.5)
-		sequence
-			Wait(0.5)
-			StrongAttack
-			Wait(1.5)
-			
+	sequence 
+		StrongAttack
+		Wait(1.5)
+		CalculateDistance
+		CloserThan(3.0)
+		tree("Dodge")	
 
 tree("Ray Attack")
 	sequence
+		mute 
+			sequence 
+				CalculateDistance
+				CloserThan(3.0)
+				DodgePlayer
+				Teleport(1.0)
 		RayAim(0.15)
 		RayAttack(1.0)
 	
