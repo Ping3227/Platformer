@@ -269,11 +269,15 @@ public class Boos1 : MonoBehaviour
     }
     [Task]
     void Immobolize() {
+        Debug.Log(player.transform.rotation.eulerAngles);
         if (!anim.GetBool("IsAnimating"))
         {
             if (ImmobolizePrefab)
             {
-                ImmobolizePrefab.transform.position = new Vector3(player.transform.position.x,Area.bounds.min.y);
+                // right 0, 0, 0 left 0, 180, 0
+                float spawnpoint = player.transform.position.x + (player.transform.rotation == Quaternion.Euler(0, 0, 0)?1:-1) * 2;
+                spawnpoint = Mathf.Clamp(spawnpoint, Area.bounds.min.x, Area.bounds.max.x);
+                ImmobolizePrefab.transform.position = new Vector3(spawnpoint,Area.bounds.min.y);
                 ImmobolizePrefab.SetActive(true);
             }
             ThisTask.Succeed();
