@@ -28,7 +28,7 @@ public class Boos1 : MonoBehaviour
     [SerializeField] Player player;
     private BoxCollider2D playerColl;
     private float DistancetoPlayer = 0f;
-    private Vector3 heightDiffer;
+    private Vector3 height;
     [SerializeField] float SmallestMoveDistance;
 
     [Header("status")]
@@ -42,23 +42,29 @@ public class Boos1 : MonoBehaviour
         player = GameController.player;
         playerColl= player.gameObject.GetComponent<BoxCollider2D>();
         PandaBehaviour pd = GetComponent<PandaBehaviour>();
-        heightDiffer = Vector3.up * (transform.position.y - playerColl.bounds.center.y);
+        height = Vector3.up * (transform.position.y );
         pd.Tick();
         
     }
  
     
     #region NonTask function
-    private void Move()
+    // Animation event can't use boolean parameter
+    private void Move(int FacingPlayer=0)
     {
+        
         rb.position = NextLocation;
-        if (rb.position.x < playerColl.bounds.center.x) { 
-            rb.transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (FacingPlayer==0) {
+            if (rb.position.x < playerColl.bounds.center.x)
+            {
+                rb.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else
+            {
+                rb.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
-        else
-        {
-            rb.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
+        
     }
 
     #endregion
@@ -89,8 +95,8 @@ public class Boos1 : MonoBehaviour
     void GoToPlayer() {
 
         InRange(playerColl.transform.position + (AttackDownSideRange * Vector3.up));
-        InRange(playerColl.transform.position + (AttackRange * Vector3.left) + heightDiffer);
-        InRange(playerColl.transform.position + (AttackRange * Vector3.right) + heightDiffer);
+        InRange(playerColl.transform.position + (AttackRange * Vector3.left) + height);
+        InRange(playerColl.transform.position + (AttackRange * Vector3.right) + height);
         int choice = Random.Range(0, MoveOptions.Count);
         NextLocation = MoveOptions[choice];
         MoveOptions.Clear();
@@ -109,7 +115,8 @@ public class Boos1 : MonoBehaviour
     [Task]
     bool ApproachPlayer(float Approachspeed)
     {
-        this.NextLocation = Vector2.MoveTowards(transform.position, playerColl.transform.position, Approachspeed);
+        NextLocation = Vector2.MoveTowards(transform.position, playerColl.transform.position, Approachspeed);
+        NextLocation.y= transform.position.y;
         return true;
     }
     [Task]
@@ -117,17 +124,30 @@ public class Boos1 : MonoBehaviour
         Vector3 tmpLocation;
         if (playerColl.transform.position.x < transform.position.x)
         {
-            tmpLocation = player.transform.position + (AttackRange * Vector3.left) + heightDiffer;
+            tmpLocation = player.transform.position + (AttackRange * Vector3.left) ;
         }
         else {
-            tmpLocation = player.transform.position + (AttackRange * Vector3.right) + heightDiffer;
+            tmpLocation = player.transform.position + (AttackRange * Vector3.right);
         }
+        tmpLocation.y = height.y;
         if(Area.bounds.min.x< tmpLocation.x && tmpLocation.x < Area.bounds.max.x)
         {
-            this.NextLocation = tmpLocation;
+            NextLocation = tmpLocation;
             return true;
         }
         return false;
+    }
+    [Task]
+    bool GoToCorner()
+    {
+        
+        if (playerColl.transform.position.x >= Area.bounds.center.x){
+            NextLocation = new Vector2(Area.bounds.min.x, transform.position.y);
+        }
+        else {
+            NextLocation = new Vector2(Area.bounds.max.x, transform.position.y);
+        }
+        return true;
     }
     [Task]
     bool GoBeforePlayer()
@@ -135,18 +155,33 @@ public class Boos1 : MonoBehaviour
         Vector3 tmpLocation;
         if (playerColl.transform.position.x < transform.position.x)
         {
-            tmpLocation = player.transform.position + (AttackRange * Vector3.right) + heightDiffer;
+            tmpLocation = player.transform.position + (AttackRange * Vector3.right);
         }
         else
         {
-            tmpLocation = player.transform.position + (AttackRange * Vector3.left) + heightDiffer;
+            tmpLocation = player.transform.position + (AttackRange * Vector3.left) ;
         }
+        tmpLocation.y = height.y;
         if (Area.bounds.min.x < tmpLocation.x && tmpLocation.x < Area.bounds.max.x)
         {
-            this.NextLocation = tmpLocation;
+            NextLocation = tmpLocation;
             return true;
         }
         return false;
+    }
+    [Task]
+    bool GoForward(float distance) {
+        float tmpX = transform.position.x + (transform.localEulerAngles.y == 180 ? distance : -distance);
+        tmpX = Mathf.Clamp(tmpX, Area.bounds.min.x, Area.bounds.max.x);
+        if(transform.root.localEulerAngles.y == 0)
+        {
+            NextLocation = new Vector2(tmpX, transform.position.y);
+        }
+        else
+        {
+            NextLocation = new Vector2(tmpX, transform.position.y);
+        }
+        return true;
     }
     [Task]
     void CalculateDistance() {
@@ -165,8 +200,10 @@ public class Boos1 : MonoBehaviour
     [Task]
     bool CloserThan(float distance) => DistancetoPlayer < distance;
     [Task]
-    bool IsPlayerInfront() => (player.transform.position.x < transform.position.x && transform.localEulerAngles.y == 180) ||
-                            (transform.position.x < player.transform.position.x && transform.localEulerAngles.y == 0);
+    bool IsPlayerInfront() => (player.transform.position.x > transform.position.x && transform.localEulerAngles.y == 180) ||
+                            (transform.position.x > player.transform.position.x && transform.localEulerAngles.y == 0);
+    [Task]
+    bool IsPlayerLowerthan(float height) => playerColl.bounds.center.y < transform.position.y + height;
     [Task]
     [HideInInspector]
     public bool IsImmobilized = false;
@@ -196,7 +233,7 @@ public class Boos1 : MonoBehaviour
         }
     }
     [Task]
-    void Attack(float speed,bool IsSpecialAttack) {
+    void Attack(float speed,bool IsSpecialAttack,bool FacingPlayer=true) {
 
         if (!anim.GetBool("IsAnimating")){
             if (fallAttackNext)
@@ -207,7 +244,8 @@ public class Boos1 : MonoBehaviour
                
             }
             else {
-                anim.Play("NormalAttack");
+                if(FacingPlayer) anim.Play("NormalAttack");
+                else anim.Play("NormalAttack(special)");
                 anim.SetBool("IsAnimating", true);
                 anim.SetFloat("AttackSpeed", speed);
             }
