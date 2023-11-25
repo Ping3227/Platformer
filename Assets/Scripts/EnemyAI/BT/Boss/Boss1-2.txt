@@ -71,7 +71,7 @@ tree("Consecutive Attack")
 									Attack(4.0,true,false)
 									Wait(2.0)
 								sequence
-									GoForward(5.0)
+									GoForward(3.0)
 									Teleport(20.0)
 									Wait(2.0)
 
@@ -106,6 +106,5 @@ tree("Ray Attack")
 				Teleport(1.0)
 		RayAim(0.15)
 		RayAttack(1.0)
-		Wait(1.0)
 	
 		
