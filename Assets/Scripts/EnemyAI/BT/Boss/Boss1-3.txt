@@ -46,8 +46,8 @@ tree("Consecutive Attack")
 				Attack(2.0,true,false)
 				Wait(2.0)
 			sequence
-				ApproachPlayer(3.0)
-				Teleport(10.0)
+				GoForward(3.0)
+				Attack(2.0,true,false)
 				Wait(0.3)
 				sequence
 					CalculateDistance
@@ -60,8 +60,8 @@ tree("Consecutive Attack")
 							Attack(3.0,true,false)
 							Wait(2.0)
 						sequence
-							ApproachPlayer(3.0)
-							Teleport(10.0)
+							GoForward(3.0)
+							Attack(3.0,true,false)
 							Wait(0.3)
 							CalculateDistance
 							fallback
@@ -72,8 +72,8 @@ tree("Consecutive Attack")
 									Attack(4.0,true,false)
 									Wait(2.0)
 								sequence
-									GoForward(3.0)
-									Teleport(20.0)
+									GoForward(5.0)
+									Attack(4.0,true,false)
 									Wait(2.0)
 
 // This region is for defense action		
@@ -106,7 +106,7 @@ tree("Ray Attack")
 				CloserThan(3.0)
 				DodgePlayer
 				Teleport(1.0)
-		RayAim(0.15)
+		RayAim(0.3)
 		RayAttack(1.0)
 	
 		

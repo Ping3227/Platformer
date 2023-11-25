@@ -1,5 +1,5 @@
 tree("Root") 
-	random(0.7,0.3)
+	random(0.8,0.2)
 		tree("Normal Attack")
 		tree("Special Attack")
 		
@@ -71,7 +71,7 @@ tree("Consecutive Attack")
 									Attack(4.0,true,false)
 									Wait(2.0)
 								sequence
-									GoForward(3.0)
+									GoForward(5.0)
 									Teleport(20.0)
 									Wait(2.0)
 

@@ -19630,8 +19630,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1745991997}
   - component: {fileID: 1745991998}
-  m_Layer: 8
-  m_Name: Normal
+  - component: {fileID: 1745991999}
+  - component: {fileID: 1745992000}
+  m_Layer: 0
+  m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19703,6 +19705,61 @@ PolygonCollider2D:
       - {x: 0.92712796, y: -0.5545101}
       - {x: -0.10938883, y: 0.22418159}
   m_UseDelaunayMesh: 0
+--- !u!114 &1745991999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745991996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62aa181d1147499dbb9a520e65c7b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 262536306}
+        m_TargetAssemblyTypeName: Boos1, Assembly-CSharp
+        m_MethodName: AttackSuccess
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  damage: 3
+--- !u!50 &1745992000
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745991996}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1793132477
 GameObject:
   m_ObjectHideFlags: 0
@@ -20019,6 +20076,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2528261318622939957, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
+      propertyPath: AttackCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528261318622939957, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
       propertyPath: doubleJumpForce
       value: 6
       objectReference: {fileID: 0}
@@ -20273,7 +20334,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8439277852971083613, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4429754214941326300, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       insertIndex: -1
