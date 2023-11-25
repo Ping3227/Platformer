@@ -95,8 +95,8 @@ public class Boos1 : MonoBehaviour
     void GoToPlayer() {
 
         InRange(playerColl.transform.position + (AttackDownSideRange * Vector3.up));
-        InRange(playerColl.transform.position + (AttackRange * Vector3.left) + height);
-        InRange(playerColl.transform.position + (AttackRange * Vector3.right) + height);
+        InRange(new Vector3(playerColl.transform.position.x + AttackRange, height.y));
+        InRange(new Vector3(playerColl.transform.position.x - AttackRange, height.y));
         int choice = Random.Range(0, MoveOptions.Count);
         NextLocation = MoveOptions[choice];
         MoveOptions.Clear();

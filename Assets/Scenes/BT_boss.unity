@@ -20072,7 +20072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8573051688395410682, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
       propertyPath: RechargingRate
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8573051688395410682, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
       propertyPath: RechargeCoolDown
