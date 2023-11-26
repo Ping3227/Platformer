@@ -18649,31 +18649,25 @@ MonoBehaviour:
     DoubleJumpforce: 3
     health: 20
     RechargeingRate: 0.3
-    RechargeingDelay: 0.5
+    RechargeingDelay: 1
   - Movespeed: 3
     Jumpforce: 5
     DoubleJumpforce: 3
-    health: 15
+    health: 20
     RechargeingRate: 0.3
-    RechargeingDelay: 0.5
+    RechargeingDelay: 1.5
   - Movespeed: 3
     Jumpforce: 5
     DoubleJumpforce: 3
-    health: 15
-    RechargeingRate: 0.2
-    RechargeingDelay: 0.5
+    health: 20
+    RechargeingRate: 0.4
+    RechargeingDelay: 1
   - Movespeed: 3
     Jumpforce: 5
     DoubleJumpforce: 3
-    health: 15
-    RechargeingRate: 0.1
-    RechargeingDelay: 0.5
-  - Movespeed: 3
-    Jumpforce: 5
-    DoubleJumpforce: 3
-    health: 15
-    RechargeingRate: 0.05
-    RechargeingDelay: 0.5
+    health: 20
+    RechargeingRate: 0.4
+    RechargeingDelay: 1.5
 --- !u!114 &1478664229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20257,6 +20251,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1390839789}
+    - target: {fileID: 2111377486377254867, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2571801564001712805, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

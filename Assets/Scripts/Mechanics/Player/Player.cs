@@ -381,7 +381,7 @@ public class Player : MonoBehaviour
         if (IsInvincible) return;
         anim.SetTrigger("IsImmobolized");
         IsMoveable = false;
-        ImmobileTimeCounter = 0.5f;
+        ImmobileTimeCounter = 0.7f;
         rb.velocity = Vector2.zero;
     }
     public void Hurt(float damage) {

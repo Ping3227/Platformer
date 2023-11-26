@@ -1,5 +1,5 @@
 tree("Root") 
-	random(0.7,0.3)
+	random(0.8,0.2)
 		tree("Normal Attack")
 		tree("Special Attack")
 		
@@ -24,7 +24,6 @@ tree("Normal Attack")
 
 tree("Special Attack")
 	sequence
-		Immobolize
 		random(0.3,0.3)
 			tree("Consecutive Attack")
 			tree("Ray Attack")
@@ -46,8 +45,8 @@ tree("Consecutive Attack")
 				Attack(2.0,true,false)
 				Wait(2.0)
 			sequence
-				GoForward(3.0)
-				Attack(2.0,true,false)
+				ApproachPlayer(3.0)
+				Teleport(10.0)
 				Wait(0.3)
 				sequence
 					CalculateDistance
@@ -60,8 +59,8 @@ tree("Consecutive Attack")
 							Attack(3.0,true,false)
 							Wait(2.0)
 						sequence
-							GoForward(3.0)
-							Attack(3.0,true,false)
+							ApproachPlayer(3.0)
+							Teleport(10.0)
 							Wait(0.3)
 							CalculateDistance
 							fallback
@@ -73,13 +72,12 @@ tree("Consecutive Attack")
 									Wait(2.0)
 								sequence
 									GoForward(5.0)
-									Attack(4.0,true,false)
+									Teleport(20.0)
 									Wait(2.0)
 
 // This region is for defense action		
 tree("Dodge")
 	sequence
-		Immobolize
 		DodgePlayer
 		Teleport(2.0)
 		Wait(1.5)
@@ -106,7 +104,7 @@ tree("Ray Attack")
 				CloserThan(3.0)
 				DodgePlayer
 				Teleport(1.0)
-		RayAim(0.3)
+		RayAim(0.15)
 		RayAttack(1.0)
-	
+		Wait(1.0)
 		
