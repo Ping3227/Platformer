@@ -46,8 +46,10 @@ tree("Consecutive Attack")
 				Attack(2.0,true,false)
 				Wait(2.0)
 			sequence
+				IsPlayerInfront
 				GoForward(3.0)
-				Attack(2.0,true,false)
+				Teleport(5.0)
+				//Attack(2.0,true,false)
 				Wait(0.3)
 				sequence
 					CalculateDistance
@@ -62,7 +64,8 @@ tree("Consecutive Attack")
 							Wait(2.0)
 						sequence
 							GoForward(3.0)
-							Attack(3.0,true,false)
+							Teleport(10.0)
+							//Attack(3.0,true,false)
 							Wait(0.3)
 							CalculateDistance
 							fallback
@@ -108,8 +111,8 @@ tree("Ray Attack")
 				CloserThan(3.0)
 				DodgePlayer
 				Teleport(1.0)
-		RayAim(0.15)
-		RayAttack(1.0)
+		RayAim(1.3)
+		RayAttack(1.)
 		Wait(1.0)
 	
 		

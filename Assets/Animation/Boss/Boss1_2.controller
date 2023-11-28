@@ -102,7 +102,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 42cf593da66221541a1cd5f58412cf76, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2263fa42ddc5b4358a2f75a5c468826c, type: 2}
   m_Tag: 
   m_SpeedParameter: RayAimSpeed
   m_MirrorParameter: 
@@ -174,7 +174,7 @@ AnimatorStateMachine:
     m_Position: {x: -710, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3316751814419630294}
-    m_Position: {x: -750, y: 180, z: 0}
+    m_Position: {x: -520, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6662741152504865051}
     m_Position: {x: -730, y: 290, z: 0}
@@ -193,15 +193,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 5445390497780556957}
     m_Position: {x: -920, y: 60, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -2089640338101279107}
-    m_Position: {x: -885, y: 125, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 6033864316616618536}
-    m_Position: {x: -850, y: 190, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 5833963829773939116}
-    m_Position: {x: -815, y: 255, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -309,32 +300,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayOrigion: {fileID: 0}
   player: {fileID: 0}
---- !u!1102 &-2089640338101279107
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: NormalD
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ab6f976b119224d0d8f937584540446b, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!114 &-769652310689879494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,9 +437,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.44444442
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -513,7 +478,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8891534ced0736a4780619ec2fdecb07, type: 2}
+  m_Motion: {fileID: 7400000, guid: 024f62c9254374c7180879151600234a, type: 2}
   m_Tag: 
   m_SpeedParameter: RayAttackSpeed
   m_MirrorParameter: 
@@ -535,7 +500,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -569,7 +534,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.84210527
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -626,58 +591,6 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 5878be400e594224eb2b309e610b1f31, type: 2}
   m_Tag: 
   m_SpeedParameter: AttackSpeed
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &5833963829773939116
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: RayAttack_2
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 024f62c9254374c7180879151600234a, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &6033864316616618536
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: RayAim_2
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2263fa42ddc5b4358a2f75a5c468826c, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
