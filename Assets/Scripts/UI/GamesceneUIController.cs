@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Platformer.Core;
 using Platformer.Gameplay;
+using System;
 
 namespace Platformer.UI
 {
@@ -35,6 +36,10 @@ namespace Platformer.UI
         [Header("Victory")]
         [SerializeField] Canvas VictoryCanvas;
         [SerializeField] TMP_Text VictoryTime;
+
+        [Header("Recover")]
+        [SerializeField] Canvas RecoverCanvas;
+        [SerializeField] int RecoverNum;
         private void Awake()
         {
             if (instance == null)
@@ -127,6 +132,33 @@ namespace Platformer.UI
             
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(0.5f);
         }
+        [ContextMenu("Recover")]
+        public void Recover()
+        {
+            if(RecoverNum <= 0)
+            {
+                Debug.Log("Run out of");
+            }
+            else
+            {
+                Image childImage = RecoverCanvas.transform.GetChild(RecoverNum - 1).GetComponent<Image>();
+                Debug.Log(childImage);
+                if (childImage != null)
+                {
+                  
+                    LeanTween.value(gameObject, childImage.color.a, 0, 1f)
+                             .setOnUpdate((float val) => {
+                                 Color currentColor = childImage.color;
+                                 currentColor.a = val;
+                                 childImage.color = currentColor;
+                             })
+                             .setEase(LeanTweenType.easeOutCubic)
+                             .setDelay(0.5f);
+                }
+
+                RecoverNum--;
+            }
+        }
         public void Respawn()
         {
             InventoryManager.Instance.Clear();
@@ -150,6 +182,10 @@ namespace Platformer.UI
         public void UpdateModeNumber() {
             PauseCanvas.GetComponentsInChildren<TMP_Text>()[1].text = "Mode: " + ModeManager.instance.index;
             
+        }
+
+        private class TestAttribute : Attribute
+        {
         }
     }
 }
