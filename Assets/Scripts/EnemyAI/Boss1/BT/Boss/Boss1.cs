@@ -310,7 +310,7 @@ public class Boos1 : MonoBehaviour
         Debug.Log(player.transform.rotation.eulerAngles);
         if (!anim.GetBool("IsAnimating"))
         {
-            if (ImmobolizePrefab)
+            if (ImmobolizePrefab&& ImmobolizePrefab.activeSelf==false)
             {
                 // right 0, 0, 0 left 0, 180, 0
                 float spawnpoint = player.transform.position.x + (player.transform.rotation == Quaternion.Euler(0, 0, 0)?1:-1) * 2;
