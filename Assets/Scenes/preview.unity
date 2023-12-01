@@ -29070,7 +29070,7 @@ MonoBehaviour:
   - SoundName: SimpleBGM
     clip: {fileID: 8300000, guid: d4f052af20b5025449bdd0c47381a36f, type: 3}
     volume: 1
-    pitch: 1.08
+    pitch: 1
     loop: 1
     source: {fileID: 0}
   - SoundName: BattleBGM

@@ -19019,6 +19019,7 @@ GameObject:
   - component: {fileID: 1478664227}
   - component: {fileID: 1478664228}
   - component: {fileID: 1478664229}
+  - component: {fileID: 1478664230}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -19145,6 +19146,49 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f1727bc14067bef49a28317832fb2bf6, type: 2}
   itemSlot: {fileID: 1959907343}
   currentItem: {fileID: 0}
+--- !u!114 &1478664230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478664223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43a723c52795b04583e43d2a080cc80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - SoundName: Suddenly
+    clip: {fileID: 8300000, guid: 075edd5f4b9cdc148844c657b85a37d8, type: 3}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - SoundName: SimpleBGM
+    clip: {fileID: 8300000, guid: a7817880af1a7a848a457b9ec17fd6dd, type: 3}
+    volume: 0
+    pitch: 0.67
+    loop: 0
+    source: {fileID: 0}
+  - SoundName: BattleBGM
+    clip: {fileID: 8300000, guid: a7817880af1a7a848a457b9ec17fd6dd, type: 3}
+    volume: 1
+    pitch: 1.26
+    loop: 0
+    source: {fileID: 0}
+  - SoundName: FallAttack
+    clip: {fileID: 8300000, guid: c24766bd1bc435847b8a82475680a1f9, type: 3}
+    volume: 1
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - SoundName: Lazer
+    clip: {fileID: 8300000, guid: 21cb0001a3d4d454299df077406d316e, type: 3}
+    volume: 1
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &1498437714
 GameObject:
   m_ObjectHideFlags: 0
