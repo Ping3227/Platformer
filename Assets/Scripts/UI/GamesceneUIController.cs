@@ -39,7 +39,7 @@ namespace Platformer.UI
 
         [Header("Recover")]
         [SerializeField] Canvas RecoverCanvas;
-        [SerializeField] int RecoverNum;
+        public int RecoverNum;
         private void Awake()
         {
             if (instance == null)
@@ -110,7 +110,18 @@ namespace Platformer.UI
 
         public void SetHealth(float health )
         {
-            healthbar.value = health;
+            if (health > healthbar.value)
+            {
+                LeanTween.value(healthbar.gameObject, healthbar.value, health, 0.5f).setEase(LeanTweenType.easeOutCubic).setOnUpdate((float val) =>
+                {
+
+                    healthbar.value  = val;
+                });
+            }
+            else {
+                healthbar.value = health;
+            }
+            
             LeanTween.value(healthLoss.gameObject, healthLoss.value, health, 1.0f).setEase(LeanTweenType.easeOutCubic).setOnUpdate((float val) =>
             {
                
@@ -132,32 +143,23 @@ namespace Platformer.UI
             
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(0.5f);
         }
-        [ContextMenu("Recover")]
-        public void Recover()
-        {
-            if(RecoverNum <= 0)
-            {
+        
+        public void Recover(){
+            if(RecoverNum <= 0){
                 Debug.Log("Run out of");
             }
-            else
-            {
+            else{
                 Image childImage = RecoverCanvas.transform.GetChild(RecoverNum - 1).GetComponent<Image>();
-                Debug.Log(childImage);
-                if (childImage != null)
-                {
+                if (childImage != null){
                   
-                    LeanTween.value(gameObject, childImage.color.a, 0, 1f)
-                             .setOnUpdate((float val) => {
-                                 Color currentColor = childImage.color;
-                                 currentColor.a = val;
-                                 childImage.color = currentColor;
-                             })
-                             .setEase(LeanTweenType.easeOutCubic)
-                             .setDelay(0.5f);
+                    LeanTween.alpha(childImage.rectTransform, 0, 1f).setEase(LeanTweenType.easeOutCubic).setOnComplete(() =>
+                    {
+                        childImage.gameObject.SetActive(false);
+                    });
                 }
-
                 RecoverNum--;
             }
+            
         }
         public void Respawn()
         {
@@ -184,8 +186,6 @@ namespace Platformer.UI
             
         }
 
-        private class TestAttribute : Attribute
-        {
-        }
+       
     }
 }

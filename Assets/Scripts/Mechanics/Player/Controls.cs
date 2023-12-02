@@ -440,11 +440,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b398fa1f-845e-4a96-bfc9-565d2a02dac9"",
-                    ""path"": ""<Keyboard>/l"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwitchItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Heal"",
+            ""id"": ""337b1809-fc00-4e3c-966e-05a9d766aea6"",
+            ""actions"": [
+                {
+                    ""name"": ""Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b8f6367-723e-4932-b3cb-ad0a7c4f25bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""530ddec7-8e2a-4442-9b39-4c157c3e5c88"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -485,6 +513,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // SwitchItem
         m_SwitchItem = asset.FindActionMap("SwitchItem", throwIfNotFound: true);
         m_SwitchItem_SwitchItem = m_SwitchItem.FindAction("SwitchItem", throwIfNotFound: true);
+        // Heal
+        m_Heal = asset.FindActionMap("Heal", throwIfNotFound: true);
+        m_Heal_Heal = m_Heal.FindAction("Heal", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -864,6 +895,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public SwitchItemActions @SwitchItem => new SwitchItemActions(this);
+
+    // Heal
+    private readonly InputActionMap m_Heal;
+    private List<IHealActions> m_HealActionsCallbackInterfaces = new List<IHealActions>();
+    private readonly InputAction m_Heal_Heal;
+    public struct HealActions
+    {
+        private @Controls m_Wrapper;
+        public HealActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Heal => m_Wrapper.m_Heal_Heal;
+        public InputActionMap Get() { return m_Wrapper.m_Heal; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(HealActions set) { return set.Get(); }
+        public void AddCallbacks(IHealActions instance)
+        {
+            if (instance == null || m_Wrapper.m_HealActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_HealActionsCallbackInterfaces.Add(instance);
+            @Heal.started += instance.OnHeal;
+            @Heal.performed += instance.OnHeal;
+            @Heal.canceled += instance.OnHeal;
+        }
+
+        private void UnregisterCallbacks(IHealActions instance)
+        {
+            @Heal.started -= instance.OnHeal;
+            @Heal.performed -= instance.OnHeal;
+            @Heal.canceled -= instance.OnHeal;
+        }
+
+        public void RemoveCallbacks(IHealActions instance)
+        {
+            if (m_Wrapper.m_HealActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IHealActions instance)
+        {
+            foreach (var item in m_Wrapper.m_HealActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_HealActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public HealActions @Heal => new HealActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -909,5 +986,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface ISwitchItemActions
     {
         void OnSwitchItem(InputAction.CallbackContext context);
+    }
+    public interface IHealActions
+    {
+        void OnHeal(InputAction.CallbackContext context);
     }
 }

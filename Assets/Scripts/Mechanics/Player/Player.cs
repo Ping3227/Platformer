@@ -1,6 +1,7 @@
 using Platformer.Core;
 using Platformer.Gameplay;
 using Platformer.Mechanics;
+using Platformer.UI;
 using UnityEngine;
 
 [RequireComponent(typeof(Health), typeof(Stamina))]
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour
     private bool IsJumping = false;
     private bool IsDoubleJumping = false;
     private bool IsInvincible = false;
+    private bool IsHealing = false;
     private bool FinishDoubleJump = false;
     private float JumpApex = 0f;
     private bool IsMoveable = true;
@@ -69,10 +71,15 @@ public class Player : MonoBehaviour
     private float DashTimeCounter;
     private float ImmobileTimeCounter;
     private float InvincibleCounter;
+    private float HealCounter;
 
     [Header("Item")]
     [SerializeField] Item HealItem;
     [SerializeField] float HealTime = 0.5f;
+    private float LastHealTime;
+    private bool HealBuffer;
+    [SerializeField] float HealMoveSpeed =2.0f;
+    [SerializeField] float HealValue = 5f;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -86,28 +93,30 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        if(hurtEffect) hurtEffect.Pause();
+        if (hurtEffect) hurtEffect.Pause();
         coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         health = GetComponent<Health>();
         stamina = GetComponent<Stamina>();
         initialParent = transform.parent;
-        if(GameController.Instance.IsSaved) transform.position = GameController.Instance.CheckPoint;
+        if (GameController.Instance.IsSaved) transform.position = GameController.Instance.CheckPoint;
     }
-    private void Update(){
+    private void Update() {
         Moveable();
         Invincible();
         CalculateBuffer();
         if (IsMoveable) {
-            Dash();
-            // if not dashing then attack
-            Attack(); 
-            // if moveable and not dashing 
-            Jump();
+            if (!IsHealing) {
+                Dash();
+                // if not dashing then attack
+                Attack();
+                // if moveable and not dashing 
+                Jump();
+            }
             Move();
-            
-            
+            HealCheck();
+
         }
         UpdateAnimation();
         IsOnPlatform();
@@ -121,40 +130,41 @@ public class Player : MonoBehaviour
         anim.SetBool("IsDash", IsDashing);
         anim.SetBool("IsFalling", IsFalling);
         anim.SetBool("IsDoubleJump", IsDoubleJumping);
-        anim.SetFloat("Speed",Mathf.Abs( rb.velocity.x/moveSpeed));
+        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x / moveSpeed));
+        anim.SetBool("IsHealing", IsHealing);
     }
 
-    private void Attack(){
+    private void Attack() {
         if (IsDashing) return;
-        if ((UserInput.instance.controls.Attack.Attack.WasPressedThisFrame() ||  (AttackBuffer && (LastAttackTime + InputTimeAllowance) > Time.time)))
+        if ((UserInput.instance.controls.Attack.Attack.WasPressedThisFrame() || (AttackBuffer && (LastAttackTime + InputTimeAllowance) > Time.time)))
         {
             stamina.ConsumeStamina(AttackCost);
             anim.SetTrigger("Attack");
             ImmobileTimeCounter = AttackTime;
             IsMoveable = false;
-            rb.AddForce(new Vector2(rb.velocity.x*50, 0));
+            rb.AddForce(new Vector2(rb.velocity.x * 50, 0));
             rb.velocity = Vector2.zero;
-            
+            AttackBuffer = false;
         }
     }
 
 
     #region movement
-    private void Move(){
-        if(IsDashing|| !IsMoveable) return;
+    private void Move() {
+        if (IsDashing || !IsMoveable) return;
         moveInput = UserInput.instance.moveInput.x;
-        if (moveInput > 0 || moveInput < 0){
+        if (moveInput > 0 || moveInput < 0) {
             TurnCheck();
         }
-
-        rb.velocity = new Vector2(moveInput * moveSpeed * (1 + JumpApex), rb.velocity.y);
+        if (IsHealing) rb.velocity = new Vector2(moveInput * HealMoveSpeed, 0);
+        else rb.velocity = new Vector2(moveInput * moveSpeed * (1 + JumpApex), rb.velocity.y);
 
     }
 
     private void Jump() {
         #region Special case
-        if (IsDashing || !IsMoveable) { 
-            if(IsJumping) IsJumping = false;
+        if (IsDashing || !IsMoveable) {
+            if (IsJumping) IsJumping = false;
             if (IsDoubleJumping) {
                 FinishDoubleJump = true;
                 IsDoubleJumping = false;
@@ -164,32 +174,32 @@ public class Player : MonoBehaviour
         }
         #endregion
         #region Jump
-        if ((UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame()|| (JumpBuffer && (LastJumpTime + InputTimeAllowance) > Time.time))
+        if ((UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame() || (JumpBuffer && (LastJumpTime + InputTimeAllowance) > Time.time))
                 && IsGrounded() && stamina.ConsumeStamina(jumpCost * Time.deltaTime)) {
-
+            JumpBuffer = false;
             IsJumping = true;
             FinishDoubleJump = false;
             jumpTimeCounter = jumpTime;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
         }
-        if (UserInput.instance.controls.Jumping.Jump.IsPressed()){
+        if (UserInput.instance.controls.Jumping.Jump.IsPressed()) {
 
-            if (jumpTimeCounter > 0 && IsJumping && stamina.ConsumeStamina(jumpCost * Time.deltaTime)){
+            if (jumpTimeCounter > 0 && IsJumping && stamina.ConsumeStamina(jumpCost * Time.deltaTime)) {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 JumpApex = (jumpTime - jumpTimeCounter) * ApexBonus / jumpTime;
                 // counter 
                 jumpTimeCounter -= Time.deltaTime;
                 if (jumpTimeCounter < 0) jumpTimeCounter = 0;
             }
-            else{
+            else {
                 JumpApex = 0;
                 IsJumping = false;
                 IsFalling = true;
             }
 
         }
-        if (UserInput.instance.controls.Jumping.Jump.WasReleasedThisFrame()){
+        if (UserInput.instance.controls.Jumping.Jump.WasReleasedThisFrame()) {
             IsJumping = false;
             JumpApex = 0;
             IsFalling = true;
@@ -198,40 +208,42 @@ public class Player : MonoBehaviour
         #region double jump
         // constant jump 
         if (!IsJumping && !IsGrounded() && !FinishDoubleJump
-                && (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame() || (JumpBuffer && (LastJumpTime + InputTimeAllowance) >Time.time))
+                && (UserInput.instance.controls.Jumping.Jump.WasPressedThisFrame() || (JumpBuffer && (LastJumpTime + InputTimeAllowance) > Time.time))
                 && stamina.ConsumeStamina(doubleJumpCost)) {
 
             doubleJumpTimeCounter = doubleJumpTime;
             IsDoubleJumping = true;
             FinishDoubleJump = true;
-            
+            JumpBuffer = false;
+
         }
         if (IsDoubleJumping) {
             rb.velocity = new Vector2(rb.velocity.x, doubleJumpForce);
-            
+
             doubleJumpTimeCounter -= Time.deltaTime;
 
             if (doubleJumpTimeCounter <= 0) {
-                
+
                 IsDoubleJumping = false;
                 IsFalling = true;
             }
         }
         #endregion
     }
-    private void Dash(){
+    private void Dash() {
 
-        if (DashTimeCounter == 0 && 
-            ( UserInput.instance.controls.Dash.Dash.WasPressedThisFrame() || (DashBuffer && (LastDashTime+InputTimeAllowance)> Time.time)) 
-            && stamina.ConsumeStamina(dashCost)){
+        if (DashTimeCounter == 0 &&
+            (UserInput.instance.controls.Dash.Dash.WasPressedThisFrame() || (DashBuffer && (LastDashTime + InputTimeAllowance) > Time.time))
+            && stamina.ConsumeStamina(dashCost)) {
             IsInvincible = true;
             IsDashing = true;
             if (IsJumping) IsJumping = false;
 
             DashTimeCounter = dashTime;
             InvincibleCounter = dashInvincibleTime;
+            DashBuffer = false;
         }
-       
+
         DashTimeCounter -= Time.deltaTime;
         if (DashTimeCounter <= 0) {
             DashTimeCounter = 0;
@@ -247,6 +259,22 @@ public class Player : MonoBehaviour
         }
 
 
+    }
+    private void HealCheck(){
+        if (IsDashing || !IsMoveable) return;
+        if (IsHealing==false && GamesceneUIController.instance.RecoverNum > 0 && IsGrounded()&& (UserInput.instance.controls.Heal.Heal.WasPressedThisFrame() || (HealBuffer && (LastHealTime + InputTimeAllowance) > Time.time))) {
+            IsHealing = true;
+            HealCounter = HealTime;
+            HealBuffer= false;
+
+        }
+        if (HealCounter > 0){
+            HealCounter -= Time.deltaTime;
+        }
+        else{
+            HealCounter = 0;
+            IsHealing = false;
+        }
     }
     private void Moveable() {
         if (ImmobileTimeCounter > 0){
@@ -381,6 +409,7 @@ public class Player : MonoBehaviour
         if (IsInvincible) return;
         anim.SetTrigger("IsImmobolized");
         IsMoveable = false;
+        IsHealing = false;
         ImmobileTimeCounter = 0.7f;
         rb.velocity = Vector2.zero;
     }
@@ -440,10 +469,7 @@ public class Player : MonoBehaviour
         #endregion
     }
 
-    void Heal(){
-        InventoryManager.Instance.UsedItem(HealItem);
-        health.Heal(0.5f);
-    }
+    
     #endregion
     void CalculateBuffer() {
 
@@ -465,6 +491,10 @@ public class Player : MonoBehaviour
                 JumpBuffer = true;
                 LastJumpTime = Time.time;
             }
+            else if (UserInput.instance.controls.Heal.Heal.WasPressedThisFrame()) { 
+                HealBuffer = true;
+                LastHealTime = Time.time;
+            }
 
         }
         else if (IsDashing) {
@@ -478,6 +508,11 @@ public class Player : MonoBehaviour
                 JumpBuffer = true;
                 LastJumpTime = Time.time;
             }
+            else if (UserInput.instance.controls.Heal.Heal.WasPressedThisFrame())
+            {
+                HealBuffer = true;
+                LastHealTime = Time.time;
+            }
         }
         
     }
@@ -489,6 +524,12 @@ public class Player : MonoBehaviour
         moveSpeed = ModeManager.instance.modes[ModeManager.instance.index].Movespeed;
         stamina.setParameter(index);
         health.SetParameter(index);
+    }
+    void Heal()
+    {
+        GamesceneUIController.instance.Recover();
+        health.Heal(HealValue);
+        
     }
 }
 

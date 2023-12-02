@@ -16,6 +16,8 @@ namespace Platformer.Mechanics {
        
         public void Heal(float value)
         {
+            if (!IsAlive) return;
+           
             currentHP += value;
             if (currentHP > MaxHP)
             {
