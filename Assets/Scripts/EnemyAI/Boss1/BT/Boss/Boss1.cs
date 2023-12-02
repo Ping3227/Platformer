@@ -224,9 +224,16 @@ public class Boos1 : MonoBehaviour
     #endregion
     #region Animation
     [Task]
-    void Teleport(float speed) {
+    void Teleport(float speed,bool FacingPlayer) {
         if (!anim.GetBool("IsAnimating") ){
-            anim.Play("Teleport");
+            if (FacingPlayer)
+            {
+                anim.Play("Teleport");
+            }
+            else {
+                anim.Play("Teleport(special)");
+            }
+            
             anim.SetFloat("TeleportSpeed", speed);
             anim.SetBool("IsAnimating", true);
             ThisTask.Succeed();
