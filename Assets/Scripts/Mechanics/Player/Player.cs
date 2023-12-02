@@ -126,9 +126,9 @@ public class Player : MonoBehaviour
 
     private void Attack(){
         if (IsDashing) return;
-        if ((UserInput.instance.controls.Attack.Attack.WasPressedThisFrame() ||  (AttackBuffer && (LastAttackTime + InputTimeAllowance) > Time.time))&& stamina.ConsumeStamina(AttackCost))
+        if ((UserInput.instance.controls.Attack.Attack.WasPressedThisFrame() ||  (AttackBuffer && (LastAttackTime + InputTimeAllowance) > Time.time)))
         {
-            
+            stamina.ConsumeStamina(AttackCost);
             anim.SetTrigger("Attack");
             ImmobileTimeCounter = AttackTime;
             IsMoveable = false;
