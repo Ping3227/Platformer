@@ -247,7 +247,7 @@ public class Boos1 : MonoBehaviour
             {
                 anim.Play("FallAttack");
                 anim.SetBool("IsAnimating", true);
-                FindObjectOfType<AudioManager>().PlayDelayed("FallAttack", 0.39f);
+                AudioManager.instance.PlayDelayed("FallAttack", 0.39f);
                 
                 fallAttackNext = false;
                
@@ -289,7 +289,7 @@ public class Boos1 : MonoBehaviour
             anim.Play("RayAim");
             anim.SetBool("IsAnimating", true);
             anim.SetFloat("RayAimSpeed", speed);
-            FindObjectOfType<AudioManager>().PlayDelayed("Lazer",0.8f);
+            
             ThisTask.Succeed();
         }
     }
@@ -300,7 +300,7 @@ public class Boos1 : MonoBehaviour
             anim.Play("RayAttack");
             anim.SetBool("IsAnimating", true);
             anim.SetFloat("RayAttackSpeed", speed);
-            
+            AudioManager.instance.PlayDelayed("Lazer", 0.0f);
             NormalAttackCount = 0;
             FailAttackCount++;
             ThisTask.Succeed();

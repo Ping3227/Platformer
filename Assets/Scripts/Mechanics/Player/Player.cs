@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
     private bool HealBuffer;
     [SerializeField] float HealMoveSpeed =2.0f;
     [SerializeField] float HealValue = 5f;
+    [SerializeField] ParticleSystem HealParticle;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -529,6 +530,8 @@ public class Player : MonoBehaviour
     {
         GamesceneUIController.instance.Recover();
         health.Heal(HealValue);
+        //AudioManager.instance.Play("Heal");
+        HealParticle.Play();
         
     }
 }

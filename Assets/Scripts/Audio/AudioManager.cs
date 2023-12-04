@@ -6,8 +6,18 @@ using System.Runtime.CompilerServices;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+    public static AudioManager instance;
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate
+            return;
+        }
         foreach(Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

@@ -6,6 +6,7 @@ public class PlayerHitBox : MonoBehaviour
 {
     Player player;
     [SerializeField] float damage;
+    [SerializeField] ParticleSystem hitEffect;
     void Start()
     {
         player = GameController.player;
@@ -14,6 +15,11 @@ public class PlayerHitBox : MonoBehaviour
     {
         if (other.CompareTag("Enemy")){
             other.GetComponent<EnemyHealth>().hurt(damage);
+            hitEffect.transform.position = other.ClosestPoint(transform.position);
+            //hitEffect.transform.position += ( player.gameObject.transform.position- other.gameObject.transform.position).normalized;
+
+            hitEffect.transform.rotation = Quaternion.FromToRotation(Vector3.forward, other.gameObject.transform.position- player.gameObject.transform.position);
+            hitEffect.Play();
         }
         
 
