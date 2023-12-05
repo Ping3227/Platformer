@@ -141,6 +141,7 @@ public class Player : MonoBehaviour
         {
             stamina.ConsumeStamina(AttackCost);
             anim.SetTrigger("Attack");
+            AudioManager.instance.Play("PlayerAttack");
             ImmobileTimeCounter = AttackTime;
             IsMoveable = false;
             rb.AddForce(new Vector2(rb.velocity.x * 50, 0));
@@ -530,6 +531,7 @@ public class Player : MonoBehaviour
     {
         GamesceneUIController.instance.Recover();
         health.Heal(HealValue);
+        AudioManager.instance.Play("Healing");
         //AudioManager.instance.Play("Heal");
         HealParticle.Play();
         
