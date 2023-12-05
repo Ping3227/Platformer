@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638374105544086180
+  platformSettingsDirtyTick: 638374107838771470
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -140,7 +140,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
   spriteSheetImportData:
-  - name: Boss2 2_0
+  - name: BigArmRight
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -160,7 +160,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_1
+  - name: SmallArmRight
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -180,7 +180,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_2
+  - name: Head
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -200,7 +200,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_3
+  - name: BigArmLeft
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -220,7 +220,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_4
+  - name: SmallArmLeft
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -240,7 +240,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_5
+  - name: ThighRight
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -260,7 +260,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_6
+  - name: CalfRight
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -280,7 +280,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_7
+  - name: Body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -300,7 +300,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_8
+  - name: ThighLeft
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -320,7 +320,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Boss2 2_9
+  - name: CalfLeft
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
