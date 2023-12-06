@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: FarestBackground
+    uniqueID: 4264292151
+    locked: 0
   - name: Background
     uniqueID: 4182158811
     locked: 0
