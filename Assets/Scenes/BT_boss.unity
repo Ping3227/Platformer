@@ -24280,7 +24280,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - SoundName: SimpleBGM
     clip: {fileID: 8300000, guid: 0b2efbd4002ab21429b64eafeb17fe46, type: 3}
-    volume: 0.377
+    volume: 0.571
     pitch: 0.67
     loop: 0
     source: {fileID: 0}
