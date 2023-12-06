@@ -49,6 +49,11 @@ public class Boss2 : MonoBehaviour
     [Task]
     void SlowAttack()
     {
+        if (!anim.GetBool("IsAnimating"))
+        {
+            anim.SetBool("IsAnimating", true);
+            anim.Play("SlowAttack2");
+        }
     }
     [Task]
     void FastAttack()
