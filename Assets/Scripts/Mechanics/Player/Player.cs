@@ -239,6 +239,7 @@ public class Player : MonoBehaviour
             && stamina.ConsumeStamina(dashCost)) {
             IsInvincible = true;
             IsDashing = true;
+            AudioManager.instance.Play("Dash");
             if (IsJumping) IsJumping = false;
 
             DashTimeCounter = dashTime;

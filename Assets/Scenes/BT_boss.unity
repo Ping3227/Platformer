@@ -24754,56 +24754,62 @@ MonoBehaviour:
   sounds:
   - SoundName: BossSuddenly
     clip: {fileID: 8300000, guid: 9240cec50c7474341bcff840a8dc44e5, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.2
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: SimpleBGM
-    clip: {fileID: 8300000, guid: 0b2efbd4002ab21429b64eafeb17fe46, type: 3}
-    volume: 0.571
-    pitch: 0.67
-    loop: 0
+    clip: {fileID: 8300000, guid: 73f756f70bd3fea4d9ac9d113f0a5b85, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
   - SoundName: BattleBGM
     clip: {fileID: 8300000, guid: 73f756f70bd3fea4d9ac9d113f0a5b85, type: 3}
     volume: 1
-    pitch: 1.26
-    loop: 0
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
   - SoundName: BossFallAttack
     clip: {fileID: 8300000, guid: a234a29bbaaad4d45811bf71bc1f99f7, type: 3}
-    volume: 0.81
-    pitch: 0.8
+    volume: 0.85
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: BossLazer
     clip: {fileID: 8300000, guid: 48cf85a606929b544815431f07b0e565, type: 3}
-    volume: 0.565
-    pitch: 1.09
+    volume: 0.3
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: BossAttack
     clip: {fileID: 8300000, guid: 08511a18fc3dc7143bc99a6f72c236fb, type: 3}
-    volume: 0.586
-    pitch: 0.76
+    volume: 0.15
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: BossTwosideAttack
     clip: {fileID: 8300000, guid: 17e416d385ca96f418ebb594df5af471, type: 3}
-    volume: 0.75
-    pitch: 0.98
+    volume: 1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: PlayerAttack
-    clip: {fileID: 8300000, guid: 55763f796ec2fbb4e9f996a9deaf3ac9, type: 3}
-    volume: 0.75
-    pitch: 0.98
+    clip: {fileID: 8300000, guid: 2b40dae4c59674f44b2851051090324a, type: 3}
+    volume: 0.25
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - SoundName: Healing
     clip: {fileID: 8300000, guid: 69199b09ed8156e42b28ef05f83b20ec, type: 3}
     volume: 0.75
-    pitch: 0.98
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - SoundName: Dash
+    clip: {fileID: 8300000, guid: cab14c5286ce44a459f5e32d0d564c2c, type: 3}
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
 --- !u!1 &1498437714
