@@ -1,5 +1,6 @@
 using Platformer.Mechanics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] AnimationClip _deadAnimation;
     [SerializeField] ParticleSystem _deadEffect;
     [SerializeField] AudioClip _deadSound;
+    [SerializeField] Slider HealthBar;
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -42,7 +44,12 @@ public class EnemyHealth : MonoBehaviour
         else{
             Isimmune = true;
         }
-       _currentHP -= damage;
+        
+        _currentHP -= damage;
+        if (HealthBar != null)
+        {
+            HealthBar.value = _currentHP / _maxHP;
+        }
         _cumulateDamage += damage;
         if (_currentHP <= 0) {
             // delete object after delay
