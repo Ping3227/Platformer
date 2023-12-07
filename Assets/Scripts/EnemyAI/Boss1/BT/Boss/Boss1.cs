@@ -229,11 +229,12 @@ public class Boos1 : MonoBehaviour
             if (FacingPlayer)
             {
                 anim.Play("Teleport");
+                
             }
             else {
                 anim.Play("Teleport(special)");
             }
-            
+            AudioManager.instance.Play("BossSuddenly");
             anim.SetFloat("TeleportSpeed", speed);
             anim.SetBool("IsAnimating", true);
             ThisTask.Succeed();
