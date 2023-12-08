@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scripts:
-  - {fileID: 4900000, guid: d52ceb03c21892041b9cb099f9c6765a, type: 3}
+  - {fileID: 4900000, guid: 6f27490ce555e4f45a066a05043e5358, type: 3}
   autoReset: 1
   tickOn: 0
   sourceInfos:
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f09c73e747890f48966badb03a146b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHP: 40
+  _maxHP: 60
   IsReflecting: 0
   _flashMaterial: {fileID: 2100000, guid: e6c6e7521da528642b42db958fc525f5, type: 2}
   _flashColor: {r: 1, g: 1, b: 1, a: 0}
@@ -533,6 +533,7 @@ MonoBehaviour:
   _deadAnimation: {fileID: 0}
   _deadEffect: {fileID: 0}
   _deadSound: {fileID: 0}
+  HealthBar: {fileID: 0}
 --- !u!1 &5120770634225552775
 GameObject:
   m_ObjectHideFlags: 0
