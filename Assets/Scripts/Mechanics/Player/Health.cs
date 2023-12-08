@@ -32,7 +32,7 @@ namespace Platformer.Mechanics {
             {
                 currentHP = 0;
                 GetComponent<Player>().Dead();
-                Simulation.Schedule<PlayerDeath>();
+                Simulation.Schedule<PlayerDeath>(0.5f);
             }
             GamesceneUIController.instance.SetHealth(healthPercentage);
 

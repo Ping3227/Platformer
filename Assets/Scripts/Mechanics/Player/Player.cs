@@ -430,6 +430,7 @@ public class Player : MonoBehaviour
         ev.ShakeAmp = ShakeAmpitude;
         ev.ShakeFrequency = ShakeFrequency;
         ev.ShakeDuration = ShakeDuration;
+        AudioManager.instance.Play("PlayerHurt");
         hurtEffect.transform.position = transform.position;
         hurtEffect.Play();
         #endregion
