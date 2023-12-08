@@ -6,7 +6,9 @@ using UnityEngine;
 public class AutoAim : MonoBehaviour
 {
     [SerializeField] Transform target;
+
     
+
     void Update(){
         // Only rotate z axis toward target
         Vector3 direction = target.position - transform.position;
@@ -14,4 +16,5 @@ public class AutoAim : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
     }
+    
 }
