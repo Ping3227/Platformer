@@ -47,7 +47,7 @@ tree("Consecutive Attack")
 				IsPlayerLowerthan(1.0)
 				GoBeforePlayer
 				Attack(2.0,true,false)
-				Wait(2.0)
+				Wait(1.5)
 			sequence
 				// not attack
 				GoForward(3.0)
@@ -65,7 +65,7 @@ tree("Consecutive Attack")
 							IsPlayerLowerthan(1.0)
 							GoBeforePlayer
 							Attack(3.0,true,false)
-							Wait(2.0)
+							Wait(1.5)
 						sequence
 							// not attack
 							GoForward(3.0)
@@ -86,7 +86,7 @@ tree("Consecutive Attack")
 									//attack far away
 									GoForward(5.0)
 									Attack(4.0,true,false)
-									Wait(2.5)
+									Wait(2.0)
 
 // This region is for defense action		
 tree("Dodge")

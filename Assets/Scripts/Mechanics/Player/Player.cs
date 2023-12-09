@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
         stamina = GetComponent<Stamina>();
         initialParent = transform.parent;
         if (GameController.Instance.IsSaved) transform.position = GameController.Instance.CheckPoint;
+        
     }
     private void Update() {
         Moveable();

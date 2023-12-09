@@ -22,7 +22,7 @@ namespace Platformer.Gameplay
             ev.RecoverRate = RecoverRate;
             CamearaController.Instance.ShakeCamera(ShakeAmp, ShakeFrequency, ShakeDuration);
 
-            //TODO: Camera shake and time slower 
+            
         }
     }
 }
