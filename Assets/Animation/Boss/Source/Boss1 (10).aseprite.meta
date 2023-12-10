@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638377512803860050
+  platformSettingsDirtyTick: 638378314720104110
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -261,8 +261,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 1277}
   - name: Boss1 (10)_Frame_84
     originalName: 
-    pivot: {x: 0.48101267, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -281,8 +281,8 @@ ScriptedImporter:
     uvTransform: {x: 207, y: 768}
   - name: Boss1 (10)_Frame_85
     originalName: 
-    pivot: {x: 0.48101267, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -301,8 +301,8 @@ ScriptedImporter:
     uvTransform: {x: 202, y: 1064}
   - name: Boss1 (10)_Frame_87
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -321,8 +321,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1790}
   - name: Boss1 (10)_Frame_88
     originalName: 
-    pivot: {x: 0.48101267, y: -0.989011}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -341,8 +341,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 899}
   - name: Boss1 (10)_Frame_89
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -361,8 +361,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1888}
   - name: Boss1 (10)_Frame_91
     originalName: 
-    pivot: {x: 0.48101267, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -381,8 +381,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 103}
   - name: Boss1 (10)_Frame_92
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -401,8 +401,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 998}
   - name: Boss1 (10)_Frame_93
     originalName: 
-    pivot: {x: 0.48101267, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -421,8 +421,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 201}
   - name: Boss1 (10)_Frame_95
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -441,8 +441,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 299}
   - name: Boss1 (10)_Frame_96
     originalName: 
-    pivot: {x: 0.48101267, y: -0.989011}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -461,8 +461,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1097}
   - name: Boss1 (10)_Frame_97
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -481,8 +481,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 397}
   - name: Boss1 (10)_Frame_99
     originalName: 
-    pivot: {x: 0.48101267, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -501,8 +501,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1196}
   - name: Boss1 (10)_Frame_100
     originalName: 
-    pivot: {x: 0.48101267, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -521,8 +521,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 495}
   - name: Boss1 (10)_Frame_101
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -541,8 +541,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 593}
   - name: Boss1 (10)_Frame_103
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -561,8 +561,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 691}
   - name: Boss1 (10)_Frame_104
     originalName: 
-    pivot: {x: 0.48101267, y: -0.989011}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -581,8 +581,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1295}
   - name: Boss1 (10)_Frame_105
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -601,8 +601,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 789}
   - name: Boss1 (10)_Frame_107
     originalName: 
-    pivot: {x: 0.48101267, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -621,8 +621,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1394}
   - name: Boss1 (10)_Frame_108
     originalName: 
-    pivot: {x: 0.48101267, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -641,8 +641,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1493}
   - name: Boss1 (10)_Frame_109
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -661,8 +661,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 887}
   - name: Boss1 (10)_Frame_111
     originalName: 
-    pivot: {x: 0.48101267, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -681,8 +681,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1592}
   - name: Boss1 (10)_Frame_112
     originalName: 
-    pivot: {x: 0.48101267, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -701,8 +701,8 @@ ScriptedImporter:
     uvTransform: {x: 299, y: 1691}
   - name: Boss1 (10)_Frame_113
     originalName: 
-    pivot: {x: 0.48101267, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2181,8 +2181,8 @@ ScriptedImporter:
     uvTransform: {x: 532, y: 495}
   - name: Boss1 (10)_Frame_82
     originalName: 
-    pivot: {x: 0.49999997, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2201,8 +2201,8 @@ ScriptedImporter:
     uvTransform: {x: 386, y: 1493}
   - name: Boss1 (10)_Frame_86
     originalName: 
-    pivot: {x: 0.5172415, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2221,8 +2221,8 @@ ScriptedImporter:
     uvTransform: {x: 553, y: 1680}
   - name: Boss1 (10)_Frame_94
     originalName: 
-    pivot: {x: 0.5172415, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2241,8 +2241,8 @@ ScriptedImporter:
     uvTransform: {x: 553, y: 1778}
   - name: Boss1 (10)_Frame_115
     originalName: 
-    pivot: {x: 0.51428574, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2261,8 +2261,8 @@ ScriptedImporter:
     uvTransform: {x: 248, y: 473}
   - name: Boss1 (10)_Frame_116
     originalName: 
-    pivot: {x: 0.5294118, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2281,8 +2281,8 @@ ScriptedImporter:
     uvTransform: {x: 401, y: 403}
   - name: Boss1 (10)_Frame_117
     originalName: 
-    pivot: {x: 0.51351345, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2341,8 +2341,8 @@ ScriptedImporter:
     uvTransform: {x: 122, y: 1574}
   - name: Boss1 (10)_Frame_120
     originalName: 
-    pivot: {x: 0.54347825, y: -0.81000006}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2361,8 +2361,8 @@ ScriptedImporter:
     uvTransform: {x: 386, y: 1888}
   - name: Boss1 (10)_Frame_121
     originalName: 
-    pivot: {x: 0.4915254, y: -0.8076923}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2381,8 +2381,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 1698}
   - name: Boss1 (10)_Frame_122
     originalName: 
-    pivot: {x: 0.45762712, y: -0.764151}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2401,8 +2401,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 1584}
   - name: Boss1 (10)_Frame_123
     originalName: 
-    pivot: {x: 0.54838705, y: -0.7884615}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2421,8 +2421,8 @@ ScriptedImporter:
     uvTransform: {x: 445, y: 1472}
   - name: Boss1 (10)_Frame_124
     originalName: 
-    pivot: {x: 0.46808517, y: -0.68644065}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2441,8 +2441,8 @@ ScriptedImporter:
     uvTransform: {x: 170, y: 1596}
   - name: Boss1 (10)_Frame_125
     originalName: 
-    pivot: {x: 0.44897965, y: -0.8157894}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2481,8 +2481,8 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 1574}
   - name: Boss1 (10)_Frame_127
     originalName: 
-    pivot: {x: -0.03174591, y: -1.1470588}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2501,8 +2501,8 @@ ScriptedImporter:
     uvTransform: {x: 515, y: 1472}
   - name: Boss1 (10)_Frame_90
     originalName: 
-    pivot: {x: 0.49999997, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2521,8 +2521,8 @@ ScriptedImporter:
     uvTransform: {x: 532, y: 103}
   - name: Boss1 (10)_Frame_98
     originalName: 
-    pivot: {x: 0.5172415, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2541,8 +2541,8 @@ ScriptedImporter:
     uvTransform: {x: 553, y: 1876}
   - name: Boss1 (10)_Frame_102
     originalName: 
-    pivot: {x: 0.5172415, y: -1.0111111}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2561,8 +2561,8 @@ ScriptedImporter:
     uvTransform: {x: 592, y: 4}
   - name: Boss1 (10)_Frame_106
     originalName: 
-    pivot: {x: 0.49999997, y: -1}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2581,8 +2581,8 @@ ScriptedImporter:
     uvTransform: {x: 532, y: 201}
   - name: Boss1 (10)_Frame_110
     originalName: 
-    pivot: {x: 0.49999997, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2601,8 +2601,8 @@ ScriptedImporter:
     uvTransform: {x: 386, y: 1592}
   - name: Boss1 (10)_Frame_114
     originalName: 
-    pivot: {x: 0.49999997, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
