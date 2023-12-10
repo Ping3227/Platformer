@@ -35,14 +35,14 @@ namespace Platformer.Mechanics
             shake= Current_camera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
         public void ShakeCamera(float amp, float frequency, float duration,int priority=0) {
-            Debug.Log("ShakeCamera"+ShakePriority+" "+ priority);
+            //Debug.Log("ShakeCamera"+ShakePriority+" "+ priority);
             if (priority>=ShakePriority) {
                 
                 shake.m_AmplitudeGain = amp;
                 shake.m_FrequencyGain = frequency;
                 ShakePriority= priority;
                 shakeCounter = duration;
-                Debug.Log(shake.m_AmplitudeGain + " " + shake.m_FrequencyGain);
+                //Debug.Log(shake.m_AmplitudeGain + " " + shake.m_FrequencyGain);
             }
             
         }
@@ -50,8 +50,8 @@ namespace Platformer.Mechanics
         {
             if (shakeCounter > 0) { 
                 shakeCounter -= Time.deltaTime;
-                Debug.Log(shake.m_AmplitudeGain + " " + shake.m_FrequencyGain);
-                Debug.Log(Current_camera.name);
+                //Debug.Log(shake.m_AmplitudeGain + " " + shake.m_FrequencyGain);
+                //Debug.Log(Current_camera.name);
             }
             else
             {

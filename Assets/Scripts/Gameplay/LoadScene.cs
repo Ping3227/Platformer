@@ -17,7 +17,7 @@ namespace Platformer.Gameplay
         {
             
             SceneManager.LoadScene(SceneName);
-            
+            Schedule<ResetAll>();
         }
     }
 }

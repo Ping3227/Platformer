@@ -13,7 +13,7 @@ namespace Platformer.Gameplay
     {
         public override void Execute()
         {
-            
+            GamesceneUIController.instance.RecoverNum = 2;
         }
     }
 }

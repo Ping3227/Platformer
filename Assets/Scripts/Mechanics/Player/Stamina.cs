@@ -74,6 +74,7 @@ namespace Platformer.Mechanics
         void OnEnable()
         {
             CurrentStamina = MaxStamina;
+            if (GamesceneUIController.instance != null)
             GamesceneUIController.instance.SetStamina(1);
         }
         public void setParameter(int index) { 
