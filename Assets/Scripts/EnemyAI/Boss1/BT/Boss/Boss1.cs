@@ -3,11 +3,7 @@ using UnityEngine;
 using Panda;
 using System.Collections.Generic;
 using Platformer.Mechanics;
-using System.Runtime.CompilerServices;
-using UnityEditor;
-using JetBrains.Annotations;
-using Platformer.UI;
-using static Unity.VisualScripting.Member;
+
 
 public class Boos1 : MonoBehaviour
 {
@@ -381,15 +377,18 @@ public class Boos1 : MonoBehaviour
     }
     #endregion
     public void NextStage(AnimationClip clip, TextAsset[] BTscripts) {
-        //anim.Play(clip.name); clip.length
-        //anim.SetBool("IsAnimating", true);
+        anim.Play(clip.name); 
+        anim.SetBool("IsAnimating", true);
         if (BTscripts!=null) {
             _BT.enabled = false;
+            _BT.Reset();
             _BT.scripts = BTscripts;
             _BT.Compile();
-            LeanTween.delayedCall(gameObject,1.0f , () =>
+            _BT.Tick();
+            LeanTween.delayedCall(gameObject, clip.length, () =>
             {
                 _BT.enabled = true;
+                
             });
         }
     }
