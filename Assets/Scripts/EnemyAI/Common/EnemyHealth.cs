@@ -1,6 +1,6 @@
 using Platformer.Mechanics;
 using System;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
         _initialMaterial = _spriteRenderer.material;
         _currentHP = _stateInfo[0]._maxHP;
         boss = GetComponent<Boos1>();
+        
     }
     
     public void hurt(float damage) {
@@ -61,7 +62,8 @@ public class EnemyHealth : MonoBehaviour
         if (_currentHP <= 0) {
             if (State == _stateInfo.Length - 1){
                 // play animation and death
-                LeanTween.delayedCall(gameObject, _hurtInterval, () =>
+                boss.NextStage(_stateInfo[State].end_animation,null);
+                LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
                 {
                     Destroy(gameObject);
                 });
@@ -71,14 +73,10 @@ public class EnemyHealth : MonoBehaviour
                 boss.NextStage(_stateInfo[State].end_animation, _stateInfo[State].BT_scripts);
                 if (HealthBar != null)
                 {
-                    //_stateInfo[State].end_animation.length,
-                    LeanTween.delayedCall( 1.0f,() =>
-                    {
-                        
-                        State++;
-                        _currentHP = _stateInfo[State]._maxHP;
-                        HealthBar.value = _currentHP / _stateInfo[State]._maxHP;
-                    });
+                    State++;
+                    _currentHP = _stateInfo[State]._maxHP;
+                    HealthBar.value = _currentHP / _stateInfo[State]._maxHP;
+                    
                     
                 }
             }
@@ -102,6 +100,7 @@ public class EnemyHealth : MonoBehaviour
         public AnimationClip end_animation;
         public InteractActor[] InteractionObjects;
         public TextAsset[] BT_scripts;
+        
     }
 }
 
