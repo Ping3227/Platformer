@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638378314720104110
+  platformSettingsDirtyTick: 638379097932369900
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -241,8 +241,8 @@ ScriptedImporter:
     uvTransform: {x: 208, y: 670}
   - name: Boss1 (10)_Frame_83
     originalName: 
-    pivot: {x: 0.48101267, y: -1.0224719}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -1341,8 +1341,8 @@ ScriptedImporter:
     uvTransform: {x: 515, y: 1681}
   - name: Boss1 (10)_Frame_11
     originalName: 
-    pivot: {x: 0.5017422, y: -0.56172836}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2121,8 +2121,8 @@ ScriptedImporter:
     uvTransform: {x: 386, y: 1790}
   - name: Boss1 (10)_Frame_79
     originalName: 
-    pivot: {x: 0.51428574, y: -0.97802204}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2301,8 +2301,8 @@ ScriptedImporter:
     uvTransform: {x: 397, y: 501}
   - name: Boss1 (10)_Frame_118
     originalName: 
-    pivot: {x: 0.5000001, y: -0.9673913}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2321,8 +2321,8 @@ ScriptedImporter:
     uvTransform: {x: 248, y: 273}
   - name: Boss1 (10)_Frame_119
     originalName: 
-    pivot: {x: 0.51351345, y: -0.9462365}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -2461,8 +2461,8 @@ ScriptedImporter:
     uvTransform: {x: 170, y: 1474}
   - name: Boss1 (10)_Frame_126
     originalName: 
-    pivot: {x: 0.4272727, y: -0.6935483}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
