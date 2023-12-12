@@ -51,6 +51,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Boss
+    uniqueID: 4192820083
+    locked: 0
+  - name: Player
+    uniqueID: 1438747069
+    locked: 0
   - name: Ground_layer
     uniqueID: 4126655143
     locked: 0

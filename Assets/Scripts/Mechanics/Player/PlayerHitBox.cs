@@ -7,6 +7,10 @@ public class PlayerHitBox : MonoBehaviour
     Player player;
     [SerializeField] float damage;
     [SerializeField] ParticleSystem hitEffect;
+    [Header("Camera Shake")]
+    [SerializeField] float ShakeAmp;
+    [SerializeField] float ShakeFrequency;
+    [SerializeField] float ShakeDuration;
     void Start()
     {
         player = GameController.player;
@@ -15,9 +19,10 @@ public class PlayerHitBox : MonoBehaviour
     {
         if (other.CompareTag("Enemy")){
             other.GetComponent<EnemyHealth>().hurt(damage);
-            hitEffect.transform.position = other.ClosestPoint(transform.position);
-            //hitEffect.transform.position += ( player.gameObject.transform.position- other.gameObject.transform.position).normalized;
-
+            hitEffect.transform.position = other.transform.position;
+            hitEffect.transform.position += ( player.gameObject.transform.position- other.gameObject.transform.position).normalized*2;
+            CamearaController.Instance.ShakeCamera(ShakeAmp, ShakeFrequency, ShakeDuration,-1);
+            AudioManager.instance.Play("PlayerAttackHit");
             hitEffect.transform.rotation = Quaternion.FromToRotation(Vector3.forward, other.gameObject.transform.position- player.gameObject.transform.position);
             hitEffect.Play();
         }

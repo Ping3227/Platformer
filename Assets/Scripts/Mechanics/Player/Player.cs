@@ -3,6 +3,7 @@ using Platformer.Gameplay;
 using Platformer.Mechanics;
 using Platformer.UI;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Health), typeof(Stamina))]
 public class Player : MonoBehaviour
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour
     [SerializeField][Range(0, 1)] private float TimeSlower;
     [Tooltip("Recover Time from TimeSlower")]
     [SerializeField] private float TimeRecoverRate;
+    [SerializeField] private Light2D playerLight;
 
     [Header("Status")]
     private bool IsFacingRight = true;
@@ -102,6 +104,7 @@ public class Player : MonoBehaviour
         stamina = GetComponent<Stamina>();
         initialParent = transform.parent;
         if (GameController.Instance.IsSaved) transform.position = GameController.Instance.CheckPoint;
+        
     }
     private void Update() {
         Moveable();
@@ -422,14 +425,20 @@ public class Player : MonoBehaviour
         health.Hurt(damage);
         InvincibleCounter = hurtInvincibleTime;
         IsInvincible = true;
-
+        
         #region hurt effect
+        LeanTween.value(60,25,ShakeDuration/2).setOnUpdate((float val)=>
+        {
+            playerLight.pointLightOuterRadius = val;
+            
+        }).setLoopPingPong(1).setEaseInOutSine();
         var ev =Simulation.Schedule<PlayerHurt>();
         ev.RecoverRate = TimeRecoverRate;
         ev.TimeSlower = TimeSlower;
         ev.ShakeAmp = ShakeAmpitude;
         ev.ShakeFrequency = ShakeFrequency;
         ev.ShakeDuration = ShakeDuration;
+        AudioManager.instance.Play("PlayerHurt");
         hurtEffect.transform.position = transform.position;
         hurtEffect.Play();
         #endregion

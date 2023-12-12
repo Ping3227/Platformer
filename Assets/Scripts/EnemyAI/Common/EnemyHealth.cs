@@ -1,11 +1,18 @@
 using Platformer.Mechanics;
+using System;
+
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [Header("Health of stage")]
     private float _currentHP;
-    [SerializeField] private float _maxHP;
+    private Boos1 boss;
+    [SerializeField] StateInfo[] _stateInfo;
+    private int State=0;
     private SpriteRenderer _spriteRenderer;
+    
 
     [Tooltip("CumulateDamage for ability use")]
     public float _cumulateDamage { private set; get; } 
@@ -25,11 +32,14 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] AnimationClip _deadAnimation;
     [SerializeField] ParticleSystem _deadEffect;
     [SerializeField] AudioClip _deadSound;
+    [SerializeField] Slider HealthBar;
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _initialMaterial = _spriteRenderer.material;
-        _currentHP = _maxHP;
+        _currentHP = _stateInfo[0]._maxHP;
+        boss = GetComponent<Boos1>();
+        
     }
     
     public void hurt(float damage) {
@@ -42,14 +52,34 @@ public class EnemyHealth : MonoBehaviour
         else{
             Isimmune = true;
         }
-       _currentHP -= damage;
+        
+        _currentHP -= damage;
+        if (HealthBar != null)
+        {
+            HealthBar.value = _currentHP / _stateInfo[State]._maxHP;
+        }
         _cumulateDamage += damage;
         if (_currentHP <= 0) {
-            // delete object after delay
-            LeanTween.delayedCall(gameObject,_hurtInterval, () =>{
-                Destroy(gameObject);
-            });
-            // delay after dead 
+            if (State == _stateInfo.Length - 1){
+                // play animation and death
+                boss.NextStage(_stateInfo[State].end_animation,null);
+                LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
+                {
+                    Destroy(gameObject);
+                });
+            }
+            else {
+                
+                boss.NextStage(_stateInfo[State].end_animation, _stateInfo[State].BT_script);
+                if (HealthBar != null)
+                {
+                    State++;
+                    _currentHP = _stateInfo[State]._maxHP;
+                    HealthBar.value = _currentHP / _stateInfo[State]._maxHP;
+                    
+                    
+                }
+            }
         }
         
         _spriteRenderer.material = _flashMaterial;
@@ -63,5 +93,14 @@ public class EnemyHealth : MonoBehaviour
     public void ResetCumulateDamage() {
         _cumulateDamage = 0;
     }
-    
+    [Serializable]
+    class StateInfo
+    {
+        public float _maxHP;
+        public AnimationClip end_animation;
+        public InteractActor[] InteractionObjects;
+        public TextAsset BT_script;
+        
+    }
 }
+

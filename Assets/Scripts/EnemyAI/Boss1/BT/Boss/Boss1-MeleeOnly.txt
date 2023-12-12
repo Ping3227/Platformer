@@ -1,0 +1,127 @@
+tree("Root") 
+	random(0.6,0.4)
+		tree("Normal Attack")
+		tree("Special Attack")
+		
+tree("Normal Attack")
+	sequence
+		mute 
+			sequence 
+				CalculateDistance
+				CloserThan(2.0)
+				DodgePlayer
+				Teleport(2.0,true)
+				Wait(2.0)
+		GoToPlayer
+		Attack(1.0,false,true)
+		mute 
+			repeat 2
+				sequence
+					CalculateDistance
+					not CloserThan(3.0)
+					GoBeforePlayer
+					Attack(1.0,false,true)
+					Wait(2.0)
+		Random(0.5,0.5)
+			tree("Dodge")
+			tree("Strong Attack")
+				
+				
+		
+
+
+tree("Special Attack")
+	random(0.3,0.7)
+		sequence
+			tree("Consecutive Attack")
+			CloserThan(3.0)
+			tree("Dodge")
+		sequence
+			tree("DelayFall")
+			CloserThan(3.0)
+			Random(0.5,0.5)
+				tree("Dodge")
+				tree("Strong Attack")
+
+			
+		
+
+tree("Consecutive Attack")
+	sequence
+		// Initialial setup
+		GoToCorner
+		Teleport(2.0,true)
+		Wait(1.0)		
+		CalculateDistance
+		// first teleport
+		fallback
+			sequence
+				// attack
+				CloserThan(5.0)
+				IsPlayerLowerthan(1.0)
+				GoBeforePlayer
+				Attack(2.0,true,false)
+				Wait(1.0)
+			sequence
+				// not attack
+				GoForward(3.0)
+				Teleport(5.0,false)
+				Wait(0.3)
+				sequence
+				// second teleport
+					CalculateDistance
+					IsPlayerInfront
+					fallback 
+						sequence
+						    // Attack
+							not CloserThan(2.0)
+							CloserThan(5.0)
+							IsPlayerLowerthan(1.0)
+							GoBeforePlayer
+							Attack(3.0,true,false)
+							Wait(1.0)
+						sequence
+							// not attack
+							GoForward(3.0)
+							Teleport(10.0,false)
+							Wait(0.3)
+							CalculateDistance
+							fallback
+								sequence
+								   // Attack
+									not CloserThan(2.0)
+									CloserThan(5.0)
+									IsPlayerLowerthan(1.0)
+									IsPlayerInfront
+									GoBeforePlayer
+									Attack(4.0,true,false)
+									Wait(1.5)
+								sequence
+									//attack far away
+									GoForward(5.0)
+									Attack(4.0,true,false)
+									Wait(1.5)
+
+// This region is for defense action		
+tree("Dodge")
+	sequence
+		DodgePlayer
+		Teleport(2.0,true)
+		Wait(2.0)
+
+tree("Strong Attack")
+	sequence 
+		StrongAttack
+		Wait(1.5)
+		CalculateDistance
+		CloserThan(3.0)
+		tree("Dodge")	
+
+tree("DelayFall")
+	sequence
+		GoAbovePlayer
+		DelayFallAttack
+		Wait(1.5)
+
+
+		

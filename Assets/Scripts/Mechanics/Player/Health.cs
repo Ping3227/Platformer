@@ -27,12 +27,13 @@ namespace Platformer.Mechanics {
         }
         public void Hurt(float  value)
         {
-            if(IsAlive) currentHP -= value;
+            if (IsAlive) currentHP -= value;
+            else return;
             if (currentHP <= 0)
             {
                 currentHP = 0;
                 GetComponent<Player>().Dead();
-                Simulation.Schedule<PlayerDeath>();
+                Simulation.Schedule<PlayerDeath>(0.5f);
             }
             GamesceneUIController.instance.SetHealth(healthPercentage);
 

@@ -17,7 +17,7 @@ namespace Platformer.Gameplay
 
             
             GamesceneUIController.instance.Death();
-            var reload =Simulation.Schedule<LoadScene>(1.5f);
+            var reload =Schedule<LoadScene>(1.5f);
             reload.SceneName = SceneManager.GetActiveScene().name;
             GamesceneUIController.instance.Respawn();
         }
