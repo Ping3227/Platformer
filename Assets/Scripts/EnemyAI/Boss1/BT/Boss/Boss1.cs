@@ -376,19 +376,22 @@ public class Boos1 : MonoBehaviour
         FailAttackCount = 0;
     }
     #endregion
-    public void NextStage(AnimationClip clip, TextAsset[] BTscripts) {
+    public void NextStage(AnimationClip clip, TextAsset BTscript) {
         anim.Play(clip.name); 
         anim.SetBool("IsAnimating", true);
-        if (BTscripts!=null) {
+        if (BTscript!=null) {
             _BT.enabled = false;
-            _BT.Reset();
-            _BT.scripts = BTscripts;
-            _BT.Compile();
-            _BT.Tick();
+            
+            
+            
+            _BT.Compile(BTscript.text);
+            
             LeanTween.delayedCall(gameObject, clip.length, () =>
             {
                 _BT.enabled = true;
                 
+                _BT.Tick();
+
             });
         }
     }

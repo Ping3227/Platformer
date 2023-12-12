@@ -70,7 +70,7 @@ public class EnemyHealth : MonoBehaviour
             }
             else {
                 
-                boss.NextStage(_stateInfo[State].end_animation, _stateInfo[State].BT_scripts);
+                boss.NextStage(_stateInfo[State].end_animation, _stateInfo[State].BT_script);
                 if (HealthBar != null)
                 {
                     State++;
@@ -99,7 +99,7 @@ public class EnemyHealth : MonoBehaviour
         public float _maxHP;
         public AnimationClip end_animation;
         public InteractActor[] InteractionObjects;
-        public TextAsset[] BT_scripts;
+        public TextAsset BT_script;
         
     }
 }

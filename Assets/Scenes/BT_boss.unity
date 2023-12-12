@@ -32343,6 +32343,10 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
+      propertyPath: _stateInfo.Array.data[0].BT_script
+      value: 
+      objectReference: {fileID: 4900000, guid: 6f27490ce555e4f45a066a05043e5358, type: 3}
+    - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0].end_animation
       value: 
       objectReference: {fileID: -8083872452977053707, guid: a0aaa842dc9104c959ba6cd17776b660, type: 3}
