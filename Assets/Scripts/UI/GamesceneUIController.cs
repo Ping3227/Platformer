@@ -163,7 +163,7 @@ namespace Platformer.UI
         }
         public void Respawn()
         {
-            InventoryManager.Instance.Clear();
+            //InventoryManager.Instance.Clear();
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 0, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(1.5f);
             Image[] childImages = RecoverCanvas.transform.GetComponentsInChildren<Image>();
             foreach (Image image in childImages)

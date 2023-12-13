@@ -55,12 +55,22 @@ public class AudioManager : MonoBehaviour
     }
 
 
+    public void StopAllBackground() {
+        foreach (Sound s in sounds)
+        {
+            if (s.loop) {
+                s.source.Stop();
+            }
+            
+
+        }
+        
+    }
     public void Pause(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.SoundName == name);
         s.source.Pause();
     }
-
 
 
     public void PlayDelayed(string name, float second)

@@ -14,7 +14,8 @@ namespace Platformer.Gameplay
         public override void Execute()
         {
             Debug.Log("Player died.");
-
+            AudioManager.instance.StopAllBackground();
+            
             
             GamesceneUIController.instance.Death();
             var reload =Schedule<LoadScene>(1.5f);

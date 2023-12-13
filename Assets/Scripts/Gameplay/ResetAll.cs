@@ -14,6 +14,7 @@ namespace Platformer.Gameplay
         public override void Execute()
         {
             GamesceneUIController.instance.RecoverNum = 2;
+            AudioManager.instance.Play("SimpleBGM");
         }
     }
 }
