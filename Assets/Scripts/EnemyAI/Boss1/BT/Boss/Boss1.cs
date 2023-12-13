@@ -379,20 +379,22 @@ public class Boos1 : MonoBehaviour
     public void NextStage(AnimationClip clip, TextAsset BTscript) {
         anim.Play(clip.name); 
         anim.SetBool("IsAnimating", true);
-        if (BTscript!=null) {
+        if (BTscript != null)
+        {
             _BT.enabled = false;
-            
-            
-            
             _BT.Compile(BTscript.text);
-            
+
             LeanTween.delayedCall(gameObject, clip.length, () =>
             {
                 _BT.enabled = true;
-                
+
                 _BT.Tick();
 
             });
+        }
+        else {
+            AudioManager.instance.StopAllBackground();
+            AudioManager.instance.Play("SimpleBGM");
         }
     }
 }

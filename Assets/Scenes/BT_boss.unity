@@ -6505,6 +6505,7 @@ GameObject:
   - component: {fileID: 257388451}
   - component: {fileID: 257388450}
   - component: {fileID: 257388449}
+  - component: {fileID: 257388452}
   m_Layer: 0
   m_Name: TriggerBossFight
   m_TagString: Untagged
@@ -6545,9 +6546,9 @@ MonoBehaviour:
   OnDirectorPlay:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1478664230}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
+      - m_Target: {fileID: 257388452}
+        m_TargetAssemblyTypeName: TimelineHelper, Assembly-CSharp
+        m_MethodName: play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6555,18 +6556,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: BattleBGM
-          m_BoolArgument: 0
-        m_CallState: 1
-      - m_Target: {fileID: 1478664230}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Stop
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SimpleBGM
           m_BoolArgument: 0
         m_CallState: 1
   OnDirectorFinish:
@@ -6698,6 +6687,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8783982, y: 2.2766857}
   m_EdgeRadius: 0
+--- !u!114 &257388452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257388447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35c0fcb98791074db1a9dd8b60f98ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &262536306 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1443943694047110491, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
@@ -13854,7 +13855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &868118842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13925,14 +13926,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868118841}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.000000021384398, y: 0.000000032201303, z: 6.886055e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 497199216}
   - {fileID: 1565863238}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 896624522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -14052,6 +14053,38 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &896624521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 896624522}
+  m_Layer: 0
+  m_Name: All boss Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &896624522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896624521}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000021384398, y: -0.000000032201303, z: -6.886055e-16, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 868118845}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &920473767
 GameObject:
   m_ObjectHideFlags: 0
@@ -23703,6 +23736,6 @@ SceneRoots:
   - {fileID: 73037690}
   - {fileID: 1461665465}
   - {fileID: 1747287500}
+  - {fileID: 896624522}
   - {fileID: 1357529314}
   - {fileID: 96336982}
-  - {fileID: 868118845}

@@ -63,6 +63,7 @@ public class EnemyHealth : MonoBehaviour
             if (State == _stateInfo.Length - 1){
                 // play animation and death
                 boss.NextStage(_stateInfo[State].end_animation,null);
+                Destroy(HealthBar.transform.parent.gameObject);
                 LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
                 {
                     Destroy(gameObject);
