@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [Header("Move")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] float InputTimeAllowance = 0.3f;
+    private float LastMoveTime;
+    private bool MoveBuffer;
 
     [Header("Attack")]
     [SerializeField] private float AttackTime = 0.2f;
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour
     private bool IsDoubleJumping = false;
     private bool IsInvincible = false;
     private bool IsHealing = false;
+    private bool IsDead = false;
     private bool FinishDoubleJump = false;
     private float JumpApex = 0f;
     private bool IsMoveable = true;
@@ -107,6 +110,13 @@ public class Player : MonoBehaviour
         
     }
     private void Update() {
+        if (IsDead && IsGrounded()) {
+            anim.SetTrigger("Dead");
+            IsDead = false;
+            
+            return;
+            
+        }
         Moveable();
         Invincible();
         CalculateBuffer();
@@ -142,6 +152,7 @@ public class Player : MonoBehaviour
         if (IsDashing) return;
         if ((UserInput.instance.controls.Attack.Attack.WasPressedThisFrame() || (AttackBuffer && (LastAttackTime + InputTimeAllowance) > Time.time)))
         {
+            
             stamina.ConsumeStamina(AttackCost);
             anim.SetTrigger("Attack");
             AudioManager.instance.Play("PlayerAttack");
@@ -150,6 +161,10 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector2(rb.velocity.x * 50, 0));
             rb.velocity = Vector2.zero;
             AttackBuffer = false;
+            if ((MoveBuffer && (LastMoveTime + InputTimeAllowance) > Time.time)) {
+                Turn();
+                MoveBuffer = false;
+            }
         }
     }
 
@@ -160,6 +175,7 @@ public class Player : MonoBehaviour
         moveInput = UserInput.instance.moveInput.x;
         if (moveInput > 0 || moveInput < 0) {
             TurnCheck();
+            MoveBuffer= false;
         }
         if (IsHealing) rb.velocity = new Vector2(moveInput * HealMoveSpeed, 0);
         else rb.velocity = new Vector2(moveInput * moveSpeed * (1 + JumpApex), rb.velocity.y);
@@ -244,7 +260,10 @@ public class Player : MonoBehaviour
             IsDashing = true;
             AudioManager.instance.Play("Dash");
             if (IsJumping) IsJumping = false;
-
+            if ((MoveBuffer && (LastMoveTime + InputTimeAllowance) > Time.time)){
+                Turn();
+                MoveBuffer = false;
+            }
             DashTimeCounter = dashTime;
             InvincibleCounter = dashInvincibleTime;
             DashBuffer = false;
@@ -333,6 +352,7 @@ public class Player : MonoBehaviour
             Turn();
         }
     }
+    
     private void Turn()
     {
         if (IsFacingRight)
@@ -453,9 +473,11 @@ public class Player : MonoBehaviour
         anim.SetTrigger("Pounded");
     }
     public void Dead() {
-        anim.SetTrigger("Dead");
+        rb.velocity = Vector2.zero;
+        IsDead = true;
+        ImmobileTimeCounter= 10.0f;
+        IsMoveable = false;
         // Dead event 
-        rb.velocity= Vector2.zero;
     }
     public void Reflected(float damage) { 
         anim.SetTrigger("IsReflected");
@@ -525,6 +547,16 @@ public class Player : MonoBehaviour
                 HealBuffer = true;
                 LastHealTime = Time.time;
             }
+        }
+        if (UserInput.instance.moveInput.x > 0 && !IsFacingRight)
+        {
+            MoveBuffer = true;
+            LastMoveTime = Time.time;
+        }
+        else if (UserInput.instance.moveInput.x < 0 && IsFacingRight)
+        {
+            MoveBuffer = true;
+            LastMoveTime = Time.time;
         }
         
     }

@@ -295,6 +295,13 @@ public class Boos1 : MonoBehaviour
         {
             anim.Play("DelayFallAttack");
             anim.SetBool("IsAnimating", true);
+            AudioManager.instance.PlayDelayed("BossFallAttack", 0.50f);
+            // Used leatween to continue call a function in a constant interval until its done
+            LeanTween.value(gameObject, 0, 1, 0.5f).setOnUpdate((float val) =>
+            {
+                CamearaController.Instance.ShakeCamera(val * 2, 0.1f, 0.3f, 1);
+
+            }).setDelay(0.50f);
             fallAttackNext = false;
             ThisTask.Succeed();
         }

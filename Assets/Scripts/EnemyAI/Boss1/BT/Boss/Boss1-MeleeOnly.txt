@@ -11,7 +11,10 @@ tree("Normal Attack")
 				CloserThan(2.0)
 				DodgePlayer
 				Teleport(2.0,true)
-				Wait(2.0)
+				CalculateDistance
+				Wait(1.0)
+				not CloserThan(5.0)
+				Wait(0.5)
 		GoToPlayer
 		Attack(1.0,false,true)
 		mute 
@@ -43,8 +46,6 @@ tree("Special Attack")
 				tree("Dodge")
 				tree("Strong Attack")
 
-			
-		
 
 tree("Consecutive Attack")
 	sequence
@@ -65,7 +66,7 @@ tree("Consecutive Attack")
 			sequence
 				// not attack
 				GoForward(3.0)
-				Teleport(5.0,false)
+				Teleport(10.0,false)
 				Wait(0.3)
 				sequence
 				// second teleport
@@ -97,17 +98,29 @@ tree("Consecutive Attack")
 									Attack(4.0,true,false)
 									Wait(1.5)
 								sequence
-									//attack far away
-									GoForward(5.0)
+									random(0.5,0.5)
+										GoForward(5.0)
+										sequence 
+											IsPlayerInfront
+											GoAbovePlayer
 									Attack(4.0,true,false)
 									Wait(1.5)
+									
 
 // This region is for defense action		
 tree("Dodge")
 	sequence
 		DodgePlayer
 		Teleport(2.0,true)
-		Wait(2.0)
+		Wait(1.0)
+		CalculateDistance
+		mute
+			sequence
+				CloserThan(5.0)
+				StrongAttack
+				Wait(0.5)
+		Wait(1.0)
+
 
 tree("Strong Attack")
 	sequence 
@@ -122,6 +135,5 @@ tree("DelayFall")
 		GoAbovePlayer
 		DelayFallAttack
 		Wait(1.5)
-
 
 		
