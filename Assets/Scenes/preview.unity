@@ -25141,7 +25141,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0.5}
-    oldSize: {x: 3.1, y: 0.2}
+    oldSize: {x: 3.2666667, y: 0.46666667}
     newSize: {x: 1.51, y: 0.06}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -28376,6 +28376,7 @@ MonoBehaviour:
   ImmobolizePrefab: {fileID: 1976058688}
   AttackRange: 1
   AttackDownSideRange: 7
+  AttackEffect: {fileID: 0}
   Area: {fileID: 1853719546}
   player: {fileID: 0}
   SmallestMoveDistance: 0
@@ -30623,8 +30624,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -32050,8 +32051,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Well Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
