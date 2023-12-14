@@ -17,6 +17,7 @@ public class Boos1 : MonoBehaviour
     private bool fallAttackNext = false;
     private int NormalAttackCount = 0;
     private int FailAttackCount = 0;
+    [SerializeField] ParticleSystem AttackEffect;
 
     [Header("Move")]
     private Rigidbody2D rb;
@@ -287,6 +288,11 @@ public class Boos1 : MonoBehaviour
 
             ThisTask.Succeed();
         }
+    }
+    [Task]
+    void ConsecutiveAttack(){
+        AttackEffect.Play();
+        ThisTask.Succeed();
     }
     [Task]
     void DelayFallAttack()

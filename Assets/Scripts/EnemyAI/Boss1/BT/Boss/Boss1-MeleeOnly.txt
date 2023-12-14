@@ -51,7 +51,8 @@ tree("Consecutive Attack")
 	sequence
 		// Initialial setup
 		GoToCorner
-		Teleport(2.0,true)
+		Teleport(1.5,true)
+		ConsecutiveAttack()
 		Wait(1.0)		
 		CalculateDistance
 		// first teleport
