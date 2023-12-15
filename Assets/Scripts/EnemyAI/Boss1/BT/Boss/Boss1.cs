@@ -10,7 +10,9 @@ public class Boos1 : MonoBehaviour
     [Header("Animation")]
     private Animator anim;
     [SerializeField] GameObject ImmobolizePrefab;
-
+    [SerializeField] GameObject Bomb;
+    [SerializeField] GameObject Drone;
+    
     [Header("Attack")]
     [SerializeField] float AttackRange;
     [SerializeField] float AttackDownSideRange;
