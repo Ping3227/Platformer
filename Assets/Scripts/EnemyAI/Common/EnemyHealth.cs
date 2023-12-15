@@ -18,21 +18,12 @@ public class EnemyHealth : MonoBehaviour
     [Header("player hurt effect")]
     private  bool Isimmune;
     private Material _initialMaterial;
-<<<<<<< Updated upstream
-    [SerializeField] private GameObject _canvas;
-=======
     private Color _initialColor;
->>>>>>> Stashed changes
     [Tooltip("The material when player hurt")]
     [SerializeField] Material _flashMaterial;
     [Tooltip("The color when player hurt")]
     [SerializeField] Color _flashColor;
     [SerializeField] float _hurtInterval;
-<<<<<<< Updated upstream
-    [SerializeField] float hurtSound;
-    [SerializeField] GameObject _gameController;
-=======
->>>>>>> Stashed changes
 
     [Header("Enemy dead effect")]
     [SerializeField] AnimationClip _deadAnimation;
@@ -64,16 +55,7 @@ public class EnemyHealth : MonoBehaviour
                 {
                     _spawner?.OnObjectDeath();
                     Destroy(gameObject);
-<<<<<<< Updated upstream
-                    Destroy(_canvas);
-                    
-                    //GamesceneUIController.Victory();
-                    _gameController.GetComponent<GamesceneUIController>().Victory();
-                    SceneManager.LoadScene("LeaderBoard");
-                    //_gameController.getComponent<GamesceneUIController>.Victory();
-=======
 
->>>>>>> Stashed changes
                 });
             }
             else {

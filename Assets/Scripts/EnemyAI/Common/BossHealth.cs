@@ -1,7 +1,9 @@
 using Platformer.Mechanics;
+using Platformer.UI;
 using System;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
@@ -33,6 +35,8 @@ public class BossHealth : MonoBehaviour
     [SerializeField] ParticleSystem _deadEffect;
     [SerializeField] AudioClip _deadSound;
     [SerializeField] Slider HealthBar;
+    [SerializeField] private GameObject _canvas;
+    [SerializeField] GameObject _gameController;
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -66,6 +70,12 @@ public class BossHealth : MonoBehaviour
                 Destroy(HealthBar.transform.parent.gameObject);
                 LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
                 {
+                    Destroy(_canvas);
+
+                    //GamesceneUIController.Victory();
+                    _gameController.GetComponent<GamesceneUIController>().Victory();
+                    SceneManager.LoadScene("LeaderBoard");
+                    //_gameController.getComponent<GamesceneUIController>.Victory();
                     Destroy(gameObject);
                 });
             }
