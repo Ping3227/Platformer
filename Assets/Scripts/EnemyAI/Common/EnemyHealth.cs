@@ -3,6 +3,8 @@ using System;
 
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using Platformer.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -21,12 +23,14 @@ public class EnemyHealth : MonoBehaviour
     [HideInInspector]public bool IsReflecting;
     private  bool Isimmune;
     private Material _initialMaterial;
+    [SerializeField] private GameObject _canvas;
     [Tooltip("The material when player hurt")]
     [SerializeField] Material _flashMaterial;
     [Tooltip("The color when player hurt")]
     [SerializeField] Color _flashColor;
     [SerializeField] float _hurtInterval;
     [SerializeField] float hurtSound;
+    [SerializeField] GameObject _gameController;
 
     [Header("Enemy dead effect")]
     [SerializeField] AnimationClip _deadAnimation;
@@ -67,6 +71,12 @@ public class EnemyHealth : MonoBehaviour
                 LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
                 {
                     Destroy(gameObject);
+                    Destroy(_canvas);
+                    
+                    //GamesceneUIController.Victory();
+                    _gameController.GetComponent<GamesceneUIController>().Victory();
+                    SceneManager.LoadScene("LeaderBoard");
+                    //_gameController.getComponent<GamesceneUIController>.Victory();
                 });
             }
             else {

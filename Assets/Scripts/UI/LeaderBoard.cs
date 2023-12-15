@@ -10,8 +10,6 @@ public class PlayerData
 
 public class LeaderBoard : MonoBehaviour
 {
-    public string fileName = "test";
-
     void Start()
     {
         PlayerData[] players = Read();
@@ -27,13 +25,11 @@ public class LeaderBoard : MonoBehaviour
         {
             Debug.Log("No Data");
         }
-        
-        //Write("Jack", "8.0");
     }
 
-    public PlayerData[] Read()
+    public static PlayerData[] Read()
     {
-        TextAsset textAsset = Resources.Load<TextAsset>(fileName);
+        TextAsset textAsset = Resources.Load<TextAsset>("test");
 
         PlayerData[] players = new PlayerData[0];
 
@@ -63,7 +59,7 @@ public class LeaderBoard : MonoBehaviour
     }
 
 
-    public void Write(string name, string time)
+    public static void Write(string name, string time)
     {
         using (StreamWriter writeFile = new StreamWriter(System.IO.Path.Combine("Assets/Resources", "leader.txt"), true))
         {
