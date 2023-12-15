@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
         }
         UpdateAnimation();
         IsOnPlatform();
-        ItemCheck();
+        // ItemCheck();
 
     }
 
@@ -319,26 +319,26 @@ public class Player : MonoBehaviour
             InvincibleCounter = 0;
         }
     }
-    private void ItemCheck()
-    {
-        if (UserInput.instance.controls.SwitchItem.SwitchItem.WasPressedThisFrame())
-        {
-            Debug.Log("...");
-            InventoryManager.Instance.NextItem();
-        }
-        else if (UserInput.instance.controls.UsedItem.UsedItem.WasPressedThisFrame() && IsMoveable && !IsDashing && !IsFalling)
-        {
-            if (InventoryManager.Instance.currentItem != null)
-            {
-                if (InventoryManager.Instance.currentItem==HealItem && InventoryManager.Instance.UsedItem(HealItem))
-                {
-                    anim.SetTrigger("Heal");
-                    ImmobileTimeCounter = HealTime;
-                    IsMoveable = false;
-                }
-            }
-        }
-    }
+    //private void ItemCheck()
+    //{
+    //    if (UserInput.instance.controls.SwitchItem.SwitchItem.WasPressedThisFrame())
+    //    {
+    //        Debug.Log("...");
+    //        InventoryManager.Instance.NextItem();
+    //    }
+    //    else if (UserInput.instance.controls.UsedItem.UsedItem.WasPressedThisFrame() && IsMoveable && !IsDashing && !IsFalling)
+    //    {
+    //        if (InventoryManager.Instance.currentItem != null)
+    //        {
+    //            if (InventoryManager.Instance.currentItem==HealItem && InventoryManager.Instance.UsedItem(HealItem))
+    //            {
+    //                anim.SetTrigger("Heal");
+    //                ImmobileTimeCounter = HealTime;
+    //                IsMoveable = false;
+    //            }
+    //        }
+    //    }
+    //}
     #endregion
     #region Turn check
     private void TurnCheck()

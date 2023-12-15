@@ -10,108 +10,89 @@ public class EnemyHealth : MonoBehaviour
 {
     [Header("Health of stage")]
     private float _currentHP;
-    private Boos1 boss;
-    [SerializeField] StateInfo[] _stateInfo;
-    private int State=0;
+    [SerializeField] private float _maxHP;
+    [SerializeField] private bool IsInvincible;
     private SpriteRenderer _spriteRenderer;
-    
-
-    [Tooltip("CumulateDamage for ability use")]
-    public float _cumulateDamage { private set; get; } 
+    [HideInInspector] public PracticeSpawner Spawner;
 
     [Header("player hurt effect")]
-    [HideInInspector]public bool IsReflecting;
     private  bool Isimmune;
     private Material _initialMaterial;
+<<<<<<< Updated upstream
     [SerializeField] private GameObject _canvas;
+=======
+    private Color _initialColor;
+>>>>>>> Stashed changes
     [Tooltip("The material when player hurt")]
     [SerializeField] Material _flashMaterial;
     [Tooltip("The color when player hurt")]
     [SerializeField] Color _flashColor;
     [SerializeField] float _hurtInterval;
+<<<<<<< Updated upstream
     [SerializeField] float hurtSound;
     [SerializeField] GameObject _gameController;
+=======
+>>>>>>> Stashed changes
 
     [Header("Enemy dead effect")]
     [SerializeField] AnimationClip _deadAnimation;
     [SerializeField] ParticleSystem _deadEffect;
     [SerializeField] AudioClip _deadSound;
-    [SerializeField] Slider HealthBar;
+    [SerializeField] PracticeSpawner _spawner;
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _initialMaterial = _spriteRenderer.material;
-        _currentHP = _stateInfo[0]._maxHP;
-        boss = GetComponent<Boos1>();
-        
+        _initialColor = _spriteRenderer.color;
+        _currentHP = _maxHP;
+       
     }
     
     public void hurt(float damage) {
-        if (IsReflecting)
-        {
-            GameController.player.Reflected(damage);
-            return;
-        }
         if (Isimmune) return;
         else{
             Isimmune = true;
         }
-        
-        _currentHP -= damage;
-        if (HealthBar != null)
-        {
-            HealthBar.value = _currentHP / _stateInfo[State]._maxHP;
-        }
-        _cumulateDamage += damage;
+        if (!IsInvincible) _currentHP -= damage;       
         if (_currentHP <= 0) {
-            if (State == _stateInfo.Length - 1){
-                // play animation and death
-                boss.NextStage(_stateInfo[State].end_animation,null);
-                Destroy(HealthBar.transform.parent.gameObject);
-                LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
+                if (_deadEffect != null){
+                    _deadEffect.Play();
+                }
+            if (_deadAnimation != null)
+            {
+                LeanTween.delayedCall(gameObject, _deadAnimation.length, () =>
                 {
+                    _spawner?.OnObjectDeath();
                     Destroy(gameObject);
+<<<<<<< Updated upstream
                     Destroy(_canvas);
                     
                     //GamesceneUIController.Victory();
                     _gameController.GetComponent<GamesceneUIController>().Victory();
                     SceneManager.LoadScene("LeaderBoard");
                     //_gameController.getComponent<GamesceneUIController>.Victory();
+=======
+
+>>>>>>> Stashed changes
                 });
             }
             else {
-                
-                boss.NextStage(_stateInfo[State].end_animation, _stateInfo[State].BT_script);
-                if (HealthBar != null)
+                LeanTween.delayedCall(gameObject, _hurtInterval, () =>
                 {
-                    State++;
-                    _currentHP = _stateInfo[State]._maxHP;
-                    HealthBar.value = _currentHP / _stateInfo[State]._maxHP;
-                    
-                    
-                }
+                    _spawner?.OnObjectDeath();
+                    Destroy(gameObject);
+                });
             }
-        }
-        
+                
+            }
         _spriteRenderer.material = _flashMaterial;
       
        LeanTween.color(gameObject, _flashColor, _hurtInterval).setOnComplete(() => {
            _spriteRenderer.material = _initialMaterial;
-           _spriteRenderer.color = Color.white;
+           _spriteRenderer.color = _initialColor;
            Isimmune = false;
        });
     }
-    public void ResetCumulateDamage() {
-        _cumulateDamage = 0;
-    }
-    [Serializable]
-    class StateInfo
-    {
-        public float _maxHP;
-        public AnimationClip end_animation;
-        public InteractActor[] InteractionObjects;
-        public TextAsset BT_script;
-        
-    }
+    
 }
 

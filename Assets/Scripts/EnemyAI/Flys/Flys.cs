@@ -1,4 +1,5 @@
 using Panda;
+using Platformer.Mechanics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -13,24 +14,26 @@ public class Flys : MonoBehaviour
     private Vector2 SupportPoint1;
     private Vector2 SupportPoint2;
     private float progress;
-    [SerializeField] BoxCollider2D PatrolArea;
+    public BoxCollider2D PatrolArea;
     [SerializeField] float SmallestMoveDistance;
     [SerializeField] float Speed;
+
     private bool IsMoving= false;
     enum State {  Moving, Attacking };
-    private State state ;
+    private State state =State.Attacking ;
 
     [Header("Attack")]
     [SerializeField] Player player;
-    [SerializeField] BoxCollider2D AttackArea;
+    public BoxCollider2D AttackArea;
     private Animator anim;
 
     private void Start()
     {
+        if(player==null) player = GameController.player;
         StartPoint = transform.position;
         rb= GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
+        
     }
     private void Update()
     {

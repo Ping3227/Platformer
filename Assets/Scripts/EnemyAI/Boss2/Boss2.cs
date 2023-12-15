@@ -25,12 +25,12 @@ public class Boss2 : MonoBehaviour
     [SerializeField] float SmallestMoveDistance;
 
     [Header("status")]
-    EnemyHealth health;
+    BossHealth health;
     private void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        health = GetComponent<EnemyHealth>();
+        health = GetComponent<BossHealth>();
         player = GameController.player;
         playerColl = player.gameObject.GetComponent<BoxCollider2D>();
         PandaBehaviour pd = GetComponent<PandaBehaviour>();

@@ -18,7 +18,15 @@ public class PlayerHitBox : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy")){
-            other.GetComponent<EnemyHealth>().hurt(damage);
+            BossHealth bossHealth = other.GetComponent<BossHealth>();
+            if (bossHealth)
+            {
+                other.GetComponent<BossHealth>().hurt(damage);
+            }
+            else { 
+                other.GetComponent<EnemyHealth>().hurt(damage);
+            }
+            
             hitEffect.transform.position = other.transform.position;
             hitEffect.transform.position += ( player.gameObject.transform.position- other.gameObject.transform.position).normalized*2;
             CamearaController.Instance.ShakeCamera(ShakeAmp, ShakeFrequency, ShakeDuration,-1);

@@ -1,3 +1,4 @@
+using Platformer.Mechanics;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,7 +8,11 @@ public class AutoAim : MonoBehaviour
 {
     [SerializeField] Transform target;
 
+    private void Start()
+    {
+        if(target==null) target = GameController.player.transform;
     
+    }
 
     void Update(){
         // Only rotate z axis toward target

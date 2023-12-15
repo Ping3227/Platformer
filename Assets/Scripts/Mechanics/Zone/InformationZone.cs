@@ -11,6 +11,7 @@ public class InformationZone : MonoBehaviour
     [SerializeField] GameObject PopOutWord;
     [SerializeField] float PopOutTime;
     [SerializeField] float Size;
+ 
     private void Awake()
     {
         _PopOutWord= Instantiate(PopOutWord, transform.position, Quaternion.identity);

@@ -395,62 +395,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""UsedItem"",
-            ""id"": ""a7048b8b-96f2-43ef-bf55-3c09ee0106ee"",
-            ""actions"": [
-                {
-                    ""name"": ""UsedItem"",
-                    ""type"": ""Button"",
-                    ""id"": ""96af48d8-afe3-45cb-be0a-044a094da5f1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""dc7048aa-223f-4286-80f7-9546d1792b4b"",
-                    ""path"": ""<Keyboard>/i"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UsedItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""SwitchItem"",
-            ""id"": ""6027c784-74ba-4f79-97da-facc953ebe1d"",
-            ""actions"": [
-                {
-                    ""name"": ""SwitchItem"",
-                    ""type"": ""Button"",
-                    ""id"": ""a8d968c9-1ead-41a0-9fc2-f1b9ff3278a7"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""b398fa1f-845e-4a96-bfc9-565d2a02dac9"",
-                    ""path"": ""<Keyboard>/p"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Heal"",
             ""id"": ""337b1809-fc00-4e3c-966e-05a9d766aea6"",
             ""actions"": [
@@ -473,6 +417,34 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Interact"",
+            ""id"": ""4dd8d5ef-a183-4c45-a9dc-9e9b535fe920"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""56d563a8-46f5-44dc-bc24-4d7efd470b24"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8c81b1d1-d02a-4b55-9b52-7ee53c8768b6"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -507,15 +479,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Dash
         m_Dash = asset.FindActionMap("Dash", throwIfNotFound: true);
         m_Dash_Dash = m_Dash.FindAction("Dash", throwIfNotFound: true);
-        // UsedItem
-        m_UsedItem = asset.FindActionMap("UsedItem", throwIfNotFound: true);
-        m_UsedItem_UsedItem = m_UsedItem.FindAction("UsedItem", throwIfNotFound: true);
-        // SwitchItem
-        m_SwitchItem = asset.FindActionMap("SwitchItem", throwIfNotFound: true);
-        m_SwitchItem_SwitchItem = m_SwitchItem.FindAction("SwitchItem", throwIfNotFound: true);
         // Heal
         m_Heal = asset.FindActionMap("Heal", throwIfNotFound: true);
         m_Heal_Heal = m_Heal.FindAction("Heal", throwIfNotFound: true);
+        // Interact
+        m_Interact = asset.FindActionMap("Interact", throwIfNotFound: true);
+        m_Interact_Interact = m_Interact.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -804,98 +773,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     }
     public DashActions @Dash => new DashActions(this);
 
-    // UsedItem
-    private readonly InputActionMap m_UsedItem;
-    private List<IUsedItemActions> m_UsedItemActionsCallbackInterfaces = new List<IUsedItemActions>();
-    private readonly InputAction m_UsedItem_UsedItem;
-    public struct UsedItemActions
-    {
-        private @Controls m_Wrapper;
-        public UsedItemActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @UsedItem => m_Wrapper.m_UsedItem_UsedItem;
-        public InputActionMap Get() { return m_Wrapper.m_UsedItem; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(UsedItemActions set) { return set.Get(); }
-        public void AddCallbacks(IUsedItemActions instance)
-        {
-            if (instance == null || m_Wrapper.m_UsedItemActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_UsedItemActionsCallbackInterfaces.Add(instance);
-            @UsedItem.started += instance.OnUsedItem;
-            @UsedItem.performed += instance.OnUsedItem;
-            @UsedItem.canceled += instance.OnUsedItem;
-        }
-
-        private void UnregisterCallbacks(IUsedItemActions instance)
-        {
-            @UsedItem.started -= instance.OnUsedItem;
-            @UsedItem.performed -= instance.OnUsedItem;
-            @UsedItem.canceled -= instance.OnUsedItem;
-        }
-
-        public void RemoveCallbacks(IUsedItemActions instance)
-        {
-            if (m_Wrapper.m_UsedItemActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IUsedItemActions instance)
-        {
-            foreach (var item in m_Wrapper.m_UsedItemActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_UsedItemActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public UsedItemActions @UsedItem => new UsedItemActions(this);
-
-    // SwitchItem
-    private readonly InputActionMap m_SwitchItem;
-    private List<ISwitchItemActions> m_SwitchItemActionsCallbackInterfaces = new List<ISwitchItemActions>();
-    private readonly InputAction m_SwitchItem_SwitchItem;
-    public struct SwitchItemActions
-    {
-        private @Controls m_Wrapper;
-        public SwitchItemActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SwitchItem => m_Wrapper.m_SwitchItem_SwitchItem;
-        public InputActionMap Get() { return m_Wrapper.m_SwitchItem; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(SwitchItemActions set) { return set.Get(); }
-        public void AddCallbacks(ISwitchItemActions instance)
-        {
-            if (instance == null || m_Wrapper.m_SwitchItemActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_SwitchItemActionsCallbackInterfaces.Add(instance);
-            @SwitchItem.started += instance.OnSwitchItem;
-            @SwitchItem.performed += instance.OnSwitchItem;
-            @SwitchItem.canceled += instance.OnSwitchItem;
-        }
-
-        private void UnregisterCallbacks(ISwitchItemActions instance)
-        {
-            @SwitchItem.started -= instance.OnSwitchItem;
-            @SwitchItem.performed -= instance.OnSwitchItem;
-            @SwitchItem.canceled -= instance.OnSwitchItem;
-        }
-
-        public void RemoveCallbacks(ISwitchItemActions instance)
-        {
-            if (m_Wrapper.m_SwitchItemActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(ISwitchItemActions instance)
-        {
-            foreach (var item in m_Wrapper.m_SwitchItemActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_SwitchItemActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public SwitchItemActions @SwitchItem => new SwitchItemActions(this);
-
     // Heal
     private readonly InputActionMap m_Heal;
     private List<IHealActions> m_HealActionsCallbackInterfaces = new List<IHealActions>();
@@ -941,6 +818,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public HealActions @Heal => new HealActions(this);
+
+    // Interact
+    private readonly InputActionMap m_Interact;
+    private List<IInteractActions> m_InteractActionsCallbackInterfaces = new List<IInteractActions>();
+    private readonly InputAction m_Interact_Interact;
+    public struct InteractActions
+    {
+        private @Controls m_Wrapper;
+        public InteractActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_Interact_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Interact; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractActions set) { return set.Get(); }
+        public void AddCallbacks(IInteractActions instance)
+        {
+            if (instance == null || m_Wrapper.m_InteractActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InteractActionsCallbackInterfaces.Add(instance);
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(IInteractActions instance)
+        {
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(IInteractActions instance)
+        {
+            if (m_Wrapper.m_InteractActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IInteractActions instance)
+        {
+            foreach (var item in m_Wrapper.m_InteractActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_InteractActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public InteractActions @Interact => new InteractActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -979,16 +902,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnDash(InputAction.CallbackContext context);
     }
-    public interface IUsedItemActions
-    {
-        void OnUsedItem(InputAction.CallbackContext context);
-    }
-    public interface ISwitchItemActions
-    {
-        void OnSwitchItem(InputAction.CallbackContext context);
-    }
     public interface IHealActions
     {
         void OnHeal(InputAction.CallbackContext context);
+    }
+    public interface IInteractActions
+    {
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
