@@ -7,6 +7,7 @@ public class AutoRotate : MonoBehaviour
 {
 
     public bool IsRotating = false;
+    public bool ResetAngle = false;
     [SerializeField] Transform target;
     [SerializeField] float RotateTime;
     private int RotateDirection;
@@ -20,7 +21,13 @@ public class AutoRotate : MonoBehaviour
     [SerializeField] LayerMask whichToHit;
     void Update()
     {
-        
+        if(ResetAngle == true)
+        {
+            
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+            
+            ResetAngle = false;
+        }
         // Only rotate z axis toward target
         if (IsRotating == true) {
             
@@ -32,7 +39,7 @@ public class AutoRotate : MonoBehaviour
                angle += 360;
             }
             //Debug.Log("angle: " + angle + " minus " + transform.rotation.eulerAngles.z );
-            if (angle - transform.rotation.eulerAngles.z > 0 )
+            if (angle - transform.rotation.eulerAngles.z > 0 && angle - transform.rotation.eulerAngles.z<180)
             {
                 RotateDirection = 1;
             }
@@ -40,15 +47,15 @@ public class AutoRotate : MonoBehaviour
             {
                 RotateDirection = -1;
             }
-            //Debug.Log("RotateDirection:" +RotateDirection+"target angle: " + angle + " Transform start " + transform.rotation.eulerAngles.z + " to " + transform.rotation.eulerAngles.z + RotateDirection * RotateAngle);
-            LeanTween.rotateZ(gameObject, transform.rotation.eulerAngles.z + RotateDirection * RotateAngle, RotateTime).setEaseInOutSine();
+            Debug.Log("RotateDirection:" +RotateDirection+"target angle: " + angle + " Transform start " + transform.rotation.eulerAngles.z + " to " + transform.rotation.eulerAngles.z + RotateDirection * RotateAngle);
+            LeanTween.rotateZ(gameObject, transform.rotation.eulerAngles.z + RotateDirection * RotateAngle, RotateTime);
             IsRotating = false;
         }
         hit= Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad)),20,whichToHit);
         
         //Debug.Log("Location: "+transform.position+" Direction: " + new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad)));
-        if(hit)
-        Debug.Log(hit.collider.name + "hit point" + hit.point);
+        //if(hit)
+        //Debug.Log(hit.collider.name + "hit point" + hit.point);
         if(hit && Explodeable && ExplodeEffect != null)
         {
             Debug.Log("Explode");
