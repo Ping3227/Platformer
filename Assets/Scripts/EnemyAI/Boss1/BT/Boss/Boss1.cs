@@ -75,9 +75,9 @@ public class Boos1 : MonoBehaviour
     void DodgePlayer() {
 
         //player is on the right side
-        if (playerColl.transform.position.x >= Area.bounds.center.x)
+        if (playerColl.transform.position.x >= Area.bounds.center.x )
         {
-
+            NextLocation = new Vector2(Random.Range(Area.bounds.min.x, Area.bounds.center.x - playerColl.bounds.extents.x), transform.position.y);
             while (SmallestMoveDistance > Mathf.Abs(NextLocation.x - transform.position.x)) {
                 NextLocation = new Vector2(Random.Range(Area.bounds.min.x, Area.bounds.center.x - playerColl.bounds.extents.x), transform.position.y);
             }
@@ -86,6 +86,7 @@ public class Boos1 : MonoBehaviour
         //player is on the left side of the boss
         else
         {
+            NextLocation = new Vector2(Random.Range(Area.bounds.min.x, Area.bounds.center.x - playerColl.bounds.extents.x), transform.position.y);
             while (SmallestMoveDistance > Mathf.Abs(NextLocation.x - transform.position.x)) {
                 NextLocation = new Vector2(Random.Range(Area.bounds.center.x + playerColl.bounds.extents.x, Area.bounds.max.x), transform.position.y);
             }
@@ -391,17 +392,6 @@ public class Boos1 : MonoBehaviour
             FailAttackCount++;
             ThisTask.Succeed();
         }
-    }
-    
-    [Task]
-    void Blocking() {
-        if (!anim.GetBool("IsAnimating"))
-        {
-            anim.Play("Block");
-            anim.SetBool("IsAnimating", true);
-            ThisTask.Succeed();
-        }
-
     }
     [Task]
     void Immobolize() {

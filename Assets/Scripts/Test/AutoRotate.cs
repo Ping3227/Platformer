@@ -47,7 +47,8 @@ public class AutoRotate : MonoBehaviour
             {
                 RotateDirection = -1;
             }
-            Debug.Log("RotateDirection:" +RotateDirection+"target angle: " + angle + " Transform start " + transform.rotation.eulerAngles.z + " to " + transform.rotation.eulerAngles.z + RotateDirection * RotateAngle);
+            //Debug.Log("RotateDirection:" +RotateDirection+"target angle: " + angle + " Transform start " + transform.rotation.eulerAngles.z + " to " + transform.rotation.eulerAngles.z + RotateDirection * RotateAngle);
+            LeanTween.cancel(gameObject);
             LeanTween.rotateZ(gameObject, transform.rotation.eulerAngles.z + RotateDirection * RotateAngle, RotateTime);
             IsRotating = false;
         }
@@ -58,7 +59,7 @@ public class AutoRotate : MonoBehaviour
         //Debug.Log(hit.collider.name + "hit point" + hit.point);
         if(hit && Explodeable && ExplodeEffect != null)
         {
-            Debug.Log("Explode");
+            //Debug.Log("Explode");
             LeanTween.delayedCall(ExplodeDelay, () => {
                 ExplodeEffect.transform.position = hit.point;
                 ExplodeEffect.Play();

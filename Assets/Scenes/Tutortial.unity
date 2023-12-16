@@ -19486,7 +19486,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: SimpleBGM
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
   OnDirectorFinish:
     m_PersistentCalls:
       m_Calls:
@@ -19513,7 +19513,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 1
 --- !u!320 &2057659546
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -20008,6 +20008,10 @@ PrefabInstance:
       propertyPath: HealthBar
       value: 
       objectReference: {fileID: 1565863239}
+    - target: {fileID: 65324106851311982, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: _stateInfo.Array.data[0]._maxHP
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2019241656161264828, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: target
       value: 
@@ -20055,6 +20059,18 @@ PrefabInstance:
     - target: {fileID: 2939358485866570601, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3647289952890328020, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: scripts.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 16abab79b9fc16a4a8384769fe530719, type: 3}
+    - target: {fileID: 4120728628180629482, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_Size.x
+      value: 16.877523
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120728628180629482, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.43057156
       objectReference: {fileID: 0}
     - target: {fileID: 5147778659890996984, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: player
