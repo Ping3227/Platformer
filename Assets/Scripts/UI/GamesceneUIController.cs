@@ -180,7 +180,7 @@ namespace Platformer.UI
             VictoryCanvas.gameObject.SetActive(true);
             VictoryCanvas.GetComponent<CanvasGroup>().alpha = 0;
             LeanTween.alphaCanvas(VictoryCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic);
-            VictoryTime.text = "Pass Time:\n"+TimeCounter.ToString("F1")+" s";
+            //VictoryTime.text = "Pass Time:\n"+TimeCounter.ToString("F1")+" s";
         }
         public void Restart()
         {
