@@ -251,6 +251,31 @@ public class Boos1 : MonoBehaviour
         }
     }
     [Task]
+    void LeaveBombAndTeleport(float speed, bool FacingPlayer)
+    {
+        if (!anim.GetBool("IsAnimating"))
+        {
+            if (FacingPlayer)
+            {
+                anim.Play("Teleport");
+                if (Bomb != null && Bomb.activeSelf == false) {
+                    Bomb.transform.position = transform.position;
+                    Bomb.SetActive(true);
+                }
+                
+
+            }
+            else
+            {
+                anim.Play("Teleport(special)");
+            }
+            AudioManager.instance.Play("BossSuddenly");
+            anim.SetFloat("TeleportSpeed", speed);
+            anim.SetBool("IsAnimating", true);
+            ThisTask.Succeed();
+        }
+    }
+    [Task]
     void Attack(float speed, bool IsSpecialAttack, bool FacingPlayer = true) {
 
         if (!anim.GetBool("IsAnimating")) {
@@ -380,6 +405,19 @@ public class Boos1 : MonoBehaviour
                 spawnpoint = Mathf.Clamp(spawnpoint, Area.bounds.min.x, Area.bounds.max.x);
                 ImmobolizePrefab.transform.position = new Vector3(spawnpoint, Area.bounds.min.y);
                 ImmobolizePrefab.SetActive(true);
+            }
+            ThisTask.Succeed();
+        }
+    }
+    [Task]
+    void SpawnDrone()
+    {
+        if (!anim.GetBool("IsAnimating"))
+        {
+            if (Drone && Drone.activeSelf == false)
+            {
+                Drone.transform.position = transform.position;
+                Drone.SetActive(true);
             }
             ThisTask.Succeed();
         }

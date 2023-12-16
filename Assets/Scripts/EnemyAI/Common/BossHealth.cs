@@ -71,11 +71,10 @@ public class BossHealth : MonoBehaviour
                 LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
                 {
                     Destroy(_canvas);
+                    GamesceneUIController.instance.Victory();
 
-                    //GamesceneUIController.Victory();
-                    _gameController.GetComponent<GamesceneUIController>().Victory();
-                    SceneManager.LoadScene("LeaderBoard");
-                    //_gameController.getComponent<GamesceneUIController>.Victory();
+                    //SceneManager.LoadScene("LeaderBoard");
+                    Debug.Log(gameObject.name + " is dead");
                     Destroy(gameObject);
                 });
             }

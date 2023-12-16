@@ -15168,7 +15168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 0
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 2
+  m_XDamping: 20
   m_YDamping: 2
   m_ZDamping: 1
   m_AngularDampingMode: 0
@@ -15298,7 +15298,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2140587992}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 5.05
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -29604,6 +29604,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -4488702446181724977, guid: 7c8493379c4b81c4bbda904390ffef0e, type: 2}
     value: {fileID: 1461665466}
+  - key: {fileID: 1685037798453264195, guid: 7c8493379c4b81c4bbda904390ffef0e, type: 2}
+    value: {fileID: 868118841}
   m_ExposedReferences:
     m_References:
     - f7d41527e594ed44ca4ce35866e78830: {fileID: 0}
@@ -30280,18 +30282,18 @@ PrefabInstance:
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: HealthBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1565863239}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _gameController
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0]._maxHP
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[1]._maxHP
@@ -30300,11 +30302,11 @@ PrefabInstance:
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0].BT_script
       value: 
-      objectReference: {fileID: 4900000, guid: 6f27490ce555e4f45a066a05043e5358, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0].end_animation
       value: 
-      objectReference: {fileID: -8083872452977053707, guid: a0aaa842dc9104c959ba6cd17776b660, type: 3}
+      objectReference: {fileID: 7400000, guid: f1aaaff0a161143958cbcda2edbd4df5, type: 2}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[1].end_animation
       value: 
