@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
             ImmobileTimeCounter = AttackTime;
             IsMoveable = false;
             rb.AddForce(new Vector2(rb.velocity.x * 50, 0));
-            //rb.velocity = Vector2.zero;
+            rb.velocity = new Vector2 (0,rb.velocity.y);
             AttackBuffer = false;
             if ((MoveBuffer && (LastMoveTime + InputTimeAllowance) > Time.time)) {
                 Turn();

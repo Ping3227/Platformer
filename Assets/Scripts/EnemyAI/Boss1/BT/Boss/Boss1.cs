@@ -12,6 +12,7 @@ public class Boos1 : MonoBehaviour
     [SerializeField] GameObject ImmobolizePrefab;
     [SerializeField] GameObject Bomb;
     [SerializeField] GameObject Drone;
+    [SerializeField] BoxCollider2D DroneArea;
     
     [Header("Attack")]
     [SerializeField] float AttackRange;
@@ -29,7 +30,7 @@ public class Boos1 : MonoBehaviour
     [SerializeField] Player player;
     private BoxCollider2D playerColl;
     private float DistancetoPlayer = 0f;
-    private Vector3 height;
+    [SerializeField] Vector3 height;
     [SerializeField] float SmallestMoveDistance;
 
     [Header("status")]
@@ -44,7 +45,7 @@ public class Boos1 : MonoBehaviour
         player = GameController.player;
         playerColl = player.gameObject.GetComponent<BoxCollider2D>();
         _BT = GetComponent<PandaBehaviour>();
-        height = Vector3.up * transform.position.y;
+       
         _BT.Tick();
 
     }
@@ -68,7 +69,14 @@ public class Boos1 : MonoBehaviour
         }
 
     }
-
+    void DroneSpawnInAnimation() {
+        if (Drone != null)
+        {
+            var NewDrone = Instantiate(Drone, transform.position, Quaternion.identity).GetComponent<Flys>();
+            NewDrone.PatrolArea = DroneArea;
+            NewDrone.AttackArea = Area;
+        }
+    }
     #endregion
     #region MovePattern
     [Task]
@@ -414,10 +422,10 @@ public class Boos1 : MonoBehaviour
     {
         if (!anim.GetBool("IsAnimating"))
         {
-            Debug.Log("spawning");
+           
             if (Drone!=null)
             {
-                Debug.Log("spawn");
+                
                 var NewDrone =Instantiate(Drone, transform.position, Quaternion.identity).GetComponent<Flys>();
                 NewDrone.PatrolArea = Area;
                 NewDrone.AttackArea = Area;
@@ -433,13 +441,16 @@ public class Boos1 : MonoBehaviour
     }
     #endregion
     public void NextStage(AnimationClip clip, TextAsset BTscript) {
+        Debug.Log("play animation");
         anim.Play(clip.name); 
         anim.SetBool("IsAnimating", true);
         if (BTscript != null)
         {
+            Debug.Log("set new scripts");
             _BT.enabled = false;
+            _BT.scripts = new TextAsset[1] { BTscript};
             _BT.Compile(BTscript.text);
-
+            _BT.Reset();
             LeanTween.delayedCall(gameObject, clip.length, () =>
             {
                 _BT.enabled = true;

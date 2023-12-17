@@ -6585,18 +6585,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 1
-      - m_Target: {fileID: 262536306}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!320 &257388450
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -6717,7 +6705,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 2092200325123452982}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959615434}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7610c63ecb36e6646975b834a70a0034, type: 3}
   m_Name: 
@@ -27477,7 +27465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5323898145069095655, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.89
+      value: -2.98
       objectReference: {fileID: 0}
     - target: {fileID: 5323898145069095655, guid: 925fedbb7e0417b419622ec78ebfe7d1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27933,8 +27921,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1390839792}
     - target: {fileID: 1443943694047110491, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
+      propertyPath: height.y
+      value: -2.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443943694047110491, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1443943694047110491, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: AttackEffect
@@ -28118,11 +28110,11 @@ PrefabInstance:
       objectReference: {fileID: 1478664223}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0]._maxHP
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[1]._maxHP
@@ -28131,11 +28123,11 @@ PrefabInstance:
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0].BT_script
       value: 
-      objectReference: {fileID: 4900000, guid: 6f27490ce555e4f45a066a05043e5358, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0].end_animation
       value: 
-      objectReference: {fileID: -8083872452977053707, guid: a0aaa842dc9104c959ba6cd17776b660, type: 3}
+      objectReference: {fileID: 7400000, guid: f1aaaff0a161143958cbcda2edbd4df5, type: 2}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[1].end_animation
       value: 
@@ -28162,7 +28154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113059604936789961, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Size.y
-      value: 9.638588
+      value: 10.669356
       objectReference: {fileID: 0}
     - target: {fileID: 7113059604936789961, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Offset.x
@@ -28170,7 +28162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113059604936789961, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Offset.y
-      value: 0.64555454
+      value: 1.1609387
       objectReference: {fileID: 0}
     - target: {fileID: 7660374802131825455, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_LocalScale.x
