@@ -64,6 +64,9 @@ public class BossHealth : MonoBehaviour
         }
         _cumulateDamage += damage;
         if (_currentHP <= 0) {
+            foreach (var interacts in _stateInfo[State].InteractionObjects) { 
+                interacts.Action();
+            }
             if (State == _stateInfo.Length - 1){
                 // play animation and death
                 boss.NextStage(_stateInfo[State].end_animation,null);

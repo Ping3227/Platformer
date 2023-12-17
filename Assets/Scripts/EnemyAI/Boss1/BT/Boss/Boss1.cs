@@ -13,7 +13,8 @@ public class Boos1 : MonoBehaviour
     [SerializeField] GameObject Bomb;
     [SerializeField] GameObject Drone;
     [SerializeField] BoxCollider2D DroneArea;
-    
+    [SerializeField] Transform SpawnPoint;
+
     [Header("Attack")]
     [SerializeField] float AttackRange;
     [SerializeField] float AttackDownSideRange;

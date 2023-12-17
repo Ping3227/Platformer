@@ -1,4 +1,7 @@
+using Platformer.Core;
+using Platformer.Gameplay;
 using Platformer.Mechanics;
+using Platformer.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +14,8 @@ public class CheckPoint : MonoBehaviour
         {
             Debug.Log("CheckPoint");
             GameController.Instance.SetCheckPoint( transform.position);
+            Simulation.Schedule<ResetAll>();
+            GamesceneUIController.instance.ResetItem();
         }
     }
 }

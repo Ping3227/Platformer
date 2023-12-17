@@ -165,6 +165,11 @@ namespace Platformer.UI
         {
             //InventoryManager.Instance.Clear();
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 0, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(1.5f);
+            ResetItem();
+
+
+        }
+        public void ResetItem() {
             Image[] childImages = RecoverCanvas.transform.GetComponentsInChildren<Image>();
             foreach (Image image in childImages)
             {
@@ -172,8 +177,6 @@ namespace Platformer.UI
                 Debug.Log(image.name);
                 image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
             }
-
-
         }
         public void Victory()
         {
