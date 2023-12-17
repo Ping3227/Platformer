@@ -49,9 +49,17 @@ public class SaveManager : MonoBehaviour
     private void Start()
     {
        
-        FileStream fileStream = new FileStream(Application.persistentDataPath + "/save.data", FileMode.Open);
+        FileStream fileStream = new FileStream(Application.persistentDataPath + "/save.data", FileMode.OpenOrCreate);
         BinaryFormatter formatter = new BinaryFormatter();
-        SaveDatas = (Dictionary<String, SaveData>)formatter.Deserialize(fileStream);
+        Debug.Log(Application.persistentDataPath + "/save.data");
+        if(fileStream.Length == 0)
+        {
+            SaveDatas = new Dictionary<string, SaveData>();
+            return;
+        }
+        else { 
+            SaveDatas = (Dictionary<String, SaveData>)formatter.Deserialize(fileStream);
+        }
 
     }
 }

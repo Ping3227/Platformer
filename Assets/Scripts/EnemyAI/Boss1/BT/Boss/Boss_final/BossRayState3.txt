@@ -74,6 +74,8 @@ tree("RaySweep")
 				CloserThan(3.0)
 				tree("Dodge")
 		sequence
+			CalculateDistance
+			not CloserThan(3.0)
 			Immobolize
 			RaySweep
 			Wait(2.0)
