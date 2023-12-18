@@ -39,6 +39,10 @@ namespace Platformer.UI
 
         [Header("Recover")]
         [SerializeField] Canvas RecoverCanvas;
+
+        [Header("Boss")]
+        [SerializeField] GameObject Triggerzone;
+
         public int RecoverNum;
         private void Awake()
         {
@@ -57,6 +61,11 @@ namespace Platformer.UI
         }
         
         void Update(){
+            //if (!Triggerzone)
+            //{
+            //    Triggerzone = GameObject.Find("TriggerBossFight");
+            //}
+            bool EnterBossZone = Triggerzone.GetComponent<InteractZone>().m_AlreadyTriggered;
             if (Input.GetButtonDown("Cancel")){
                 if (Input.GetKeyDown(KeyCode.Escape)){
                     if (IsPause){
@@ -70,7 +79,10 @@ namespace Platformer.UI
             if (ShowTime) {
                 TimeCounter += Time.deltaTime;
                 ShowTime.text = TimeCounter.ToString("F1");
-                
+            }
+            else if (EnterBossZone)
+            {
+                TimeCounter += Time.deltaTime;
             }
             
         }
@@ -124,7 +136,7 @@ namespace Platformer.UI
             
             LeanTween.value(healthLoss.gameObject, healthLoss.value, health, 1.0f).setEase(LeanTweenType.easeOutCubic).setOnUpdate((float val) =>
             {
-               
+                
                 healthLoss.value = val;
             });
             
@@ -140,8 +152,9 @@ namespace Platformer.UI
         }
         #endregion
         public void Death() {
-            
+            Debug.Log(TimeCounter);
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(0.5f);
+
         }
         
         public void Recover(){
@@ -177,6 +190,8 @@ namespace Platformer.UI
                 Debug.Log(image.name);
                 image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
             }
+            Triggerzone = GameObject.Find("TriggerBossFight");
+            TimeCounter = 0;
         }
         public void Victory()
         {

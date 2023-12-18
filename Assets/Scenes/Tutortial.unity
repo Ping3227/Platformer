@@ -21644,7 +21644,7 @@ Transform:
   m_GameObject: {fileID: 1461665462}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000021384398, y: -0.000000032201303, z: -6.886055e-16, w: 1}
-  m_LocalPosition: {x: -2.1111104, y: -0.00000047683716, z: -10}
+  m_LocalPosition: {x: -2.9943752, y: -0.00000047683716, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21831,6 +21831,7 @@ MonoBehaviour:
   VictoryCanvas: {fileID: 761608266}
   VictoryTime: {fileID: 0}
   RecoverCanvas: {fileID: 735709017}
+  Triggerzone: {fileID: 2057659542}
   RecoverNum: 2
 --- !u!114 &1478664228
 MonoBehaviour:
@@ -28886,7 +28887,7 @@ GameObject:
   - component: {fileID: 2057659544}
   - component: {fileID: 2057659548}
   m_Layer: 0
-  m_Name: TriggerBossFight (1)
+  m_Name: TriggerBossFight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28988,6 +28989,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 1
+  m_AlreadyTriggered: 0
 --- !u!320 &2057659546
 PlayableDirector:
   m_ObjectHideFlags: 0

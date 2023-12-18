@@ -18,7 +18,8 @@ public class InteractZone : MonoBehaviour
     public TriggerType triggerType;
     public UnityEvent OnDirectorPlay;
     public UnityEvent OnDirectorFinish;
-    protected bool m_AlreadyTriggered;
+    //protected bool m_AlreadyTriggered;
+    public bool m_AlreadyTriggered;
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject != triggeringGameObject)
