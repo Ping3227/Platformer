@@ -4,7 +4,6 @@ tree("Root")
 		tree("ConsecutiveRay")
 		tree("RaySweep")
 		
-				
 
 
 // This region is for defense action		
@@ -14,6 +13,11 @@ tree("Dodge")
 			DodgePlayer
 			Teleport(2.0,true)
 			Wait(1.5)
+			CalculateDistance
+			CloserThan(3.0)
+			Wait(0.5)
+			StrongAttack
+			Wait(2.0)
 		sequence
 			Wait(0.5)
 			StrongAttack
