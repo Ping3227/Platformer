@@ -34023,6 +34023,88 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793132477}
   m_CullTransparentMesh: 1
+--- !u!1 &1802356341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1802356342}
+  - component: {fileID: 1802356343}
+  m_Layer: 8
+  m_Name: Light 2D (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1802356342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802356341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.01, y: 1.31, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1183839823283879333}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1802356343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802356341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.175
+  m_Color: {r: 0.1509434, g: 0, b: 0, a: 1}
+  m_Intensity: 30.72
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 735be9f9
+  m_LightCookieSprite: {fileID: 1878930910971138671, guid: 0a864029d286546aeb8c47e4a7a70b82, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 0
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 0.6
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &1803224432
 GameObject:
   m_ObjectHideFlags: 0
@@ -40534,7 +40616,7 @@ PrefabInstance:
     - target: {fileID: 2683111519993090806, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2100000, guid: 233335197a1bd954c9696258212eaddb, type: 2}
     - target: {fileID: 2719979006004623686, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: target
       value: 
@@ -40587,6 +40669,10 @@ PrefabInstance:
       propertyPath: scripts.Array.data[0]
       value: 
       objectReference: {fileID: 4900000, guid: 58844adf866f84449bfe807f42b6e845, type: 3}
+    - target: {fileID: 4054041356736688990, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.31
+      objectReference: {fileID: 0}
     - target: {fileID: 4120728628180629482, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_Size.x
       value: 16.877523
@@ -40601,7 +40687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_Color.g
-      value: 0.33469963
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_Color.r
@@ -40609,35 +40695,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_Intensity
-      value: 9.64
+      value: 2.92
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LightType
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_BlendStyleIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.175
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LightCookieSprite
       value: 
       objectReference: {fileID: 1878930910971138671, guid: 0a864029d286546aeb8c47e4a7a70b82, type: 3}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_PointLightInnerAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_PointLightOuterAngle
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 4.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LocalBounds.m_Center.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LocalBounds.m_Center.y
-      value: 0
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LocalBounds.m_Extent.x
-      value: 0.51666665
+      value: 0.9985302
       objectReference: {fileID: 0}
     - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LocalBounds.m_Extent.y
-      value: 1.4666667
+      value: 0.99853027
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649887957994999634, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      propertyPath: m_ApplyToSortingLayers.Array.data[0]
+      value: -102147213
       objectReference: {fileID: 0}
     - target: {fileID: 4729092189038722804, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40673,6 +40791,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2939358485866570601, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       insertIndex: 1
       addedObject: {fileID: 1178412048}
+    - targetCorrespondingSourceObject: {fileID: 4729092189038722804, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 1802356342}
     - targetCorrespondingSourceObject: {fileID: 4729092189038722804, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1241754503}
