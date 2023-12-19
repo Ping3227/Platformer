@@ -202,7 +202,7 @@ namespace Platformer.UI
             data.second = timeSpan.Seconds;
             data.milisecond = timeSpan.Milliseconds;
 
-            data.PlayerName = "Amy";
+            //data.PlayerName = UIController.instance.PlayerName;
 
             SaveManager.instance.Save(data);
 
@@ -218,6 +218,7 @@ namespace Platformer.UI
             var reload = Simulation.Schedule<LoadScene>();
             reload.SceneName = SceneManager.GetActiveScene().name;
             TimeCounter = 0;
+            StartBoss = false;
             InventoryManager.Instance.Clear();
         }
         public void UpdateModeNumber() {

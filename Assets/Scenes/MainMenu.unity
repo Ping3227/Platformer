@@ -6016,6 +6016,9 @@ MonoBehaviour:
   playButton: {fileID: 1274118030}
   quitButton: {fileID: 1123436359}
   RankingListButton: {fileID: 754285626}
+  submitButton: {fileID: 0}
+  userInput: {fileID: 600129186}
+  PlayerName: 
 --- !u!1 &2087512608
 GameObject:
   m_ObjectHideFlags: 0
