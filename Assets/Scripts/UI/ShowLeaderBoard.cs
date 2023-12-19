@@ -11,6 +11,15 @@ public class ShowLeaderBoard : MonoBehaviour
     public TextMeshProUGUI NameData; 
     public TextMeshProUGUI TimeData;
 
+    public class PlayerData
+    {
+        public string name;
+        public TimeSpan timeSpan;
+        public int minute;
+        public int second;
+        public int milisecond;
+    }
+
     void Start()
     {
         var allData = SaveManager.instance.AllData();

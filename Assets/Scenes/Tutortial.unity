@@ -27555,6 +27555,7 @@ GameObject:
   - component: {fileID: 1478664227}
   - component: {fileID: 1478664228}
   - component: {fileID: 1478664230}
+  - component: {fileID: 1478664231}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -27626,7 +27627,7 @@ MonoBehaviour:
   VictoryCanvas: {fileID: 761608266}
   VictoryTime: {fileID: 0}
   RecoverCanvas: {fileID: 735709017}
-  Triggerzone: {fileID: 2057659542}
+  GameController: {fileID: 0}
   RecoverNum: 2
 --- !u!114 &1478664228
 MonoBehaviour:
@@ -27750,6 +27751,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+--- !u!114 &1478664231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478664223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0077628e086d18147b0c4ab822c11638, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1498437714
 GameObject:
   m_ObjectHideFlags: 0
@@ -39820,6 +39833,18 @@ MonoBehaviour:
           m_StringArgument: SimpleBGM
           m_BoolArgument: 1
         m_CallState: 1
+      - m_Target: {fileID: 1478664227}
+        m_TargetAssemblyTypeName: Platformer.UI.GamesceneUIController, Assembly-CSharp
+        m_MethodName: StartTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SimpleBGM
+          m_BoolArgument: 1
+        m_CallState: 2
   OnDirectorFinish:
     m_PersistentCalls:
       m_Calls:
@@ -39835,7 +39860,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 1
-  m_AlreadyTriggered: 0
 --- !u!320 &2057659546
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -40372,7 +40396,7 @@ PrefabInstance:
       objectReference: {fileID: 7400000, guid: f1aaaff0a161143958cbcda2edbd4df5, type: 2}
     - target: {fileID: 65324106851311982, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: _stateInfo.Array.data[1].InteractionObjects.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 65324106851311982, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: _stateInfo.Array.data[2].InteractionObjects.Array.size
