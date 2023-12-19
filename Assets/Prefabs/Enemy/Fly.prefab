@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PatrolArea: {fileID: 0}
   SmallestMoveDistance: 1
-  Speed: 0.3
+  Speed: 0.5
   player: {fileID: 0}
   AttackArea: {fileID: 0}
 --- !u!114 &8855316108323882591
