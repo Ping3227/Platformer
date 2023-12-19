@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ShowLeaderBoard : MonoBehaviour
 {
@@ -58,6 +59,11 @@ public class ShowLeaderBoard : MonoBehaviour
         RankData.text = PlayerRank;
         NameData.text = PlayerName;
         TimeData.text = PlayerTime;
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     //void Read
