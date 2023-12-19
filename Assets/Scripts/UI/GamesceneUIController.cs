@@ -8,6 +8,7 @@ using TMPro;
 using Platformer.Core;
 using Platformer.Gameplay;
 using System;
+using static SaveManager;
 
 namespace Platformer.UI
 {
@@ -40,10 +41,13 @@ namespace Platformer.UI
         [Header("Recover")]
         [SerializeField] Canvas RecoverCanvas;
 
-        [Header("Boss")]
-        [SerializeField] GameObject Triggerzone;
+        [Header("GameController")]
+        [SerializeField] GameObject GameController;
 
         public int RecoverNum;
+
+        private bool StartBoss = false;
+
         private void Awake()
         {
             if (instance == null)
@@ -61,11 +65,6 @@ namespace Platformer.UI
         }
         
         void Update(){
-            //if (!Triggerzone)
-            //{
-            //    Triggerzone = GameObject.Find("TriggerBossFight");
-            //}
-            bool EnterBossZone = Triggerzone.GetComponent<InteractZone>().m_AlreadyTriggered;
             if (Input.GetButtonDown("Cancel")){
                 if (Input.GetKeyDown(KeyCode.Escape)){
                     if (IsPause){
@@ -80,7 +79,7 @@ namespace Platformer.UI
                 TimeCounter += Time.deltaTime;
                 ShowTime.text = TimeCounter.ToString("F1");
             }
-            else if (EnterBossZone)
+            else if (StartBoss)
             {
                 TimeCounter += Time.deltaTime;
             }
@@ -152,11 +151,11 @@ namespace Platformer.UI
         }
         #endregion
         public void Death() {
+
             Debug.Log(TimeCounter);
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(0.5f);
-
         }
-        
+
         public void Recover(){
             if(RecoverNum <= 0){
                 Debug.Log("Run out of");
@@ -180,7 +179,6 @@ namespace Platformer.UI
             LeanTween.alphaCanvas(DeathCanvas.GetComponent<CanvasGroup>(), 0, 1f).setEase(LeanTweenType.easeOutCubic).setDelay(1.5f);
             ResetItem();
 
-
         }
         public void ResetItem() {
             Image[] childImages = RecoverCanvas.transform.GetComponentsInChildren<Image>();
@@ -190,14 +188,30 @@ namespace Platformer.UI
                 Debug.Log(image.name);
                 image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
             }
-            Triggerzone = GameObject.Find("TriggerBossFight");
-            TimeCounter = 0;
         }
         public void Victory()
         {
             VictoryCanvas.gameObject.SetActive(true);
             VictoryCanvas.GetComponent<CanvasGroup>().alpha = 0;
             LeanTween.alphaCanvas(VictoryCanvas.GetComponent<CanvasGroup>(), 1, 1f).setEase(LeanTweenType.easeOutCubic);
+
+            SaveData data = new SaveData();
+
+            TimeSpan timeSpan = TimeSpan.FromSeconds(TimeCounter);
+            data.minute = timeSpan.Minutes;
+            data.second = timeSpan.Seconds;
+            data.milisecond = timeSpan.Milliseconds;
+
+            data.PlayerName = "Jacky";
+
+            GameController.GetComponent<SaveManager>().Save(data);
+
+            SceneManager.LoadScene("LeaderBoard");
+
+            Debug.Log("Load Success");
+
+            TimeCounter = 0;
+
             //VictoryTime.text = "Pass Time:\n"+TimeCounter.ToString("F1")+" s";
         }
         public void Restart()
@@ -212,7 +226,10 @@ namespace Platformer.UI
             PauseCanvas.GetComponentsInChildren<TMP_Text>()[1].text = "Mode: " + ModeManager.instance.index;
             
         }
+        public void StartTime()
+        {
+            StartBoss = true;
+        }
 
-       
     }
 }

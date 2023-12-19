@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class PlayerData
 {
     public string name;
-    public string time;
+    public TimeSpan timeSpan;
+    public int minute;
+    public int second;
+    public int milisecond;
 }
 
 public class LeaderBoard : MonoBehaviour
@@ -21,8 +24,8 @@ public class LeaderBoard : MonoBehaviour
         {
             foreach(PlayerData player in players)
             {
-                Debug.Log("Name: " + player.name);
-                Debug.Log("Time: " + player.time);
+                //Debug.Log("Name: " + player.name);
+                //Debug.Log("Time: " + player.time);
             }
         }
         else
@@ -52,7 +55,7 @@ public class LeaderBoard : MonoBehaviour
                 PlayerData newPlayer = new PlayerData
                 {
                     name = values[0],
-                    time = values[1]
+                    //time = values[1]
                 };
 
                 Array.Resize(ref players, players.Length + 1);

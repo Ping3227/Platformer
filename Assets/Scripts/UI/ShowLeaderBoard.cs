@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using System;
 
 public class ShowLeaderBoard : MonoBehaviour
 {
@@ -12,29 +13,42 @@ public class ShowLeaderBoard : MonoBehaviour
 
     void Start()
     {
-        string rank = "";
-        string name = "";
-        string time = "";
+        var allData = SaveManager.instance.AllData();
+
         int id = 0;
-        PlayerData[] players = LeaderBoard.Read();
 
-        players = players.OrderBy(player => float.Parse(player.time)).ToArray();
+        string PlayerName = "";
+        string PlayerRank = "";
+        string PlayerTime = "";
 
-        players = players.OrderBy(player => player.name).ToArray();
+        PlayerData[] players = allData.Select(kvp => new PlayerData
+        {
+            name = kvp.Key,
+            timeSpan = new TimeSpan(0, 0, kvp.Value.minute, kvp.Value.second, kvp.Value.milisecond),
+            minute = kvp.Value.minute,
+            second = kvp.Value.second,
+            milisecond = kvp.Value.milisecond,
+        }).ToArray();
+
+        players = players.OrderBy(player => player.timeSpan.TotalMilliseconds).ToArray();
+
         foreach (PlayerData player in players)
         {
             id++;
-            name += player.name;
-            name += "\n";
-            rank += id.ToString();
-            rank += "\n";
-            time += player.time;
-            time += "\n";
-            
+            PlayerName += player.name;
+            PlayerName += "\n";
+            PlayerRank += id.ToString();
+            PlayerRank += "\n";
+            PlayerTime += player.minute.ToString().PadLeft(2, '0'); ;
+            PlayerTime += ":";
+            PlayerTime += player.second.ToString().PadLeft(2, '0'); ;
+            PlayerTime += ":";
+            PlayerTime += player.milisecond.ToString().PadLeft(3, '0');
+            PlayerTime += "\n";
         }
-        RankData.text = rank;
-        NameData.text = name;
-        TimeData.text = time;
+        RankData.text = PlayerRank;
+        NameData.text = PlayerName;
+        TimeData.text = PlayerTime;
     }
 
     // Update is called once per frame
