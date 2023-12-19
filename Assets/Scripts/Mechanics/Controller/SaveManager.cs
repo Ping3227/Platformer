@@ -9,6 +9,9 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     private Dictionary<String, SaveData> SaveDatas ;
+
+    public string Name;
+
     [Serializable]
     public class SaveData{
         public string PlayerName;
@@ -19,18 +22,19 @@ public class SaveManager : MonoBehaviour
         public String CheckPoint;
     }
     public static SaveManager instance;
-   
+  
     public void Save(SaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        if (SaveDatas.ContainsKey(data.PlayerName) && TimeCompare(data.PlayerName, data))
+        data.PlayerName = Name;
+        if (SaveDatas.ContainsKey(Name) && TimeCompare(Name, data))
         {
-            SaveDatas[data.PlayerName] = data;
+            SaveDatas[Name] = data;
             Debug.Log("Data Is saved");
         }
-        else if (!SaveDatas.ContainsKey(data.PlayerName))
+        else if (!SaveDatas.ContainsKey(Name))
         {
-            SaveDatas.Add(data.PlayerName, data);
+            SaveDatas.Add(Name, data);
             Debug.Log("Data Is created");
         }
         string path = Application.persistentDataPath + "/save.data";
@@ -62,12 +66,14 @@ public class SaveManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
         else
         {
             Destroy(gameObject); 
         }
     }
+
     private void Start()
     {
        
