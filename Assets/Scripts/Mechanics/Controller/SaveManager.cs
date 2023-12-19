@@ -19,7 +19,7 @@ public class SaveManager : MonoBehaviour
         public String CheckPoint;
     }
     public static SaveManager instance;
-
+   
     public void Save(SaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();

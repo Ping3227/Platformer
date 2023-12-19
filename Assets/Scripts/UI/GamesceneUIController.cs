@@ -202,7 +202,7 @@ namespace Platformer.UI
             data.second = timeSpan.Seconds;
             data.milisecond = timeSpan.Milliseconds;
 
-            data.PlayerName = "Mike";
+            data.PlayerName = "May";
 
             SaveManager.instance.Save(data);
 

@@ -60,6 +60,8 @@ public class ShowLeaderBoard : MonoBehaviour
         TimeData.text = PlayerTime;
     }
 
+    //void Read
+
     // Update is called once per frame
     void Update()
     {
