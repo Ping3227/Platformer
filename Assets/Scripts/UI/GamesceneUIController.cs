@@ -45,6 +45,7 @@ namespace Platformer.UI
         [SerializeField] GameObject GameController;
 
         public int RecoverNum;
+        public Button rankButton;
 
         private bool StartBoss = false;
 
@@ -62,6 +63,7 @@ namespace Platformer.UI
                 Destroy(Canvas.gameObject);
             }
             TimeCounter = 0;
+            rankButton.onClick.AddListener(LoadRankingList);
         }
         
         void Update(){
@@ -206,7 +208,7 @@ namespace Platformer.UI
 
             SaveManager.instance.Save(data);
 
-            SceneManager.LoadScene("LeaderBoard");
+            // SceneManager.LoadScene("LeaderBoard");
 
             TimeCounter = 0;
 
@@ -228,6 +230,10 @@ namespace Platformer.UI
         public void StartTime()
         {
             StartBoss = true;
+        }
+        void LoadRankingList()
+        {
+            SceneManager.LoadScene("LeaderBoard");
         }
 
     }
