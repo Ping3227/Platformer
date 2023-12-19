@@ -202,13 +202,11 @@ namespace Platformer.UI
             data.second = timeSpan.Seconds;
             data.milisecond = timeSpan.Milliseconds;
 
-            data.PlayerName = "May";
+            data.PlayerName = "Amy";
 
             SaveManager.instance.Save(data);
 
             SceneManager.LoadScene("LeaderBoard");
-
-            Debug.Log("Load Success");
 
             TimeCounter = 0;
 
