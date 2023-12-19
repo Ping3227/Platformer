@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerData
 {
@@ -10,8 +12,10 @@ public class PlayerData
 
 public class LeaderBoard : MonoBehaviour
 {
+    public Button MainMenuButton;
     void Start()
     {
+        MainMenuButton.onClick.AddListener(LoadMainMenu);
         PlayerData[] players = Read();
         if(players.Length > 0)
         {
@@ -67,6 +71,10 @@ public class LeaderBoard : MonoBehaviour
 
             writeFile.Write(first + name + "," + time);
         }
+    }
+    void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
 

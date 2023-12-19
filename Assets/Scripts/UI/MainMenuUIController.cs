@@ -17,6 +17,7 @@ namespace Platformer.UI {
     {
         public Button playButton;
         public Button quitButton;
+        public Button RankingListButton;
         
        
         /// <summary>
@@ -28,6 +29,8 @@ namespace Platformer.UI {
 
             playButton.onClick.AddListener(PlayGame);
             quitButton.onClick.AddListener(QuitGame);
+            RankingListButton.onClick.AddListener(LoadRankingList);
+
         }
 
  
@@ -41,7 +44,12 @@ namespace Platformer.UI {
 
         void PlayGame()
         {
-            SceneManager.LoadScene("preview");
+            SceneManager.LoadScene("Tutortial");
+        }
+
+        void LoadRankingList()
+        {
+            SceneManager.LoadScene("LeaderBoard");
         }
 
     }
