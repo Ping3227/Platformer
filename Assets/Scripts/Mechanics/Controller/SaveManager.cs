@@ -22,10 +22,13 @@ public class SaveManager : MonoBehaviour
         public String CheckPoint;
     }
     public static SaveManager instance;
+    
+    public TimeSpan recentSpan;
   
     public void Save(SaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
+        recentSpan = new TimeSpan(0, 0, data.minute, data.second, data.milisecond);
         data.PlayerName = Name;
         if (SaveDatas.ContainsKey(Name) && TimeCompare(Name, data))
         {

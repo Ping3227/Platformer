@@ -12,6 +12,8 @@ public class ShowLeaderBoard : MonoBehaviour
     public TextMeshProUGUI NameData; 
     public TextMeshProUGUI TimeData;
 
+    public TextMeshProUGUI BestData;
+
     public class PlayerData
     {
         public string name;
@@ -59,6 +61,21 @@ public class ShowLeaderBoard : MonoBehaviour
         RankData.text = PlayerRank;
         NameData.text = PlayerName;
         TimeData.text = PlayerTime;
+        BestData.text = GetBestData();
+    }
+
+    string GetBestData()
+    {
+        string best = "";
+
+        TimeSpan nowSpan = SaveManager.instance.recentSpan;
+        best += nowSpan.Minutes.ToString().PadLeft(2, '0'); ;
+        best += ":";
+        best += nowSpan.Seconds.ToString().PadLeft(2, '0'); ;
+        best += ":";
+        best += nowSpan.Milliseconds.ToString().PadLeft(3, '0');
+
+        return best;
     }
 
     public void LoadMainMenu()
