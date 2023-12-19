@@ -73,7 +73,7 @@ public class Boos1 : MonoBehaviour
     void DroneSpawnInAnimation() {
         if (Drone != null)
         {
-            var NewDrone = Instantiate(Drone, transform.position, Quaternion.identity).GetComponent<Flys>();
+            var NewDrone = Instantiate(Drone, SpawnPoint.position, Quaternion.identity).GetComponent<Flys>();
             NewDrone.PatrolArea = DroneArea;
             NewDrone.AttackArea = Area;
         }
