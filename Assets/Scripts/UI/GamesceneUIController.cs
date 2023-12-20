@@ -17,7 +17,7 @@ namespace Platformer.UI
         public static GamesceneUIController instance { get; private set; }
         
         [SerializeField] GameObject Canvas;
-        
+
         [Header("HUD")]
         [SerializeField] Canvas HUDCanvas;
         [SerializeField] Slider healthLoss;
@@ -204,13 +204,17 @@ namespace Platformer.UI
             data.second = timeSpan.Seconds;
             data.milisecond = timeSpan.Milliseconds;
 
+            TimeCounter = 0;
+
+            Time.timeScale = 0;
+
             //data.PlayerName = UIController.instance.PlayerName;
 
             SaveManager.instance.Save(data);
 
             // SceneManager.LoadScene("LeaderBoard");
 
-            TimeCounter = 0;
+            
 
             //VictoryTime.text = "Pass Time:\n"+TimeCounter.ToString("F1")+" s";
         }

@@ -14,9 +14,12 @@ public class ShowLeaderBoard : MonoBehaviour
 
     public TextMeshProUGUI BestData;
 
+    public TextMeshProUGUI LevelData;
+
     public class PlayerData
     {
         public string name;
+        public string level;
         public TimeSpan timeSpan;
         public int minute;
         public int second;
@@ -27,6 +30,8 @@ public class ShowLeaderBoard : MonoBehaviour
     {
         var allData = SaveManager.instance.AllData();
 
+        string level = SaveManager.instance.Level;
+
         int id = 0;
 
         string PlayerName = "";
@@ -35,7 +40,7 @@ public class ShowLeaderBoard : MonoBehaviour
 
         PlayerData[] players = allData.Select(kvp => new PlayerData
         {
-            name = kvp.Key,
+            name = kvp.Key.Split('_')[0],
             timeSpan = new TimeSpan(0, 0, kvp.Value.minute, kvp.Value.second, kvp.Value.milisecond),
             minute = kvp.Value.minute,
             second = kvp.Value.second,
@@ -62,6 +67,7 @@ public class ShowLeaderBoard : MonoBehaviour
         NameData.text = PlayerName;
         TimeData.text = PlayerTime;
         BestData.text = GetBestData();
+        LevelData.text = level;
     }
 
     string GetBestData()

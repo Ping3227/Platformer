@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Platformer.Mechanics;
 
 namespace Platformer.UI {
     /// <summary>
@@ -13,10 +14,14 @@ namespace Platformer.UI {
     /// </summary>
     public class UIController : MonoBehaviour
     {
-        public Button playButton;
+        //public Button playButton;
         public Button quitButton;
         public Button RankingListButton;
-        public Button submitButton;
+        //public Button submitButton;
+
+        public Button easyButton;
+        public Button mediumButton;
+        public Button hardButton;
 
         public string PlayerName;
 
@@ -28,10 +33,12 @@ namespace Platformer.UI {
         
         void Start ()
         {
-            playButton.onClick.AddListener(PlayGame);
+            //playButton.onClick.AddListener(PlayGame);
             quitButton.onClick.AddListener(QuitGame);
             RankingListButton.onClick.AddListener(LoadRankingList);
-
+            easyButton.onClick.AddListener(PlayEasy);
+            mediumButton.onClick.AddListener(PlayMedium);
+            hardButton.onClick.AddListener(PlayHard);
         }
 
         /// <summary>
@@ -42,11 +49,37 @@ namespace Platformer.UI {
             Application.Quit();
         }
 
-        void PlayGame()
+        //void PlayGame()
+        //{
+        //    SaveManager.instance.Name = userInput.text;
+        //    SceneManager.LoadScene("Tutortial");
+        //}
+
+        void PlayEasy()
         {
             SaveManager.instance.Name = userInput.text;
-            Debug.Log(PlayerName);
+            SaveManager.instance.Level = "Easy";
             SceneManager.LoadScene("Tutortial");
+            Time.timeScale = 1f;
+            GameController.Instance.ResetCheckPoint();
+        }
+
+        void PlayMedium()
+        {
+            SaveManager.instance.Name = userInput.text;
+            SaveManager.instance.Level = "Medium";
+            SceneManager.LoadScene("BT_boss");
+            Time.timeScale = 1f;
+            GameController.Instance.ResetCheckPoint();
+        }
+
+        void PlayHard()
+        {
+            SaveManager.instance.Name = userInput.text;
+            SaveManager.instance.Level = "Hard";
+            SceneManager.LoadScene("BT_boss2");
+            Time.timeScale = 1f;
+            GameController.Instance.ResetCheckPoint();
         }
 
         void LoadRankingList()
