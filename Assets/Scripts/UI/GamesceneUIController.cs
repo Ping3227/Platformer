@@ -110,6 +110,7 @@ namespace Platformer.UI
             PauseCanvas.gameObject.SetActive(false);
             HUDCanvas.gameObject.SetActive(true);
             SceneManager.LoadScene("MainMenu");
+            GameController.Instance.ResetCheckPoint();
         }
 
         public void QuitGame()
