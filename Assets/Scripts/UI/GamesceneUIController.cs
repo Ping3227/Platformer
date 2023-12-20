@@ -245,6 +245,7 @@ namespace Platformer.UI
         }
         void LoadRankingList()
         {
+            HUDCanvas.gameObject.SetActive(true);
             SceneManager.LoadScene("LeaderBoard");
         }
 
