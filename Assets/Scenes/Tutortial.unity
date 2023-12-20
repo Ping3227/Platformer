@@ -39807,7 +39807,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: SimpleBGM
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 1
   OnDirectorFinish:
     m_PersistentCalls:
       m_Calls:
