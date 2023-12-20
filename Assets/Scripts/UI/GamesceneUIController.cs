@@ -210,6 +210,9 @@ namespace Platformer.UI
 
             //GameController.Instance.ResetCheckPoint();
             Time.timeScale = 0;
+            HUDCanvas.gameObject.SetActive(false);
+            VictoryCanvas.gameObject.SetActive(true);
+
 
             //data.PlayerName = UIController.instance.PlayerName;
 
