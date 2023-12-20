@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class SaveManager : MonoBehaviour
     private Dictionary<String, SaveData> SaveDatas ;
 
     public string Name;
+    public string Level;
 
     [Serializable]
     public class SaveData{
@@ -18,7 +20,7 @@ public class SaveManager : MonoBehaviour
         public int minute;
         public int second;
         public int milisecond;
-        public String CurrentLevel;
+        public string level;
         public String CheckPoint;
     }
     public static SaveManager instance;
@@ -30,14 +32,16 @@ public class SaveManager : MonoBehaviour
         BinaryFormatter formatter = new BinaryFormatter();
         recentSpan = new TimeSpan(0, 0, data.minute, data.second, data.milisecond);
         data.PlayerName = Name;
-        if (SaveDatas.ContainsKey(Name) && TimeCompare(Name, data))
+        data.level = Level;
+        string myKey = Name + "_" + Level;
+        if (SaveDatas.ContainsKey(myKey) && TimeCompare(myKey, data))
         {
-            SaveDatas[Name] = data;
+            SaveDatas[myKey] = data;
             Debug.Log("Data Is saved");
         }
-        else if (!SaveDatas.ContainsKey(Name))
+        else if (!SaveDatas.ContainsKey(myKey))
         {
-            SaveDatas.Add(Name, data);
+            SaveDatas.Add(myKey, data);
             Debug.Log("Data Is created");
         }
         string path = Application.persistentDataPath + "/save.data";
@@ -61,7 +65,10 @@ public class SaveManager : MonoBehaviour
 
     public Dictionary<String, SaveData> AllData()
     {
-        return SaveDatas;
+        return SaveDatas
+        .Where(kvp => kvp.Value.level == Level)
+        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        //return SaveDatas;
     }
 
     void Awake()
