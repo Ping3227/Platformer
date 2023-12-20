@@ -39390,7 +39390,6 @@ MonoBehaviour:
   VictoryCanvas: {fileID: 761608266}
   VictoryTime: {fileID: 0}
   RecoverCanvas: {fileID: 8809564}
-  GameController: {fileID: 0}
   RecoverNum: 2
   rankButton: {fileID: 1190621795}
 --- !u!114 &1478664228
@@ -46525,7 +46524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0]._maxHP
-      value: 2
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[1]._maxHP
