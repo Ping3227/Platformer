@@ -27188,7 +27188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Mechguard-<size=44>\u03B1</size>"
+  m_text: "Mechguard-<size=44>\u03B3</size>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8ba58bfaf21c818478465c123cf521f9, type: 2}
   m_sharedMaterial: {fileID: -572369235600431733, guid: 8ba58bfaf21c818478465c123cf521f9, type: 2}
