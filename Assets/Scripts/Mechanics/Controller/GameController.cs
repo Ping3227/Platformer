@@ -16,16 +16,17 @@ namespace Platformer.Mechanics {
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             IsSaved = false;
-            
+
             if (Instance == null)
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-            else { 
+            else
+            {
                 Destroy(gameObject);
             }
-            
+
         }
 
         void OnDisable()

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using Platformer.Core;
 using Platformer.Gameplay;
+using Platformer.Mechanics;
 using System;
 using static SaveManager;
 
@@ -85,7 +86,7 @@ namespace Platformer.UI
             {
                 TimeCounter += Time.deltaTime;
             }
-            
+            Debug.Log(TimeCounter);
         }
        
         public void Resume()
@@ -205,7 +206,9 @@ namespace Platformer.UI
             data.milisecond = timeSpan.Milliseconds;
 
             TimeCounter = 0;
+            StartBoss = false;
 
+            //GameController.Instance.ResetCheckPoint();
             Time.timeScale = 0;
 
             //data.PlayerName = UIController.instance.PlayerName;
@@ -213,8 +216,6 @@ namespace Platformer.UI
             SaveManager.instance.Save(data);
 
             // SceneManager.LoadScene("LeaderBoard");
-
-            
 
             //VictoryTime.text = "Pass Time:\n"+TimeCounter.ToString("F1")+" s";
         }
@@ -225,6 +226,7 @@ namespace Platformer.UI
             reload.SceneName = SceneManager.GetActiveScene().name;
             TimeCounter = 0;
             StartBoss = false;
+            
             InventoryManager.Instance.Clear();
         }
         public void UpdateModeNumber() {
@@ -234,6 +236,7 @@ namespace Platformer.UI
         public void StartTime()
         {
             StartBoss = true;
+            Debug.Log("triggered successfully.");
         }
         void LoadRankingList()
         {

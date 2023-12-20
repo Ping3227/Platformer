@@ -39759,8 +39759,8 @@ MonoBehaviour:
           m_StringArgument: SimpleBGM
           m_BoolArgument: 1
         m_CallState: 1
-      - m_Target: {fileID: 1478664227}
-        m_TargetAssemblyTypeName: Platformer.UI.GamesceneUIController, Assembly-CSharp
+      - m_Target: {fileID: 2057659544}
+        m_TargetAssemblyTypeName: TimelineHelper, Assembly-CSharp
         m_MethodName: StartTime
         m_Mode: 1
         m_Arguments:
