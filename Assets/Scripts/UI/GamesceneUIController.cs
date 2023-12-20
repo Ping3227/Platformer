@@ -247,6 +247,7 @@ namespace Platformer.UI
         void LoadRankingList()
         {
             HUDCanvas.gameObject.SetActive(true);
+            VictoryCanvas.gameObject.SetActive(false);
             SceneManager.LoadScene("LeaderBoard");
         }
 
