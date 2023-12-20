@@ -45,7 +45,7 @@ namespace Platformer.Mechanics {
         }
         public void ResetCheckPoint()
         {
-            CheckPoint = Vector3.zero;
+            CheckPoint = new Vector3(-4.81f, -2.98f, 0f);
             IsSaved = false;
         }
 

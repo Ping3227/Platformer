@@ -42,8 +42,8 @@ namespace Platformer.UI
         [Header("Recover")]
         [SerializeField] Canvas RecoverCanvas;
 
-        [Header("GameController")]
-        [SerializeField] GameObject GameController;
+        //[Header("GameController")]
+        //[SerializeField] GameObject GameControll;
 
         public int RecoverNum;
         public Button rankButton;
@@ -88,7 +88,6 @@ namespace Platformer.UI
             {
                 TimeCounter += Time.deltaTime;
             }
-            
         }
        
         public void Resume()
@@ -211,11 +210,11 @@ namespace Platformer.UI
             TimeCounter = 0;
             StartBoss = false;
 
-            //GameController.Instance.ResetCheckPoint();
             Time.timeScale = 0;
             HUDCanvas.gameObject.SetActive(false);
             VictoryCanvas.gameObject.SetActive(true);
 
+            GameController.Instance.ResetCheckPoint();
 
             //data.PlayerName = UIController.instance.PlayerName;
 
@@ -246,7 +245,6 @@ namespace Platformer.UI
         }
         void LoadRankingList()
         {
-            HUDCanvas.gameObject.SetActive(true);
             SceneManager.LoadScene("LeaderBoard");
         }
 
