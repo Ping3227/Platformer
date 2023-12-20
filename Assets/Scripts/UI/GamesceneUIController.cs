@@ -86,7 +86,7 @@ namespace Platformer.UI
             {
                 TimeCounter += Time.deltaTime;
             }
-            Debug.Log(TimeCounter);
+            
         }
        
         public void Resume()
