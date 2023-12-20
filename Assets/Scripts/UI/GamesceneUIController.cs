@@ -65,6 +65,8 @@ namespace Platformer.UI
             }
             TimeCounter = 0;
             rankButton.onClick.AddListener(LoadRankingList);
+            IsPause = false;
+            
         }
         
         void Update(){
@@ -107,6 +109,7 @@ namespace Platformer.UI
         public void LoadMenu(){
             Time.timeScale = 1f;
             PauseCanvas.gameObject.SetActive(false);
+            HUDCanvas.gameObject.SetActive(true);
             SceneManager.LoadScene("MainMenu");
         }
 
