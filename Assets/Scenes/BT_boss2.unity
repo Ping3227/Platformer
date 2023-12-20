@@ -46726,7 +46726,7 @@ PrefabInstance:
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: HealthBar
       value: 
-      objectReference: {fileID: 574087755}
+      objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _gameController
       value: 
@@ -46773,7 +46773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113059604936789961, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Size.x
-      value: 17.9338
+      value: 15.018455
       objectReference: {fileID: 0}
     - target: {fileID: 7113059604936789961, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Size.y
@@ -46781,7 +46781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7113059604936789961, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Offset.x
-      value: -0.043426514
+      value: 0.08151674
       objectReference: {fileID: 0}
     - target: {fileID: 7113059604936789961, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_Offset.y
