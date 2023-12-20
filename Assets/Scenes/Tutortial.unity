@@ -40286,7 +40286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65324106851311982, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: _stateInfo.Array.data[0]._maxHP
-      value: 40
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 65324106851311982, guid: 810e1c2a502d01847a5612202712ac4f, type: 3}
       propertyPath: _stateInfo.Array.data[1]._maxHP

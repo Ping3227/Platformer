@@ -35,7 +35,7 @@ public class BossHealth : MonoBehaviour
     [SerializeField] ParticleSystem _deadEffect;
     [SerializeField] AudioClip _deadSound;
     [SerializeField] Slider HealthBar;
-    [SerializeField] private GameObject _canvas;
+    //[SerializeField] private GameObject _canvas;
     [SerializeField] GameObject _gameController;
     private void Start()
     {
@@ -70,10 +70,10 @@ public class BossHealth : MonoBehaviour
             if (State == _stateInfo.Length - 1){
                 // play animation and death
                 boss.NextStage(_stateInfo[State].end_animation,null);
-                Destroy(HealthBar.transform.parent.gameObject);
+                //Destroy(HealthBar.transform.parent.gameObject);
                 LeanTween.delayedCall(gameObject, _stateInfo[State].end_animation.length, () =>
                 {
-                    Destroy(_canvas);
+                    //Destroy(_canvas);
                     GamesceneUIController.instance.Victory();
 
                     //SceneManager.LoadScene("LeaderBoard");

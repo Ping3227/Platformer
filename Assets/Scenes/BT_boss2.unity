@@ -6331,6 +6331,18 @@ MonoBehaviour:
           m_StringArgument: SimpleBGM
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 257388452}
+        m_TargetAssemblyTypeName: TimelineHelper, Assembly-CSharp
+        m_MethodName: StartTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SimpleBGM
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDirectorFinish:
     m_PersistentCalls:
       m_Calls:
@@ -46562,11 +46574,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0]._maxHP
-      value: 30
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[1]._maxHP
-      value: 30
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6550521668266454011, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: _stateInfo.Array.data[0].BT_script

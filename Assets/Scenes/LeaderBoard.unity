@@ -1786,7 +1786,7 @@ GameObject:
   - component: {fileID: 1611238798}
   - component: {fileID: 1611238797}
   m_Layer: 5
-  m_Name: Time(Best) (1)
+  m_Name: Spend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1832,7 +1832,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time(Best):'
+  m_text: 'Spend:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a853a1d5aacb6b41a376556c4bf9c58, type: 2}
   m_sharedMaterial: {fileID: -572369235600431733, guid: 5a853a1d5aacb6b41a376556c4bf9c58, type: 2}
@@ -1866,7 +1866,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
