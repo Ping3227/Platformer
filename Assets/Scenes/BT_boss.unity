@@ -46282,7 +46282,7 @@ PrefabInstance:
     - target: {fileID: 965218447136607634, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: scripts.Array.data[0]
       value: 
-      objectReference: {fileID: 4900000, guid: c640c02ba6c228f4f8ad191ef8c9bf7d, type: 3}
+      objectReference: {fileID: 4900000, guid: d52ceb03c21892041b9cb099f9c6765a, type: 3}
     - target: {fileID: 965218447136607634, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: scripts.Array.data[1]
       value: 
@@ -46405,6 +46405,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2571801564001712805, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3201681065009006703, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3201681065009006703, guid: 68e50d324f989cf42bfd51384543b5f1, type: 3}

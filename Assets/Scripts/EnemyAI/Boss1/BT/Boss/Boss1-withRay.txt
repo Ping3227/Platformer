@@ -20,51 +20,79 @@ tree("Root")
 tree("Normal Attack")
 	sequence
 		GoToPlayer
-		Attack(1.0,false)
+		Attack(1.0,false,true)
 		Wait(1.0)
 
 tree("Special Attack")
-		random(0.3,0.3,0.3)
+		random(0.3,0.3)
 			tree("Consecutive Attack")
-			tree("Immobolize")
 			tree("Ray Attack")
 		
 
+
 tree("Consecutive Attack")
 	sequence
-		mute 
-			repeat
-				sequence 
-					IsPlayerInfront
-					ApproachPlayer(3.0)
-					Teleport(5.0)
+		// Initialial setup
+		GoToCorner
+		Teleport(2.0,true)
+		Wait(2.0)		
+		CalculateDistance
+		// first teleport
+		fallback
+			sequence
+				// attack
+				CloserThan(5.0)
+				IsPlayerLowerthan(1.0)
+				GoBeforePlayer
+				Attack(2.0,true,false)
+				Wait(1.5)
+			sequence
+				// not attack
+				GoForward(3.0)
+				Teleport(5.0,false)
+				Wait(0.3)
+				sequence
+				// second teleport
 					CalculateDistance
-					mute 
-						sequence 
-							CloserThan(3.0)
-							Attack(4.0,true)
-					not CloserThan(3.0)
-		Wait(0.5)
-		IsPlayerInfront
-		GoBehindPlayer
-		Teleport(5.0)
-		Attack(4.0,true)
+					IsPlayerInfront
+					fallback 
+						sequence
+						    // Attack
+							not CloserThan(2.0)
+							CloserThan(5.0)
+							IsPlayerLowerthan(1.0)
+							GoBeforePlayer
+							Attack(3.0,true,false)
+							Wait(1.5)
+						sequence
+							// not attack
+							GoForward(3.0)
+							Teleport(10.0,false)
+							Wait(0.3)
+							CalculateDistance
+							fallback
+								sequence
+								   // Attack
+									not CloserThan(2.0)
+									CloserThan(5.0)
+									IsPlayerLowerthan(1.0)
+									IsPlayerInfront
+									GoBeforePlayer
+									Attack(4.0,true,false)
+									Wait(2.0)
+								sequence
+									//attack far away
+									GoForward(5.0)
+									Attack(4.0,true,false)
+									Wait(2.0)
 		
-tree("Immobolize")
-	sequence 
-		Immobolize
-		Wait(1.0)
-		IsImmobilized
-		GoBehindPlayer
-		Teleport(7.0)
-		Attack(4.0,false)
-		ResetImmobilized
+		
 
 // This region is for defense action		
 tree("Dodge")
 	sequence
 		DodgePlayer
-		Teleport(0.7)
+		Teleport(0.7,true)
 		Wait(1)
 		CalculateDistance
 		CloserThan(4.0)
@@ -72,10 +100,6 @@ tree("Dodge")
 			tree("Strong Attack")
 			DodgePlayer
 
-tree("Counter Attack")
-	random(0.3,0.7)
-		Blocking
-		tree("Strong Attack")
 
 tree("Strong Attack")
 	fallback
@@ -92,7 +116,7 @@ tree("Strong Attack")
 
 tree("Ray Attack")
 	sequence
-		RayAim(0.15)
-		RayAttack(2.0)
+		RayAim(1.0,true)
+		RayAttack(2.0,false,false)
 	
 		
