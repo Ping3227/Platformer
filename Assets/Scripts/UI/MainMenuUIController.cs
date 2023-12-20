@@ -61,7 +61,7 @@ namespace Platformer.UI {
             SaveManager.instance.Level = "Easy";
             SceneManager.LoadScene("Tutortial");
             Time.timeScale = 1f;
-            GameController.Instance.ResetCheckPoint();
+            
         }
 
         void PlayMedium()
@@ -70,7 +70,7 @@ namespace Platformer.UI {
             SaveManager.instance.Level = "Medium";
             SceneManager.LoadScene("BT_boss");
             Time.timeScale = 1f;
-            GameController.Instance.ResetCheckPoint();
+            
         }
 
         void PlayHard()
@@ -79,7 +79,7 @@ namespace Platformer.UI {
             SaveManager.instance.Level = "Hard";
             SceneManager.LoadScene("BT_boss2");
             Time.timeScale = 1f;
-            GameController.Instance.ResetCheckPoint();
+            
         }
 
         void LoadRankingList()
