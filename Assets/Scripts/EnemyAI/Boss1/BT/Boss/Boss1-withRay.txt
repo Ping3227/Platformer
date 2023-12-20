@@ -30,12 +30,14 @@ tree("Special Attack")
 		
 
 
+
 tree("Consecutive Attack")
 	sequence
 		// Initialial setup
 		GoToCorner
-		Teleport(2.0,true)
-		Wait(2.0)		
+		Teleport(1.5,true)
+		ConsecutiveAttack()
+		Wait(1.0)		
 		CalculateDistance
 		// first teleport
 		fallback
@@ -45,11 +47,11 @@ tree("Consecutive Attack")
 				IsPlayerLowerthan(1.0)
 				GoBeforePlayer
 				Attack(2.0,true,false)
-				Wait(1.5)
+				Wait(1.0)
 			sequence
 				// not attack
 				GoForward(3.0)
-				Teleport(5.0,false)
+				Teleport(10.0,false)
 				Wait(0.3)
 				sequence
 				// second teleport
@@ -63,7 +65,7 @@ tree("Consecutive Attack")
 							IsPlayerLowerthan(1.0)
 							GoBeforePlayer
 							Attack(3.0,true,false)
-							Wait(1.5)
+							Wait(1.0)
 						sequence
 							// not attack
 							GoForward(3.0)
@@ -79,20 +81,24 @@ tree("Consecutive Attack")
 									IsPlayerInfront
 									GoBeforePlayer
 									Attack(4.0,true,false)
-									Wait(2.0)
+									Wait(1.5)
 								sequence
-									//attack far away
-									GoForward(5.0)
+									random(0.5,0.5)
+										GoForward(5.0)
+										sequence 
+											IsPlayerInfront
+											GoAbovePlayer
 									Attack(4.0,true,false)
-									Wait(2.0)
+									Wait(1.5)
 		
 		
 
 // This region is for defense action		
 tree("Dodge")
 	sequence
+		Immobolize 
 		DodgePlayer
-		Teleport(0.7,true)
+		Teleport(2.0,true)
 		Wait(1)
 		CalculateDistance
 		CloserThan(4.0)
@@ -116,7 +122,8 @@ tree("Strong Attack")
 
 tree("Ray Attack")
 	sequence
-		RayAim(1.0,true)
+		Immobolize
+		RayAim(1.5,true)
 		RayAttack(2.0,false,false)
 	
 		
